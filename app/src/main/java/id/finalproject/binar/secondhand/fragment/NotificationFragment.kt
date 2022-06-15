@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import id.finalproject.binar.secondhand.databinding.FragmentNotificationBinding
 
-class NoticationFragment : Fragment() {
+class NotificationFragment : Fragment() {
     private var _binding: FragmentNotificationBinding? = null
     private val binding get() = _binding!!
 
