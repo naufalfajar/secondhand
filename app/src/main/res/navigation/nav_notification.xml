@@ -7,5 +7,13 @@
     <fragment
         android:id="@+id/notifikasiFragment"
         android:name="id.finalproject.binar.secondhand.fragment.NotifikasiFragment"
-        android:label="NotifikasiFragment" />
+        android:label="NotifikasiFragment">
+        <action
+            android:id="@+id/action_notifikasiFragment_to_bidderInfoFragment"
+            app:destination="@id/bidderInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bidderInfoFragment"
+        android:name="id.finalproject.binar.secondhand.fragment.BidderInfoFragment"
+        android:label="BidderInfoFragment" />
 </navigation>

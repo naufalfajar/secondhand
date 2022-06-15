@@ -5,17 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import id.finalproject.binar.secondhand.databinding.FragmentNotificationBinding
+import id.finalproject.binar.secondhand.databinding.FragmentBidderInfoBinding
 
-class NoticationFragment : Fragment() {
-    private var _binding: FragmentNotificationBinding? = null
+class BidderInfoFragment : Fragment() {
+    private var _binding: FragmentBidderInfoBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentNotificationBinding.inflate(inflater, container, false)
+        _binding = FragmentBidderInfoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
