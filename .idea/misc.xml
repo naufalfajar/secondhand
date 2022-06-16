@@ -3,7 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/projectfinal/app/src/main/res/drawable/check_bg.xml" value="0.1855" />
+        <entry key="..\:/projectfinal/app/src/main/res/drawable/dot_blur.xml" value="0.1705" />
+        <entry key="..\:/projectfinal/app/src/main/res/drawable/round_bg.xml" value="0.1705" />
+        <entry key="..\:/projectfinal/app/src/main/res/drawable/select_btn.xml" value="0.1855" />
+        <entry key="..\:/projectfinal/app/src/main/res/drawable/uncheck_bg.xml" value="0.1855" />
         <entry key="..\:/projectfinal/app/src/main/res/layout/activity_main.xml" value="0.22447916666666667" />
+        <entry key="..\:/projectfinal/app/src/main/res/layout/notif_status.xml" value="0.25" />
       </map>
     </option>
   </component>
