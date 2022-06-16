@@ -9,6 +9,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
+
         >
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -24,7 +25,8 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_image"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="@drawable/watch"/>
         <me.relex.circleindicator.CircleIndicator3
             android:id="@+id/circle_indicator"
             android:layout_width="match_parent"
@@ -127,8 +129,9 @@
                     android:layout_marginEnd="20dp">
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
                         app:cardCornerRadius="20dp">
 
                         <ImageView
@@ -218,9 +221,10 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="30dp"
-        android:hint="@string/button"
+        android:hint="Saya Tertarik dan ingin Nego"
         android:textColorHint="@color/white"
         android:text=""
+        android:backgroundTint="@color/secondhand_purple1"
         app:cornerRadius="15dp"
         android:layout_gravity="center|bottom"/>
 </FrameLayout>

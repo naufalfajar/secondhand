@@ -3,12 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/naufa/AndroidStudioProjects/secondhand/app/src/main/res/drawable/bottom_sheet_dialog_rounded.xml" value="0.224" />
         <entry key="..\:/Users/naufa/AndroidStudioProjects/secondhand/app/src/main/res/drawable/card_edge.xml" value="0.224" />
+        <entry key="..\:/Users/naufa/AndroidStudioProjects/secondhand/app/src/main/res/drawable/et_border.xml" value="0.224" />
         <entry key="..\:/Users/naufa/AndroidStudioProjects/secondhand/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.224" />
         <entry key="..\:/Users/naufa/AndroidStudioProjects/secondhand/app/src/main/res/layout/activity_main.xml" value="0.25407608695652173" />
+        <entry key="..\:/Users/naufa/AndroidStudioProjects/secondhand/app/src/main/res/layout/activity_notification.xml" value="0.25407608695652173" />
+        <entry key="..\:/Users/naufa/AndroidStudioProjects/secondhand/app/src/main/res/layout/bottomsheet_bid.xml" value="0.264" />
         <entry key="..\:/Users/naufa/AndroidStudioProjects/secondhand/app/src/main/res/layout/fragment_buyer_notification.xml" value="0.25407608695652173" />
         <entry key="..\:/Users/naufa/AndroidStudioProjects/secondhand/app/src/main/res/layout/fragment_item_detail.xml" value="0.25407608695652173" />
+        <entry key="..\:/Users/naufa/AndroidStudioProjects/secondhand/app/src/main/res/layout/fragment_notification.xml" value="0.25407608695652173" />
+        <entry key="..\:/Users/naufa/AndroidStudioProjects/secondhand/app/src/main/res/layout/item_bidder_info.xml" value="0.25407608695652173" />
+        <entry key="..\:/Users/naufa/AndroidStudioProjects/secondhand/app/src/main/res/layout/item_buyer_notification.xml" value="0.4" />
         <entry key="..\:/Users/naufa/AndroidStudioProjects/secondhand/app/src/main/res/layout/item_detail.xml" value="0.2" />
+        <entry key="..\:/Users/naufa/AndroidStudioProjects/secondhand/app/src/main/res/layout/item_notification.xml" value="0.25407608695652173" />
         <entry key="..\:/Users/naufa/AndroidStudioProjects/secondhand/app/src/main/res/layout/item_swipe_image.xml" value="0.264" />
       </map>
     </option>
