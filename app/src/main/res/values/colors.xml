@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="blur">#8A8A8A</color>
     <color name="btn_purple">#7126B5</color>
+    <color name="snackbar">#73CA5C</color>
 </resources>
