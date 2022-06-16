@@ -15,6 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
+
     <TextView
         android:id="@+id/tv_1"
         android:layout_width="wrap_content"
@@ -35,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="60dp"
         android:checkedButton="@id/rb_success"
         app:layout_constraintTop_toBottomOf="@id/tv_1"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -43,78 +44,59 @@
 
         <RadioButton
             android:id="@+id/rb_success"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:button="@android:color/transparent"
-            android:background="@drawable/select_btn"
-            android:backgroundTint="@color/blur"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Berhasil Terjual"
+            android:fontFamily="@font/poppins"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
 
         <RadioButton
             android:id="@+id/rb_failed"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="85dp"
-            android:button="@android:color/transparent"
-            android:background="@drawable/select_btn"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:text="Batalkan transaksi"
+            android:fontFamily="@font/poppins"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
     </RadioGroup>
-
-    <TextView
-        android:id="@+id/tv_pilih_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginStart="70dp"
-        android:text="Berhasil Terjual"
-        android:fontFamily="@font/poppins"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_1"/>
 
     <TextView
         android:id="@+id/tv_blur_1"
         android:layout_width="264dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="95dp"
+        android:layout_marginTop="35dp"
         android:padding="10dp"
         android:text="Kamu telah sepakat menjual produk ini kepada pembeli"
         android:fontFamily="@font/poppins"
         android:textAlignment="textStart"
         android:textColor="@color/blur"
         android:textSize="14sp"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_pilih_1"/>
-
-    <TextView
-        android:id="@+id/tv_pilih_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginStart="70dp"
-        android:text="Batalkan transaksi"
-        android:fontFamily="@font/poppins"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_blur_1"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_1"/>
 
     <TextView
         android:id="@+id/tv_blur_2"
         android:layout_width="264dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="95dp"
+        android:layout_marginTop="3dp"
         android:padding="10dp"
         android:text="Kamu membatalkan transaksi produk ini dengan pembeli"
         android:fontFamily="@font/poppins"
         android:textAlignment="textStart"
         android:textColor="@color/blur"
         android:textSize="14sp"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_pilih_2"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_blur_1"/>
 
     <Button
         android:id="@+id/btn_send"
