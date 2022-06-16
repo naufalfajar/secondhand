@@ -104,11 +104,12 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/button"
+            android:id="@+id/buttonaccept"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:orientation="horizontal"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/bid">
@@ -135,6 +136,46 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/poppins_medium"
                 android:text="Terima"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                app:cornerRadius="16dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/buttoncontact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bid">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/bt_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Status"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:cornerRadius="16dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/bt_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:drawableEnd="@drawable/ic_whatsapp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Hubungi"
                 android:textAllCaps="false"
                 android:textSize="14sp"
                 app:cornerRadius="16dp" />
