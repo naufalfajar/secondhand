@@ -126,7 +126,9 @@
                 android:textAllCaps="false"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                app:cornerRadius="16dp" />
+                app:cornerRadius="16dp"
+                app:strokeColor="@color/purple_binar"
+                app:strokeWidth="1dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/bt_accept"
@@ -165,7 +167,9 @@
                 android:textAllCaps="false"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                app:cornerRadius="16dp" />
+                app:cornerRadius="16dp"
+                app:strokeColor="@color/purple_binar"
+                app:strokeWidth="1dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/bt_contact"

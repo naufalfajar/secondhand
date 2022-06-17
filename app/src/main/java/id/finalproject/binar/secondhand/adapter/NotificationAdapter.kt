@@ -17,11 +17,11 @@ class NotificationAdapter(private var data: List<String>) :
     }
 
     override fun onBindViewHolder(holder: NotificationViewHolder, position: Int) {
-        holder.itemProduct.text = this.data[position]
+        holder.itemProduct.text = data[position]
     }
 
     override fun getItemCount(): Int {
-        return this.data.size
+        return data.size
     }
 
     inner class NotificationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

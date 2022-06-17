@@ -38,7 +38,9 @@ class NotificationFragment : Fragment() {
         dataList.add("Samsung Galaxy S20")
         dataList.add("Mobil Honda Jazz")
 
-        binding.rvData.adapter = NotificationAdapter(dataList)
+        binding.rvData.apply {
+            adapter = NotificationAdapter(dataList)
+        }
 
         binding.tvHeader.setOnClickListener {
             val viewer =
