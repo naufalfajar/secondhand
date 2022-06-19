@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/formJualFragment">
+
+    <fragment
+        android:id="@+id/formJualFragment"
+        android:name="id.finalproject.binar.secondhand.FormJualFragment"
+        android:label="fragment_form_jual"
+        tools:layout="@layout/fragment_form_jual" >
+        <action
+            android:id="@+id/action_formJualFragment_to_daftarJualProdukFragment"
+            app:destination="@id/daftarJualProdukFragment" />
+        <action
+            android:id="@+id/action_formJualFragment_to_previewFragment"
+            app:destination="@id/previewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/daftarJualTerjualFragment"
+        android:name="id.finalproject.binar.secondhand.DaftarJualTerjualFragment"
+        android:label="fragment_daftar_jual_terjual"
+        tools:layout="@layout/fragment_daftar_jual_terjual" >
+        <action
+            android:id="@+id/action_daftarJualTerjualFragment_to_daftarJualProdukFragment"
+            app:destination="@id/daftarJualProdukFragment" />
+        <action
+            android:id="@+id/action_daftarJualTerjualFragment_to_daftarJualDiminatiFragment"
+            app:destination="@id/daftarJualDiminatiFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/daftarJualDiminatiFragment"
+        android:name="id.finalproject.binar.secondhand.DaftarJualDiminatiFragment"
+        android:label="fragment_daftar_jual_diminati"
+        tools:layout="@layout/fragment_daftar_jual_diminati" >
+        <action
+            android:id="@+id/action_daftarJualDiminatiFragment_to_daftarJualProdukFragment"
+            app:destination="@id/daftarJualProdukFragment" />
+        <action
+            android:id="@+id/action_daftarJualDiminatiFragment_to_daftarJualTerjualFragment"
+            app:destination="@id/daftarJualTerjualFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/daftarJualProdukFragment"
+        android:name="id.finalproject.binar.secondhand.DaftarJualProdukFragment"
+        android:label="fragment_daftar_jual_produk"
+        tools:layout="@layout/fragment_daftar_jual_produk" >
+        <action
+            android:id="@+id/action_daftarJualProdukFragment_to_daftarJualDiminatiFragment"
+            app:destination="@id/daftarJualDiminatiFragment" />
+        <action
+            android:id="@+id/action_daftarJualProdukFragment_to_daftarJualTerjualFragment"
+            app:destination="@id/daftarJualTerjualFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/previewFragment"
+        android:name="id.finalproject.binar.secondhand.PreviewFragment"
+        android:label="fragment_preview"
+        tools:layout="@layout/fragment_preview" >
+        <action
+            android:id="@+id/action_previewFragment_to_formJualFragment"
+            app:destination="@id/formJualFragment" />
+    </fragment>
+</navigation>
