@@ -11,47 +11,11 @@
         android:label="fragment_form_jual"
         tools:layout="@layout/fragment_form_jual" >
         <action
-            android:id="@+id/action_formJualFragment_to_daftarJualProdukFragment"
-            app:destination="@id/daftarJualProdukFragment" />
-        <action
             android:id="@+id/action_formJualFragment_to_previewFragment"
             app:destination="@id/previewFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/daftarJualTerjualFragment"
-        android:name="id.finalproject.binar.secondhand.DaftarJualTerjualFragment"
-        android:label="fragment_daftar_jual_terjual"
-        tools:layout="@layout/fragment_daftar_jual_terjual" >
         <action
-            android:id="@+id/action_daftarJualTerjualFragment_to_daftarJualProdukFragment"
-            app:destination="@id/daftarJualProdukFragment" />
-        <action
-            android:id="@+id/action_daftarJualTerjualFragment_to_daftarJualDiminatiFragment"
-            app:destination="@id/daftarJualDiminatiFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/daftarJualDiminatiFragment"
-        android:name="id.finalproject.binar.secondhand.DaftarJualDiminatiFragment"
-        android:label="fragment_daftar_jual_diminati"
-        tools:layout="@layout/fragment_daftar_jual_diminati" >
-        <action
-            android:id="@+id/action_daftarJualDiminatiFragment_to_daftarJualProdukFragment"
-            app:destination="@id/daftarJualProdukFragment" />
-        <action
-            android:id="@+id/action_daftarJualDiminatiFragment_to_daftarJualTerjualFragment"
-            app:destination="@id/daftarJualTerjualFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/daftarJualProdukFragment"
-        android:name="id.finalproject.binar.secondhand.DaftarJualProdukFragment"
-        android:label="fragment_daftar_jual_produk"
-        tools:layout="@layout/fragment_daftar_jual_produk" >
-        <action
-            android:id="@+id/action_daftarJualProdukFragment_to_daftarJualDiminatiFragment"
-            app:destination="@id/daftarJualDiminatiFragment" />
-        <action
-            android:id="@+id/action_daftarJualProdukFragment_to_daftarJualTerjualFragment"
-            app:destination="@id/daftarJualTerjualFragment" />
+            android:id="@+id/action_formJualFragment_to_daftarJualFragment"
+            app:destination="@id/daftarJualFragment" />
     </fragment>
     <fragment
         android:id="@+id/previewFragment"
@@ -62,4 +26,8 @@
             android:id="@+id/action_previewFragment_to_formJualFragment"
             app:destination="@id/formJualFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/daftarJualFragment"
+        android:name="id.finalproject.binar.secondhand.DaftarJualFragment"
+        android:label="DaftarJualFragment" />
 </navigation>

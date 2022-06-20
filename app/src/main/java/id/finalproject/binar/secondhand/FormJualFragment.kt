@@ -3,11 +3,13 @@ package id.finalproject.binar.secondhand
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
@@ -42,6 +44,7 @@ class FormJualFragment : Fragment() {
 //        val adapter = ArrayAdapter(this, R.layout.list_item, items)
 //        binding.dropdownField.setAdapter(adapter)
 
+//        showToast()
         toPreviewPage()
         toDaftarJualPage()
 
@@ -59,7 +62,14 @@ class FormJualFragment : Fragment() {
         binding.btnTerbitkan.setOnClickListener{
 
             it.findNavController()
-                .navigate(R.id.action_formJualFragment_to_daftarJualProdukFragment)
+                .navigate(R.id.action_formJualFragment_to_daftarJualFragment)
+
+//            Toast(this).apply {
+//                duration = Toast.LENGTH_LONG
+//                setGravity(Gravity.TOP, 10, 10)
+//                view = layoutInflater.inflate(R.layout.custom_toast, toastLayout)
+//            }.show()
+
         }
     }
 
