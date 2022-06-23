@@ -64,6 +64,7 @@ class NotificationFragment : Fragment() {
         notificationAdapter = NotificationAdapter { id: Int, notification: GetNotificationItem ->
             val bundle = Bundle()
             bundle.putInt("id", id)
+//            notificationViewModel.patchNotifcationById(id).observe()
             findNavController().navigate(
                 R.id.action_notificationFragment_to_bidderInfoFragment,
                 bundle

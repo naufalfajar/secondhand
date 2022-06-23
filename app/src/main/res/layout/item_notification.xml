@@ -4,7 +4,7 @@
     android:id="@+id/item_Notification"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="16dp">
+    android:layout_marginBottom="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -56,8 +56,8 @@
 
                 <ImageView
                     android:id="@+id/iv_Circle"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
                     android:src="@drawable/ic_circle"
                     app:layout_constraintBottom_toBottomOf="@id/tv_Type"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -68,7 +68,7 @@
                     android:id="@+id/tv_Time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginEnd="5dp"
                     android:fontFamily="@font/poppins"
                     android:text="20 Apr, 14.04"
                     android:textSize="11sp"
