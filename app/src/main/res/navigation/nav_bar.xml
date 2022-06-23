@@ -5,10 +5,10 @@
     android:id="@+id/navigation"
     app:startDestination="@id/login">
 
-    <fragment
-        android:id="@+id/splashScreen"
-        android:name="id.fajarjudo.binar.login.SplashScreen"
-        android:label="SplashScreen" />
+<!--    <fragment-->
+<!--        android:id="@+id/splashScreen"-->
+<!--        android:name="id.fajarjudo.binar.login.SplashScreen"-->
+<!--        android:label="SplashScreen" />-->
     <fragment
         android:id="@+id/login"
         android:name="id.fajarjudo.binar.login.login"
@@ -38,5 +38,26 @@
         <action
             android:id="@+id/action_register_to_login"
             app:destination="@id/login" />
+    </fragment>
+    <fragment
+        android:id="@+id/profilFragment"
+        android:name="id.fajarjudo.binar.login.profilFragment"
+        android:label="fragment_profil"
+        tools:layout="@layout/fragment_profil" >
+        <action
+            android:id="@+id/action_profilFragment_to_updateprofil2"
+            app:destination="@id/updateprofil" />
+        <action
+            android:id="@+id/action_profilFragment_to_login2"
+            app:destination="@id/login" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateprofil"
+        android:name="id.fajarjudo.binar.login.updateprofil"
+        android:label="fragment_updateprofil"
+        tools:layout="@layout/fragment_updateprofil" >
+        <action
+            android:id="@+id/action_updateprofil_to_profilFragment2"
+            app:destination="@id/profilFragment" />
     </fragment>
 </navigation>

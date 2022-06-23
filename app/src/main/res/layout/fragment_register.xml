@@ -23,9 +23,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="152dp"
         android:layout_marginEnd="32dp"
-        android:gravity="center"
-        android:text="Form Register"
-        android:textColor="@color/ungubinar"
+        android:gravity="left"
+        android:text="Daftar"
+        android:textColor="@color/black"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,31 +90,6 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passLayoutreg2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="50dp"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:passwordToggleEnabled="true"
-        app:layout_constraintTop_toBottomOf="@+id/passLayoutreg">
-
-        <EditText
-            android:id="@+id/et_register_passwordConfirm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/text_border"
-            android:hint="Masukkan Konfirmasi Password"
-            android:inputType="textPassword"
-            android:textSize="15sp"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btn_register"
@@ -128,7 +103,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passLayoutreg2" />
+        app:layout_constraintTop_toBottomOf="@+id/passLayoutreg" />
 
     <TextView
         android:id="@+id/tv1"
