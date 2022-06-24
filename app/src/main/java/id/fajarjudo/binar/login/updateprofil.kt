@@ -26,7 +26,7 @@ class updateprofil : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-            tvprofil.setOnClickListener { back() }
+            textUbahAkun.setOnClickListener { back() }
         }
     }
     private fun back(){

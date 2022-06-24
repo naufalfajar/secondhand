@@ -7,15 +7,15 @@
     tools:context="login">
 
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="348dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="500dp"
-        android:src="@drawable/binar2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+<!--    <ImageView-->
+<!--        android:id="@+id/logo"-->
+<!--        android:layout_width="348dp"-->
+<!--        android:layout_height="100dp"-->
+<!--        android:layout_marginEnd="32dp"-->
+<!--        android:layout_marginBottom="500dp"-->
+<!--        android:src="@drawable/binar2"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent" />-->
 
     <TextView
         android:id="@+id/tvLogin"
@@ -23,9 +23,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="248dp"
         android:layout_marginEnd="32dp"
-        android:gravity="center"
-        android:text="Form Login"
-        android:textColor="@color/ungubinar"
+        android:gravity="left"
+        android:text="Masuk"
+        android:textColor="@color/black"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
