@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/item_Notification"
+    android:id="@+id/item_BidderInfo"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="1dp">
+    android:layout_marginBottom="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -54,25 +54,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/iv_Circle"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/ic_circle"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_Type"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tv_Type" />
-
-
                 <TextView
                     android:id="@+id/tv_Time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
                     android:fontFamily="@font/poppins"
                     android:text="20 Apr, 14.04"
                     android:textSize="11sp"
-                    app:layout_constraintEnd_toStartOf="@id/iv_Circle"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_Type"
                     app:layout_constraintTop_toTopOf="@id/tv_Type" />
 
@@ -111,6 +100,89 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/buttonaccept"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bid">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/bt_decline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Tolak"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:cornerRadius="16dp"
+                app:strokeColor="@color/purple_binar"
+                app:strokeWidth="1dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/bt_accept"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Terima"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                app:cornerRadius="16dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/buttoncontact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bid">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/bt_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Status"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:cornerRadius="16dp"
+                app:strokeColor="@color/purple_binar"
+                app:strokeWidth="1dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/bt_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:drawableEnd="@drawable/ic_whatsapp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Hubungi"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                app:cornerRadius="16dp" />
 
         </LinearLayout>
 
