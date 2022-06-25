@@ -34,4 +34,11 @@
         android:name="id.finalproject.binar.secondhand.DaftarJualFragment"
         android:label="fragment_daftar_jual"
         tools:layout="@layout/fragment_daftar_jual" />
+    app:startDestination="@id/itemDetailFragment">
+
+    <fragment
+        android:id="@+id/itemDetailFragment"
+        android:name="id.finalproject.binar.secondhand.ItemDetailFragment"
+        android:label="fragment_item_detail"
+        tools:layout="@layout/fragment_item_detail" />
 </navigation>
