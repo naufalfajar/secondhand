@@ -7,6 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="btn_purple">#7126B5</color>
+    <color name="snackbar">#73CA5C</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="light_gray">#FFD3D3D3</color>
     <color name="secondhand_purple1">#FF7126B5</color>
