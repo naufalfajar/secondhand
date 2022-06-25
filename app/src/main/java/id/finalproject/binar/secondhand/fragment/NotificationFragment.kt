@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.adapter.NotificationAdapter
 import id.finalproject.binar.secondhand.databinding.FragmentNotificationBinding
@@ -56,7 +57,21 @@ class NotificationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initRecyclerView()
-        observeMovie()
+        observeNotification()
+        refreshLayout()
+
+    }
+
+    private fun refreshLayout() {
+        val view =
+            LayoutInflater.from(requireContext()).inflate(R.layout.fragment_notification, null)
+        val swipe: SwipeRefreshLayout = view.findViewById(R.id.refresh_layout)
+
+        swipe.setOnRefreshListener {
+            initRecyclerView()
+            observeNotification()
+            swipe.isRefreshing = false
+        }
 
     }
 
@@ -76,12 +91,15 @@ class NotificationFragment : Fragment() {
         }
     }
 
-    private fun observeMovie() {
+    private fun observeNotification() {
         notificationViewModel.getNotification().observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
                     notificationAdapter.updateData(it.data)
                     binding.pbMovie.isVisible = false
+                    if (it.data!!.isEmpty()) {
+                        binding.nothing.isVisible = true
+                    }
                 }
                 Status.ERROR -> {
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
