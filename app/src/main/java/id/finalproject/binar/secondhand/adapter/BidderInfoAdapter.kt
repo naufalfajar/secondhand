@@ -2,6 +2,7 @@ package id.finalproject.binar.secondhand.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -58,7 +59,12 @@ class BidderInfoAdapter(private val onClickListener: (id: Int, bidderInfo: GetSe
                 tvProductPrice.text = "Rp" + item.product.basePrice.toString()
                 tvNote.text = "Ditawar Rp" + item.price
 
-                itemBidderInfo.setOnClickListener {
+                btAccept.setOnClickListener {
+                    buttonaccept.isVisible = false
+                    buttoncontact.isVisible = true
+                }
+
+                btContact.setOnClickListener {
                     onClickListener.invoke(item.id, item)
                 }
 

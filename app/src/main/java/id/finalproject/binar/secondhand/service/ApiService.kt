@@ -2,6 +2,8 @@ package id.finalproject.binar.secondhand.service
 
 import id.finalproject.binar.secondhand.model.GetNotification
 import id.finalproject.binar.secondhand.model.GetNotificationItem
+import id.finalproject.binar.secondhand.model.GetSellerOrder
+import id.finalproject.binar.secondhand.model.GetSellerOrderItem
 import retrofit2.http.*
 
 interface ApiService {
@@ -81,19 +83,19 @@ interface ApiService {
     //Order
 
     @GET("seller/order")
-    suspend fun getOrderSeller(@Header("access_token") access_token: String)
+    suspend fun getOrderSeller(@Header("access_token") access_token: String): GetSellerOrder
 
     @GET("seller/order/{id}")
     suspend fun getOrderByIdSeller(
         @Path("id") orderId: Int,
         @Header("access_token") access_token: String
-    )
+    ): GetSellerOrderItem
 
     @PATCH("seller/order/{id}")
     suspend fun patchOrderByIdSeller(
         @Path("id") orderId: Int,
         @Header("access_token") access_token: String
-    )
+    ): GetSellerOrderItem
 
     @GET("seller/order/product/{product_id}")
     suspend fun getOrderByProductIdSeller(
@@ -166,7 +168,7 @@ interface ApiService {
     suspend fun patchNotificationById(
         @Path("id") notificationId: Int,
         @Header("access_token") access_token: String
-    )
+    ): GetNotificationItem
 
 
 }
