@@ -8,11 +8,8 @@ import id.finalproject.binar.secondhand.databinding.ActivityMainBinding
 import me.relex.circleindicator.CircleIndicator3
 
 class MainActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
     }
-
 }
