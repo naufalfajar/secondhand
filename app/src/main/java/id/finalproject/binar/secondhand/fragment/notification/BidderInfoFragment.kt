@@ -1,4 +1,4 @@
-package id.finalproject.binar.secondhand.fragment
+package id.finalproject.binar.secondhand.fragment.notification
 
 import android.content.Intent
 import android.net.Uri
@@ -7,12 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.snackbar.Snackbar
 import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.adapter.BidderInfoAdapter
 import id.finalproject.binar.secondhand.databinding.FragmentBidderInfoBinding
@@ -72,11 +74,13 @@ class BidderInfoFragment : Fragment() {
     private fun initRecyclerView() {
         bidderInfoAdapter = BidderInfoAdapter { id: Int, bidderInfo: GetSellerOrderItem ->
 
-            val view = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_contact, null)
-            val btnContact = view.findViewById<Button>(R.id.bt_contact)
+            val viewContact =
+                LayoutInflater.from(requireContext()).inflate(R.layout.dialog_contact, null)
+            val btnContact = viewContact.findViewById<Button>(R.id.bt_contact)
 
-            observeContact(id, view)
+            observeContact(id, viewContact)
 
+            //contact
             val dialog = BottomSheetDialog(requireContext())
             dialog.setContentView(requireView())
 
@@ -86,6 +90,35 @@ class BidderInfoFragment : Fragment() {
             }
 
             dialog.show()
+
+            //status
+            val viewStatus =
+                LayoutInflater.from(requireContext()).inflate(R.layout.notif_status, null)
+
+            val success = viewStatus.findViewById<RadioButton>(R.id.rb_success)
+            val fail = viewStatus.findViewById<RadioButton>(R.id.rb_failed)
+            val btnSend = viewStatus.findViewById<Button>(R.id.btn_send)
+
+            btnSend.setOnClickListener {
+                if (success.isChecked) {
+                    Snackbar.make(it, "Status produk berhasil diperbarui", Snackbar.LENGTH_LONG)
+                        .setActionTextColor(resources.getColor(R.color.white))
+                        .setTextColor(resources.getColor(R.color.white))
+                        .setBackgroundTint(resources.getColor(R.color.snackbar))
+                        .show()
+                    dialog.dismiss()
+                } else if (fail.isChecked) {
+                    Snackbar.make(it, "Status produk gagal diperbarui", Snackbar.LENGTH_LONG)
+                        .setActionTextColor(resources.getColor(R.color.white))
+                        .setTextColor(resources.getColor(R.color.white))
+                        .setBackgroundTint(resources.getColor(R.color.snackbar))
+                        .show()
+                    dialog.dismiss()
+                }
+            }
+            dialog.show()
+
+
         }
         binding.rvData.apply {
             adapter = bidderInfoAdapter

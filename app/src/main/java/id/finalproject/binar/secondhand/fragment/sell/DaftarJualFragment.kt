@@ -1,13 +1,14 @@
-package id.finalproject.binar.secondhand
+package id.finalproject.binar.secondhand.fragment.sell
 
 import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
+import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.databinding.FragmentDaftarJualBinding
 
 class DaftarJualFragment : Fragment() {

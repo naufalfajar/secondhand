@@ -1,16 +1,16 @@
-package id.finalproject.binar.secondhand
+package id.finalproject.binar.secondhand.fragment.sell
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.databinding.FragmentFormJualBinding
-
 
 
 class FormJualFragment : Fragment() {

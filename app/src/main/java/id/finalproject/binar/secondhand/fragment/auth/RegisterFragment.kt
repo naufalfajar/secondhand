@@ -1,16 +1,16 @@
-package id.fajarjudo.binar.login
+package id.finalproject.binar.secondhand.fragment.auth
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import id.fajarjudo.binar.login.databinding.FragmentLoginBinding
-import id.fajarjudo.binar.login.databinding.FragmentRegisterBinding
+import id.finalproject.binar.secondhand.R
+import id.finalproject.binar.secondhand.databinding.FragmentRegisterBinding
 
 
-class register : Fragment() {
+class RegisterFragment : Fragment() {
 
     private lateinit var binding: FragmentRegisterBinding
 
@@ -31,7 +31,7 @@ class register : Fragment() {
         }
     }
     private fun tologin() {
-        findNavController().navigate(R.id.action_register_to_login)
+        findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
     }
 
 }

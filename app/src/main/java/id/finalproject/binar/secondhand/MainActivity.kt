@@ -2,14 +2,54 @@ package id.finalproject.binar.secondhand
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager2.widget.ViewPager2
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import id.finalproject.binar.secondhand.databinding.ActivityMainBinding
-import me.relex.circleindicator.CircleIndicator3
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        binding.bottomNavigationView.setupWithNavController(navController)
+
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.loginFragment -> binding.bottomNavigationView.visibility = View.INVISIBLE
+                R.id.registerFragment -> binding.bottomNavigationView.visibility = View.INVISIBLE
+                else -> binding.bottomNavigationView.visibility = View.VISIBLE
+            }
+        }
+        doubleBackToExit()
+    }
+
+    private fun doubleBackToExit() {
+        var doubleBackPressed: Long = 0
+        val toast = Toast.makeText(this, "Tekan sekali lagi untuk keluar", Toast.LENGTH_SHORT)
+        this@MainActivity.onBackPressedDispatcher.addCallback(this) {
+            if (doubleBackPressed + 2000 > System.currentTimeMillis()) {
+                finishAffinity()
+                finish()
+                toast.cancel()
+            } else {
+                toast.show()
+            }
+            doubleBackPressed = System.currentTimeMillis()
+        }
     }
 }

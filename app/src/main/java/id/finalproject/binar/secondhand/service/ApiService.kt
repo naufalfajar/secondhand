@@ -9,10 +9,10 @@ import retrofit2.http.*
 interface ApiService {
 
     //AUTH
-    @POST("auth/register")
+    @POST("auth/RegisterFragment")
     suspend fun postRegister()
 
-    @POST("auth/login")
+    @POST("auth/LoginFragment")
     suspend fun postLogin()
 
     @GET("auth/user/{id}")

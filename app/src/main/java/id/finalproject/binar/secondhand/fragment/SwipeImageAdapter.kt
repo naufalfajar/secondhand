@@ -1,11 +1,11 @@
-package id.finalproject.binar.secondhand
+package id.finalproject.binar.secondhand.fragment
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import id.finalproject.binar.secondhand.R
 
 class SwipeImageAdapter(private var images: List<Int>)
     : RecyclerView.Adapter<SwipeImageAdapter.ImageViewHolder>(){

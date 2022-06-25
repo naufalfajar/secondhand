@@ -64,7 +64,15 @@ class BidderInfoAdapter(private val onClickListener: (id: Int, bidderInfo: GetSe
                     buttoncontact.isVisible = true
                 }
 
+                btDecline.setOnClickListener {
+                    buttonaccept.isVisible = false
+                }
+
                 btContact.setOnClickListener {
+                    onClickListener.invoke(item.id, item)
+                }
+
+                btStatus.setOnClickListener {
                     onClickListener.invoke(item.id, item)
                 }
 

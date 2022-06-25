@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="login">
+    tools:context="id.finalproject.binar.secondhand.fragment.auth.LoginFragment">
 
 
-<!--    <ImageView-->
-<!--        android:id="@+id/logo"-->
-<!--        android:layout_width="348dp"-->
-<!--        android:layout_height="100dp"-->
-<!--        android:layout_marginEnd="32dp"-->
-<!--        android:layout_marginBottom="500dp"-->
-<!--        android:src="@drawable/binar2"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--    <ImageView-->
+    <!--        android:id="@+id/logo"-->
+    <!--        android:layout_width="348dp"-->
+    <!--        android:layout_height="100dp"-->
+    <!--        android:layout_marginEnd="32dp"-->
+    <!--        android:layout_marginBottom="500dp"-->
+    <!--        android:src="@drawable/binar2"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
 <!--        app:layout_constraintEnd_toEndOf="parent" />-->
 
     <TextView

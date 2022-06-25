@@ -1,4 +1,4 @@
-package id.finalproject.binar.secondhand.fragment
+package id.finalproject.binar.secondhand.fragment.notification
 
 import android.os.Bundle
 import android.view.LayoutInflater
