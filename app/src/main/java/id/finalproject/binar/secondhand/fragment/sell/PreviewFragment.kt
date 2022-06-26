@@ -1,5 +1,6 @@
 package id.finalproject.binar.secondhand.fragment.sell
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import id.finalproject.binar.secondhand.R
+import id.finalproject.binar.secondhand.MainActivity
 import id.finalproject.binar.secondhand.databinding.FragmentPreviewBinding
 
 class PreviewFragment : Fragment() {
@@ -35,16 +36,15 @@ class PreviewFragment : Fragment() {
     private fun toFormJualPage() {
         binding.btnBack.setOnClickListener {
 
-            it.findNavController()
-                .navigate(R.id.action_previewFragment_to_formJualFragment)
+            it.findNavController().popBackStack()
         }
     }
 
     private fun toDaftarJualPage() {
         binding.btnTerbitkan2.setOnClickListener {
-
-            it.findNavController()
-                .navigate(R.id.action_previewFragment_to_daftarJualFragment)
+            val intent = Intent(this@PreviewFragment.requireContext(), MainActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
 
         }
 

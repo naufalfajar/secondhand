@@ -3,96 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
-
-    <fragment
-        android:id="@+id/formJualFragment"
-        android:name="id.finalproject.binar.secondhand.fragment.sell.FormJualFragment"
-        android:label="fragment_form_jual"
-        tools:layout="@layout/fragment_form_jual">
-        <action
-            android:id="@+id/action_formJualFragment_to_previewFragment"
-            app:destination="@id/previewFragment" />
-        <action
-            android:id="@+id/action_formJualFragment_to_daftarJualFragment"
-            app:destination="@id/daftarJualFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/previewFragment"
-        android:name="id.finalproject.binar.secondhand.fragment.sell.PreviewFragment"
-        android:label="fragment_preview"
-        tools:layout="@layout/fragment_preview" >
-        <action
-            android:id="@+id/action_previewFragment_to_formJualFragment"
-            app:destination="@id/formJualFragment" />
-        <action
-            android:id="@+id/action_previewFragment_to_daftarJualFragment"
-            app:destination="@id/daftarJualFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/daftarJualFragment"
-        android:name="id.finalproject.binar.secondhand.fragment.sell.DaftarJualFragment"
-        android:label="fragment_daftar_jual"
-        tools:layout="@layout/fragment_daftar_jual" />
-
-    <fragment
-        android:id="@+id/itemDetailFragment"
-        android:name="id.finalproject.binar.secondhand.fragment.sell.ItemDetailFragment"
-        android:label="fragment_item_detail"
-        tools:layout="@layout/fragment_item_detail" />
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="id.finalproject.binar.secondhand.fragment.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home">
-        <action
-            android:id="@+id/action_homeFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_profilFragment2"
-            app:destination="@id/profilFragment2" />
-        <action
-            android:id="@+id/action_homeFragment_to_formJualFragment"
-            app:destination="@id/formJualFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_notificationFragment"
-            app:destination="@id/notificationFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_daftarJualFragment"
-            app:destination="@id/daftarJualFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="id.finalproject.binar.secondhand.fragment.auth.LoginFragment"
-        android:label="LoginFragment"
-        tools:layout="@layout/fragment_login">
-        <action
-            android:id="@+id/action_loginFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/bidderInfoFragment"
-        android:name="id.finalproject.binar.secondhand.fragment.notification.BidderInfoFragment"
-        android:label="BidderInfoFragment"
-        tools:layout="@layout/fragment_bidder_info" />
-
-    <fragment
-        android:id="@+id/notificationFragment"
-        android:name="id.finalproject.binar.secondhand.fragment.notification.NotificationFragment"
-        android:label="NotificationFragment"
-        tools:layout="@layout/fragment_notification">
-        <action
-            android:id="@+id/action_notificationFragment_to_bidderInfoFragment"
-            app:destination="@id/bidderInfoFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_home"></fragment>
 
     <fragment
         android:id="@+id/profilFragment2"
@@ -100,21 +17,8 @@
         android:label="ProfilFragment"
         tools:layout="@layout/fragment_profil">
         <action
-            android:id="@+id/action_profilFragment2_to_loginFragment"
-            app:destination="@id/loginFragment" />
-        <action
             android:id="@+id/action_profilFragment2_to_updateProfilFragment"
             app:destination="@id/updateProfilFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/registerFragment"
-        android:name="id.finalproject.binar.secondhand.fragment.auth.RegisterFragment"
-        android:label="RegisterFragment"
-        tools:layout="@layout/fragment_register">
-        <action
-            android:id="@+id/action_registerFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
     </fragment>
 
     <fragment
@@ -126,4 +30,36 @@
             android:id="@+id/action_updateProfilFragment_to_profilFragment2"
             app:destination="@id/profilFragment2" />
     </fragment>
+
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="id.finalproject.binar.secondhand.fragment.notification.NotificationFragment"
+        android:label="NotificationFragment"
+        tools:layout="@layout/fragment_notification">
+        <action
+            android:id="@+id/action_notificationFragment_to_notificationActivity"
+            app:destination="@id/notificationActivity" />
+    </fragment>
+
+    <activity
+        android:id="@+id/notificationActivity"
+        android:name="id.finalproject.binar.secondhand.NotificationActivity"
+        android:label="activity_notification"
+        tools:layout="@layout/activity_notification" />
+
+    <activity
+        android:id="@+id/authActivity"
+        android:name="id.finalproject.binar.secondhand.AuthActivity"
+        android:label="activity_auth"
+        tools:layout="@layout/activity_auth" />
+    <activity
+        android:id="@+id/sellActivity"
+        android:name="id.finalproject.binar.secondhand.SellActivity"
+        android:label="activity_sell"
+        tools:layout="@layout/activity_sell" />
+    <fragment
+        android:id="@+id/daftarJualFragment"
+        android:name="id.finalproject.binar.secondhand.fragment.sell.DaftarJualFragment"
+        android:label="fragment_daftar_jual"
+        tools:layout="@layout/fragment_daftar_jual" />
 </navigation>

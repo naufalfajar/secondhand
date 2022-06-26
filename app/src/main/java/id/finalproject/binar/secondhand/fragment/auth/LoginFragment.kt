@@ -1,11 +1,13 @@
 package id.finalproject.binar.secondhand.fragment.auth
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import id.finalproject.binar.secondhand.MainActivity
 import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.databinding.FragmentLoginBinding
 
@@ -35,6 +37,8 @@ class LoginFragment : Fragment() {
         findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
     }
     private fun toHome() {
-        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+        val intent = Intent(this@LoginFragment.requireContext(), MainActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
     }
 }

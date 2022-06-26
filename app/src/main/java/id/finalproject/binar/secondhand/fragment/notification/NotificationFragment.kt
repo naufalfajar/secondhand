@@ -81,7 +81,7 @@ class NotificationFragment : Fragment() {
             bundle.putInt("id", id)
 //            notificationViewModel.patchNotifcationById(id).observe()
             findNavController().navigate(
-                R.id.action_notificationFragment_to_bidderInfoFragment,
+                R.id.action_notificationFragment_to_notificationActivity,
                 bundle
             )
         }

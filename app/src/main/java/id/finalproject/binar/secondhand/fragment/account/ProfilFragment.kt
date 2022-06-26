@@ -1,5 +1,6 @@
 package id.finalproject.binar.secondhand.fragment.account
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import id.finalproject.binar.secondhand.AuthActivity
 import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.databinding.FragmentProfilBinding
 
@@ -44,8 +46,10 @@ class ProfilFragment : Fragment() {
     private fun logout() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setMessage("Yakin ingin keluar?")
-            .setPositiveButton("Ya") {_, _->
-                findNavController().navigate(R.id.action_profilFragment2_to_loginFragment)
+            .setPositiveButton("Ya") { _, _ ->
+                val intent = Intent(this@ProfilFragment.requireContext(), AuthActivity::class.java)
+                startActivity(intent)
+                requireActivity().finish()
             }
             .setNegativeButton("Tidak") {dialog, _->
                 dialog.dismiss()

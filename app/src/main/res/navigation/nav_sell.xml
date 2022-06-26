@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_sell"
+    app:startDestination="@id/formJualFragment">
+
+    <fragment
+        android:id="@+id/formJualFragment"
+        android:name="id.finalproject.binar.secondhand.fragment.sell.FormJualFragment"
+        android:label="fragment_form_jual"
+        tools:layout="@layout/fragment_form_jual">
+        <action
+            android:id="@+id/action_formJualFragment_to_previewFragment"
+            app:destination="@id/previewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/previewFragment"
+        android:name="id.finalproject.binar.secondhand.fragment.sell.PreviewFragment"
+        android:label="fragment_preview"
+        tools:layout="@layout/fragment_preview" />
+
+    <fragment
+        android:id="@+id/itemDetailFragment"
+        android:name="id.finalproject.binar.secondhand.fragment.sell.ItemDetailFragment"
+        android:label="fragment_item_detail"
+        tools:layout="@layout/fragment_item_detail" />
+</navigation>
