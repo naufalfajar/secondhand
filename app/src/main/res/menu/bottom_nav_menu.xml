@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/home"
+        android:id="@+id/homeFragment"
         android:icon="@drawable/home_icon"
         android:title="Beranda"/>
 
     <item
-        android:id="@+id/notification"
+        android:id="@+id/notificationFragment"
         android:icon="@drawable/notif_icon"
         android:title="Notifikasi"/>
 
     <item
-        android:id="@+id/formJual"
+        android:id="@+id/formJualFragment"
         android:icon="@drawable/ic_tambah_jual"
         android:title="Jual"/>
 
     <item
-        android:id="@+id/daftarJual"
+        android:id="@+id/daftarJualFragment"
         android:icon="@drawable/daft_jual_icon"
         android:title="Daftar Jual"/>
 
     <item
-        android:id="@+id/profil"
+        android:id="@+id/profilFragment2"
         android:icon="@drawable/profile_icon"
         android:title="Akun"/>
 </menu>

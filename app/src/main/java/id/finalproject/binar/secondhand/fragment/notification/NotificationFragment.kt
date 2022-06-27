@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import id.finalproject.binar.secondhand.R
@@ -80,7 +79,7 @@ class NotificationFragment : Fragment() {
             val bundle = Bundle()
             bundle.putInt("id", id)
 //            notificationViewModel.patchNotifcationById(id).observe()
-            findNavController().navigate(R.id.action_notificationFragment_to_bidderInfoFragment, bundle)
+//            findNavController().navigate(R.id.action_notificationFragment_to_bidderInfoFragment, bundle)
         }
         binding.rvData.apply {
             adapter = notificationAdapter
