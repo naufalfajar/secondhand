@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import id.finalproject.binar.secondhand.MainActivity
 import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.databinding.FragmentFormJualBinding
@@ -38,36 +39,26 @@ class FormJualFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-
         toPreviewPage()
         toDaftarJualPage()
-
     }
 
     private fun toPreviewPage() {
         binding.btnPreview.setOnClickListener{
-
-            it.findNavController()
-                .navigate(R.id.action_formJualFragment_to_previewFragment)
+            it.findNavController().navigate(R.id.action_formJualFragment_to_previewFragment)
         }
     }
 
     private fun toDaftarJualPage() {
         binding.btnTerbitkan.setOnClickListener{
-
             val bundle = Bundle()
             bundle.putBoolean("snackbar", true)
 
-            val intent = Intent(this@FormJualFragment.requireContext(), MainActivity::class.java)
-            startActivity(intent)
-            requireActivity().finish()
+//            val intent = Intent(this@FormJualFragment.requireContext(), MainActivity::class.java)
+//            startActivity(intent)
+//            requireActivity().finish()
 
-//            findNavController().navigate(
-//                R.id.action_formJualFragment_to_daftarJualFragment, bundle)
-
-
+            findNavController().navigate(R.id.action_formJualFragment_to_daftarJualFragment, bundle)
         }
     }
 

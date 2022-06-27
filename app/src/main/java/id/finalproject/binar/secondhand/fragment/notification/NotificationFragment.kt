@@ -80,10 +80,7 @@ class NotificationFragment : Fragment() {
             val bundle = Bundle()
             bundle.putInt("id", id)
 //            notificationViewModel.patchNotifcationById(id).observe()
-            findNavController().navigate(
-                R.id.action_notificationFragment_to_notificationActivity,
-                bundle
-            )
+            findNavController().navigate(R.id.action_notificationFragment_to_bidderInfoFragment, bundle)
         }
         binding.rvData.apply {
             adapter = notificationAdapter
