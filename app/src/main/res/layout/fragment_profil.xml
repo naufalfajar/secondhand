@@ -6,113 +6,106 @@
     android:layout_height="match_parent"
     tools:context="id.finalproject.binar.secondhand.fragment.account.ProfilFragment">
 
-    <TextView
-        android:id="@+id/tvprofil"
-        android:layout_width="346dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="32dp"
-        android:gravity="left"
-        android:text="Akun Saya"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="45dp"
-        app:cardElevation="10dp"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/btn_toUpdate">
-
-    </com.google.android.material.card.MaterialCardView>
-
-
-    <Button
-        android:id="@+id/btn_toUpdate"
-        android:layout_width="336dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="250dp"
-        android:layout_marginEnd="50dp"
-        android:backgroundTint="@color/white"
-        android:drawableLeft="@drawable/ubah"
-        android:gravity="left"
-        android:text="Ubah Akun"
-        android:textColor="@color/black"
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/btn_tosetting"
-        android:layout_width="336dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="250dp"
-        android:layout_marginEnd="50dp"
-        android:backgroundTint="@color/white"
-        android:drawableLeft="@drawable/setting"
-        android:gravity="left"
-        android:text="Pengaturan Akun"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.96"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.151" />
-
-    <Button
-        android:id="@+id/btn_toexit"
-        android:layout_width="336dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="250dp"
-        android:layout_marginEnd="50dp"
-        android:backgroundTint="@color/white"
-        android:drawableLeft="@drawable/exit"
-        android:gravity="left"
-        android:text="Keluar"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.92"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.311" />
-
-    <TextView
-        android:id="@+id/tv2"
-        android:layout_width="346dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="492dp"
-        android:layout_marginEnd="28dp"
-        android:gravity="center"
-        android:text="Version 1.0.0"
-        android:textColor="@color/black"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/profile_pics"
-        android:layout_width="88dp"
-        android:layout_height="88dp"
-        android:layout_marginTop="116dp"
-        android:layout_marginEnd="160dp"
-        android:src="@drawable/camera"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
 
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Akun Saya"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="match_parent"
+            android:layout_height="126dp"
+            android:src="@drawable/ic_add_image"
+            android:layout_margin="30dp"/>
+
+        <TextView
+            android:id="@+id/btn_to_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ubah Akun"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:drawableLeft="@drawable/ic_ubah_akun"
+            android:drawablePadding="20dp"
+            android:layout_marginStart="20dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/grey_line"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pengaturan Akun"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:drawableLeft="@drawable/ic_pengaturan"
+            android:drawablePadding="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/grey_line"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/btn_toexit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Keluar"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:drawableLeft="@drawable/ic_keluar"
+            android:drawablePadding="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/grey_line"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Version 1.0.0"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_marginTop="20dp"/>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

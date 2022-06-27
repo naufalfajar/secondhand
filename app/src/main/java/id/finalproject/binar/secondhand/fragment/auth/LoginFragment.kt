@@ -30,7 +30,7 @@ class LoginFragment : Fragment() {
 
         binding.apply {
             btnLogin.setOnClickListener { toHome() }
-            tvOrOptions.setOnClickListener { toRegister() }
+            tvReg.setOnClickListener { toRegister() }
         }
     }
     private fun toRegister() {

@@ -73,20 +73,20 @@
         android:elevation="10dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="100dp"
-        app:layout_constraintBottom_toBottomOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.592"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.048">
-        <TextView
+
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="15dp"
             android:text="Cari Di Second Chance"
             android:textSize="15sp"
-            android:layout_gravity="center_vertical"></TextView>
+            android:layout_gravity="center_vertical"/>
 
         <SearchView
             android:layout_width="50dp"

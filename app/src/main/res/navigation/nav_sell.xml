@@ -21,9 +21,4 @@
         android:label="fragment_preview"
         tools:layout="@layout/fragment_preview" />
 
-    <fragment
-        android:id="@+id/itemDetailFragment"
-        android:name="id.finalproject.binar.secondhand.fragment.sell.ItemDetailFragment"
-        android:label="fragment_item_detail"
-        tools:layout="@layout/fragment_item_detail" />
 </navigation>
