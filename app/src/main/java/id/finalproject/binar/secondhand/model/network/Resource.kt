@@ -1,4 +1,4 @@
-package id.finalproject.binar.secondhand.model
+package id.finalproject.binar.secondhand.model.network
 
 data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
     companion object {

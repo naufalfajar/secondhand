@@ -1,4 +1,4 @@
-package id.finalproject.binar.secondhand.database.entity
+package id.finalproject.binar.secondhand.model.local.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

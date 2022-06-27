@@ -1,13 +1,19 @@
-package id.finalproject.binar.secondhand.model
+package id.finalproject.binar.secondhand.model.network.response
 
 
 import com.google.gson.annotations.SerializedName
 
-data class Product(
+data class GetSellerProductItem(
     @SerializedName("base_price")
     val basePrice: Int,
+    @SerializedName("Categories")
+    val categories: List<Any>,
+    @SerializedName("createdAt")
+    val createdAt: String,
     @SerializedName("description")
     val description: String,
+    @SerializedName("id")
+    val id: Int,
     @SerializedName("image_name")
     val imageName: String,
     @SerializedName("image_url")
@@ -18,6 +24,8 @@ data class Product(
     val name: String,
     @SerializedName("status")
     val status: String,
+    @SerializedName("updatedAt")
+    val updatedAt: String,
     @SerializedName("user_id")
     val userId: Int
 )

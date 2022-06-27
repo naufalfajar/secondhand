@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import id.finalproject.binar.secondhand.databinding.ItemBidderInfoBinding
-import id.finalproject.binar.secondhand.model.GetSellerOrder
-import id.finalproject.binar.secondhand.model.GetSellerOrderItem
+import id.finalproject.binar.secondhand.model.network.response.GetSellerOrder
+import id.finalproject.binar.secondhand.model.network.response.GetSellerOrderItem
 
 class BidderInfoAdapter(private val onClickListener: (id: Int, bidderInfo: GetSellerOrderItem) -> Unit) :
     RecyclerView.Adapter<BidderInfoAdapter.BidderInfoViewHolder>() {

@@ -2,10 +2,9 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs'
-
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -97,20 +96,12 @@ dependencies {
     // circular imageview
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
-//    // koin
-//    def koin_version = "2.2.2"
-//    implementation "org.koin:koin-core:$koin_version"
-//    implementation "org.koin:koin-android:$koin_version"
-//    implementation "org.koin:koin-android-viewmodel:$koin_version"
-//
-//    // Koin Test
-//    def koinTest_version = "3.2.0"
-//    testImplementation "io.insert-koin:koin-test:$koinTest_version"
-//    testImplementation "io.insert-koin:koin-test-junit4:$koinTest_version"
-    // Gson
-    implementation "com.google.code.gson:gson:2.8.6"
+    //Hilt
+    implementation 'com.google.dagger:hilt-android:2.42'
+    kapt 'com.google.dagger:hilt-compiler:2.42'
 
-//    testImplementation "org.mockito:mockito-inline:4.5.1"
+    // Gson
+    implementation "com.google.code.gson:gson:2.9.0"
 
 
 }

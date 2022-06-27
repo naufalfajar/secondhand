@@ -2,7 +2,7 @@ package id.finalproject.binar.secondhand.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import id.finalproject.binar.secondhand.model.Resource
+import id.finalproject.binar.secondhand.model.network.Resource
 import id.finalproject.binar.secondhand.repository.NotificationRepository
 import kotlinx.coroutines.Dispatchers
 

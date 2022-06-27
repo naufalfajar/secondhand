@@ -1,9 +1,9 @@
 package id.finalproject.binar.secondhand.service
 
-import id.finalproject.binar.secondhand.model.GetNotification
-import id.finalproject.binar.secondhand.model.GetNotificationItem
-import id.finalproject.binar.secondhand.model.GetSellerOrder
-import id.finalproject.binar.secondhand.model.GetSellerOrderItem
+import id.finalproject.binar.secondhand.model.network.response.GetNotification
+import id.finalproject.binar.secondhand.model.network.response.GetNotificationItem
+import id.finalproject.binar.secondhand.model.network.response.GetSellerOrder
+import id.finalproject.binar.secondhand.model.network.response.GetSellerOrderItem
 import retrofit2.http.*
 
 interface ApiService {

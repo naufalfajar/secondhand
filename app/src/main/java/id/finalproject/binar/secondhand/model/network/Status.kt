@@ -1,4 +1,4 @@
-package id.finalproject.binar.secondhand.model
+package id.finalproject.binar.secondhand.model.network
 
 enum class Status {
     SUCCESS,

@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.databinding.ItemNotificationBinding
-import id.finalproject.binar.secondhand.model.GetNotification
-import id.finalproject.binar.secondhand.model.GetNotificationItem
+import id.finalproject.binar.secondhand.model.network.response.GetNotification
+import id.finalproject.binar.secondhand.model.network.response.GetNotificationItem
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*

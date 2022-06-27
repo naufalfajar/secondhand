@@ -1,4 +1,4 @@
-//package id.finalproject.binar.secondhand.database
+package id.finalproject.binar.secondhand.model.local
 //
 //import android.content.Context
 //import androidx.room.Database
