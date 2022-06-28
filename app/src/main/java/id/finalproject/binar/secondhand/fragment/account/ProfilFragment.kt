@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import id.finalproject.binar.secondhand.AuthActivity
-import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.databinding.FragmentProfilBinding
 
 
@@ -40,7 +38,6 @@ class ProfilFragment : Fragment() {
         }
     }
     private fun toUpdate() {
-        findNavController().navigate(R.id.action_profilFragment2_to_updateProfilFragment)
     }
 
     private fun logout() {

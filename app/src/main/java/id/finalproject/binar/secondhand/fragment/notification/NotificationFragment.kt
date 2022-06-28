@@ -88,17 +88,18 @@ class NotificationFragment : Fragment() {
     }
 
     private fun observeNotification() {
-        notificationViewModel.getNotification().observe(viewLifecycleOwner) {
-            when (it.status) {
-                Status.SUCCESS -> {
-                    notificationAdapter.updateData(it.data)
-                    binding.pbMovie.isVisible = false
-                    if (it.data!!.isEmpty()) {
-                        binding.nothing.isVisible = true
+        notificationViewModel.getNotification("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAbWFpbC5jb20iLCJpYXQiOjE2NTQ5MjcxODZ9.fghFryd8OPEHztZlrN50PtZj0EC7NWFVj2iPPN9xi1M")
+            .observe(viewLifecycleOwner) {
+                when (it.status) {
+                    Status.SUCCESS -> {
+                        notificationAdapter.updateData(it.data)
+                        binding.pbMovie.isVisible = false
+                        if (it.data!!.isEmpty()) {
+                            binding.nothing.isVisible = true
+                        }
                     }
-                }
-                Status.ERROR -> {
-                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                    Status.ERROR -> {
+                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                 }
                 else -> {}
             }

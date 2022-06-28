@@ -8,9 +8,7 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
+import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import id.finalproject.binar.secondhand.databinding.ActivityMainBinding
@@ -22,18 +20,18 @@ import id.finalproject.binar.secondhand.fragment.sell.DaftarJualFragment
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var navController: NavController
+//    private lateinit var navController: NavController
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-        navController = navHostFragment.navController
+//        val navHostFragment =
+//            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+//        navController = navHostFragment.navController
 //
 //        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 //        setupWithNavController(bottomNavigationView, navController)
@@ -51,6 +49,7 @@ class MainActivity : AppCompatActivity() {
 //        }
 
 //        setupBottomNavigationBar()
+        replaceFragment(HomeFragment())
         doubleBackToExit()
 
         if (intent.extras != null) {
@@ -63,23 +62,11 @@ class MainActivity : AppCompatActivity() {
             BottomNavigationView.OnNavigationItemSelectedListener { item ->
                 when (item.itemId) {
                     R.id.homeFragment -> {
-                        val fragment = HomeFragment()
-                        supportFragmentManager.beginTransaction().replace(
-                            R.id.fragmentContainerView,
-                            fragment,
-                            fragment.javaClass.simpleName
-                        )
-                            .commit()
+                        replaceFragment(HomeFragment())
                         return@OnNavigationItemSelectedListener true
                     }
                     R.id.notificationFragment -> {
-                        val fragment = NotificationFragment()
-                        supportFragmentManager.beginTransaction().replace(
-                            R.id.fragmentContainerView,
-                            fragment,
-                            fragment.javaClass.simpleName
-                        )
-                            .commit()
+                        replaceFragment(NotificationFragment())
                         return@OnNavigationItemSelectedListener true
                     }
                     R.id.formJualFragment -> {
@@ -88,32 +75,27 @@ class MainActivity : AppCompatActivity() {
                         return@OnNavigationItemSelectedListener true
                     }
                     R.id.daftarJualFragment -> {
-                        val fragment = DaftarJualFragment()
-                        supportFragmentManager.beginTransaction().replace(
-                            R.id.fragmentContainerView,
-                            fragment,
-                            fragment.javaClass.simpleName
-                        )
-                            .commit()
+                        replaceFragment(DaftarJualFragment())
                         return@OnNavigationItemSelectedListener true
                     }
-                    R.id.profilFragment2 -> {
-                        val fragment = ProfilFragment()
-                        supportFragmentManager.beginTransaction().replace(
-                            R.id.fragmentContainerView,
-                            fragment,
-                            fragment.javaClass.simpleName
-                        )
-                            .commit()
+                    R.id.profilFragment -> {
+                        replaceFragment(ProfilFragment())
                         return@OnNavigationItemSelectedListener true
                     }
+                }
+                false
             }
-            false
-        }
         binding.bottomNavigationView.setOnNavigationItemSelectedListener(
             mOnNavigationItemSelectedListener
         )
     }
+
+    private fun replaceFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragmentContainerView, fragment)
+        transaction.commit()
+    }
+
 
     private fun doubleBackToExit() {
         var doubleBackPressed: Long = 0

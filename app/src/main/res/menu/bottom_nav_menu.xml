@@ -21,7 +21,7 @@
         android:title="Daftar Jual"/>
 
     <item
-        android:id="@+id/profilFragment2"
+        android:id="@+id/profilFragment"
         android:icon="@drawable/profile_icon"
         android:title="Akun"/>
 </menu>
