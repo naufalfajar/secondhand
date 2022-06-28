@@ -2,13 +2,14 @@ package id.finalproject.binar.secondhand.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import id.finalproject.binar.secondhand.databinding.ItemBidderInfoBinding
-import id.finalproject.binar.secondhand.model.GetSellerOrder
-import id.finalproject.binar.secondhand.model.GetSellerOrderItem
+import id.finalproject.binar.secondhand.model.network.response.GetSellerOrder
+import id.finalproject.binar.secondhand.model.network.response.GetSellerOrderItem
 
 class BidderInfoAdapter(private val onClickListener: (id: Int, bidderInfo: GetSellerOrderItem) -> Unit) :
     RecyclerView.Adapter<BidderInfoAdapter.BidderInfoViewHolder>() {
@@ -58,7 +59,20 @@ class BidderInfoAdapter(private val onClickListener: (id: Int, bidderInfo: GetSe
                 tvProductPrice.text = "Rp" + item.product.basePrice.toString()
                 tvNote.text = "Ditawar Rp" + item.price
 
-                itemBidderInfo.setOnClickListener {
+                btAccept.setOnClickListener {
+                    buttonaccept.isVisible = false
+                    buttoncontact.isVisible = true
+                }
+
+                btDecline.setOnClickListener {
+                    buttonaccept.isVisible = false
+                }
+
+                btContact.setOnClickListener {
+                    onClickListener.invoke(item.id, item)
+                }
+
+                btStatus.setOnClickListener {
                     onClickListener.invoke(item.id, item)
                 }
 

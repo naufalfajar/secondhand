@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/ic_purple_daft_jual" android:state_checked="true" />
+
+    <item android:drawable="@drawable/ic_grey_daft_jual" android:state_checked="false" />
+
+</selector>

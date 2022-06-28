@@ -1,5 +1,6 @@
 package id.finalproject.binar.secondhand.service
 
+import id.finalproject.binar.secondhand.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -7,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
 
-    const val BASE_URL = "https://market-final-project.herokuapp.com/"
+    private const val BASE_URL = BuildConfig.BASE_URL
 
     private val logging: HttpLoggingInterceptor
         get() {

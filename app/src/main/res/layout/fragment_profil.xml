@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="id.finalproject.binar.secondhand.fragment.account.ProfilFragment">
+
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Akun Saya"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="match_parent"
+            android:layout_height="126dp"
+            android:src="@drawable/ic_add_image"
+            android:layout_margin="30dp"/>
+
+        <TextView
+            android:id="@+id/btn_to_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ubah Akun"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:drawableLeft="@drawable/ic_ubah_akun"
+            android:drawablePadding="20dp"
+            android:layout_marginStart="20dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/grey_line"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pengaturan Akun"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:drawableLeft="@drawable/ic_pengaturan"
+            android:drawablePadding="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/grey_line"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/btn_toexit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Keluar"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:drawableLeft="@drawable/ic_keluar"
+            android:drawablePadding="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/grey_line"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Version 1.0.0"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_marginTop="20dp"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

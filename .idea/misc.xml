@@ -3,6 +3,62 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable-v24/button_border.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/back.xml" value="0.1785" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/camera.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/cari.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/check_bg.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/custom_et.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/custom_layout.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/custom_login.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/custom_text.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/cycleoutline.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/daft_jual_icon.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/daftarjual.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/dot_blur.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/edit_btn.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/et_border.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/exit.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/filled_btn.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/highlight_btn.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/home_icon.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/ic_add.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/ic_add_image.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/ic_adress.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/ic_arrow_back.xml" value="0.1785" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/ic_arrow_down.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/ic_circle.xml" value="0.1725" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/ic_close.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/ic_date.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/ic_eye.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/ic_fav_grey.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/ic_filled_eye.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/ic_grey_daft_jual.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/ic_grey_home.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/ic_outline_eye.xml" value="0.1075" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/activity_auth.xml" value="0.16458333333333333" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/activity_main.xml" value="0.16" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/activity_notification.xml" value="0.27447916666666666" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/activity_sell.xml" value="0.16458333333333333" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/bottomsheet_bid.xml" value="0.27447916666666666" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/dialog_contact.xml" value="0.264" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/fragment_bidder_info.xml" value="0.27447916666666666" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/fragment_buyer_notification.xml" value="0.27447916666666666" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/fragment_daftar_jual.xml" value="0.16458333333333333" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/fragment_form_jual.xml" value="0.27447916666666666" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/fragment_home.xml" value="0.27447916666666666" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/fragment_item_detail.xml" value="0.1408514492753623" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/fragment_login.xml" value="0.1" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/fragment_notification.xml" value="0.1" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/fragment_preview.xml" value="0.16458333333333333" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/fragment_profil.xml" value="0.27447916666666666" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/fragment_register.xml" value="0.27447916666666666" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/fragment_splash_screen.xml" value="0.16458333333333333" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/fragment_updateprofil.xml" value="0.27447916666666666" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/item_bidder_info.xml" value="0.264" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/item_detail.xml" value="0.27447916666666666" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/notif_status.xml" value="0.27447916666666666" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/menu/bottom_nav_menu.xml" value="0.278125" />
         <entry key="..\:/izaz/BINAR/SecondHand/app/src/main/res/drawable/button_border.xml" value="0.1175" />
         <entry key="..\:/izaz/BINAR/SecondHand/app/src/main/res/drawable/dot_blur.xml" value="0.1175" />
         <entry key="..\:/izaz/BINAR/SecondHand/app/src/main/res/drawable/round_bg.xml" value="0.1175" />
@@ -17,7 +73,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
