@@ -56,6 +56,7 @@
         android:paddingEnd="24dp"
         android:paddingBottom="16dp"
         android:textSize="14sp"
+        android:drawableEnd="@drawable/ic_search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
