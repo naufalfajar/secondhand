@@ -1,4 +1,4 @@
-package id.finalproject.binar.secondhand.fragment
+package id.finalproject.binar.secondhand.adapter
 
 import android.view.LayoutInflater
 import android.view.View

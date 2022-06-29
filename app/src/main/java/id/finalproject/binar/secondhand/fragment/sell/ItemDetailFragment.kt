@@ -13,8 +13,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import id.finalproject.binar.secondhand.R
+import id.finalproject.binar.secondhand.adapter.SwipeImageAdapter
 import id.finalproject.binar.secondhand.databinding.FragmentItemDetailBinding
-import id.finalproject.binar.secondhand.fragment.SwipeImageAdapter
 
 class ItemDetailFragment : Fragment() {
     private var _binding: FragmentItemDetailBinding? = null
