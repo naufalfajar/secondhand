@@ -5,6 +5,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import id.finalproject.binar.secondhand.database.dao.NotificationDao
+import id.finalproject.binar.secondhand.model.local.dao.BuyerCategoryDao
+import id.finalproject.binar.secondhand.model.local.dao.BuyerProductDao
 import id.finalproject.binar.secondhand.model.local.entity.BuyerCategory
 import id.finalproject.binar.secondhand.model.local.entity.BuyerProduct
 import id.finalproject.binar.secondhand.model.local.entity.Notification
@@ -15,6 +17,8 @@ import id.finalproject.binar.secondhand.model.local.entity.Notification
     exportSchema = false
 )
 abstract class SecondHandDatabase : RoomDatabase() {
+    abstract fun buyerProductDao(): BuyerProductDao
+    abstract fun buyerCategoryDao(): BuyerCategoryDao
     abstract fun notificationDao(): NotificationDao
 
     companion object {

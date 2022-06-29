@@ -14,7 +14,7 @@ import id.finalproject.binar.secondhand.adapter.NotificationAdapter
 import id.finalproject.binar.secondhand.databinding.FragmentNotificationBinding
 import id.finalproject.binar.secondhand.model.network.Status
 import id.finalproject.binar.secondhand.model.network.response.GetNotificationItem
-import id.finalproject.binar.secondhand.repository.NotificationRepository
+import id.finalproject.binar.secondhand.repository.network.NotificationRepository
 import id.finalproject.binar.secondhand.repository.viewModelsFactory
 import id.finalproject.binar.secondhand.service.ApiClient
 import id.finalproject.binar.secondhand.service.ApiService

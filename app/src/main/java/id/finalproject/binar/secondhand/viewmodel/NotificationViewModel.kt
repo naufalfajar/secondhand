@@ -3,7 +3,7 @@ package id.finalproject.binar.secondhand.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import id.finalproject.binar.secondhand.model.network.Resource
-import id.finalproject.binar.secondhand.repository.NotificationRepository
+import id.finalproject.binar.secondhand.repository.network.NotificationRepository
 import kotlinx.coroutines.Dispatchers
 
 class NotificationViewModel(private val repository: NotificationRepository) : ViewModel() {

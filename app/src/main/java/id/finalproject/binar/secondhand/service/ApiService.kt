@@ -2,6 +2,8 @@ package id.finalproject.binar.secondhand.service
 
 import id.finalproject.binar.secondhand.model.network.response.GetNotification
 import id.finalproject.binar.secondhand.model.network.response.GetNotificationItem
+import id.finalproject.binar.secondhand.model.network.response.buyer.GetBuyerProduct
+import id.finalproject.binar.secondhand.model.network.response.buyer.GetBuyerProductItem
 import id.finalproject.binar.secondhand.model.network.response.seller.GetSellerOrder
 import id.finalproject.binar.secondhand.model.network.response.seller.GetSellerOrderItem
 import retrofit2.http.*
@@ -108,13 +110,10 @@ interface ApiService {
     //Product
 
     @GET("buyer/product")
-    suspend fun getProductBuyer(
-        @Query("status") status: String,
-        @Query("category_id") category_id: Int
-    )
+    suspend fun getProductBuyer(): GetBuyerProduct
 
     @GET("buyer/product/{id}")
-    suspend fun getProductByIdBuyer(@Path("id") productId: Int)
+    suspend fun getProductByIdBuyer(@Path("id") productId: Int): GetBuyerProductItem
 
     //Order
 
