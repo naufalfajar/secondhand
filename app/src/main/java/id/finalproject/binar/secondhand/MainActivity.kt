@@ -49,13 +49,17 @@ class MainActivity : AppCompatActivity() {
 //        }
 
 //        setupBottomNavigationBar()
-        replaceFragment(HomeFragment())
         doubleBackToExit()
 
         if (intent.extras != null) {
             val bundle = intent.extras
-            snackbarAddProduct(bundle!!.getBoolean("addProduct"))
-            bundle.remove("addProduct")
+            if (bundle!!.getBoolean("addProduct")) {
+                replaceFragment(DaftarJualFragment())
+                snackbarAddProduct(bundle.getBoolean("addProduct"))
+                bundle.remove("addProduct")
+            }
+        } else {
+            replaceFragment(HomeFragment())
         }
 
         val mOnNavigationItemSelectedListener =
@@ -72,7 +76,7 @@ class MainActivity : AppCompatActivity() {
                     R.id.formJualFragment -> {
                         val intent = Intent(this, SellActivity::class.java)
                         startActivity(intent)
-                        return@OnNavigationItemSelectedListener true
+                        return@OnNavigationItemSelectedListener false
                     }
                     R.id.daftarJualFragment -> {
                         replaceFragment(DaftarJualFragment())
