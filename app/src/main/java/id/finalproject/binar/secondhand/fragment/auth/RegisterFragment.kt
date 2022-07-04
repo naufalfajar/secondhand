@@ -30,8 +30,6 @@ class RegisterFragment : Fragment() {
     private val userRepo: UserRepo by lazy { UserRepo(apiService) }
     private val regisViewModel: RegisViewModel by viewModelsFactory { RegisViewModel(userRepo) }
 
-    private lateinit var path: String
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,7 +45,6 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        path = ""
         btnRegis()
         tvLogin()
     }
@@ -97,14 +94,14 @@ class RegisterFragment : Fragment() {
         address: String,
         city: String
     ) {
-        val file = File(path)
+        val file = ""
         val reqFile = RequestBody.create("image/jpg".toMediaTypeOrNull(), file)
         val nama1 = nama.toRequestBody("text/plain".toMediaType())
         val email1 = email.toRequestBody("text/plain".toMediaType())
         val pass1 = pass.toRequestBody("text/plain".toMediaType())
         val phoneNumber1 = phoneNumber.toString().toRequestBody("text/plain".toMediaType())
         val address1 = address.toRequestBody("text/plain".toMediaType())
-        val image1 = MultipartBody.Part.createFormData("image", file.name, reqFile)
+        val image1 = MultipartBody.Part.createFormData("image", file, reqFile)
         val city1 = city.toRequestBody("text/plain".toMediaType())
 
         regisViewModel.postRegisUser(
