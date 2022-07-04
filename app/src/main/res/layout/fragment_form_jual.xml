@@ -65,6 +65,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:id="@+id/et_nama_produk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_et"
@@ -88,6 +89,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:id="@+id/et_harga_produk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_et"
@@ -155,6 +157,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:id="@+id/et_deskripsi_produk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_et"
@@ -180,9 +183,10 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/add_image" />
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="fitCenter"
+            android:background="@drawable/add_image"/>
 
     </LinearLayout>
 

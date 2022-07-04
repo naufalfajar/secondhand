@@ -1,16 +1,25 @@
 package id.finalproject.binar.secondhand.service
 
-import id.finalproject.binar.secondhand.model.network.response.GetNotification
-import id.finalproject.binar.secondhand.model.network.response.GetNotificationItem
-import id.finalproject.binar.secondhand.model.network.response.GetSellerOrder
-import id.finalproject.binar.secondhand.model.network.response.GetSellerOrderItem
+import id.finalproject.binar.secondhand.model.network.response.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiService {
 
     //AUTH
-    @POST("auth/RegisterFragment")
-    suspend fun postRegister()
+    @Multipart
+    @POST("auth/register")
+    suspend fun postRegister(
+        @Part("full_name") full_name: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("password") password: RequestBody,
+        @Part("phone_number") phone_number: RequestBody,
+        @Part("address") address: RequestBody,
+        @Part image: MultipartBody.Part,
+        @Part("city") city: RequestBody
+    )
 
     @POST("auth/LoginFragment")
     suspend fun postLogin()
@@ -56,11 +65,21 @@ interface ApiService {
     suspend fun deleteCategoryById(@Path("id") categoryId: Int)
 
     //Product
+    @Multipart
     @POST("seller/product")
-    suspend fun postProductSeller(@Header("access_token") access_token: String)
+    suspend fun postProductSeller(
+        @Header("access_token") access_token: String,
+        @Part("name") name: RequestBody,
+        @Part("description") description: RequestBody,
+        @Part("base_price") base_price: RequestBody,
+        @Part("category_ids") category_ids: RequestBody,
+        @Part("location") location: RequestBody,
+        @Part image: MultipartBody.Part
+    )
 
     @GET("seller/product")
-    suspend fun getProductSeller(@Header("access_token") access_token: String)
+    suspend fun getProductSeller(
+        @Header("access_token") access_token: String)
 
     @GET("seller/product/{id}")
     suspend fun getProductByIdSeller(
