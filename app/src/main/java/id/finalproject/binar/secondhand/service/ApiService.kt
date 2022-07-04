@@ -1,19 +1,31 @@
 package id.finalproject.binar.secondhand.service
 
-import id.finalproject.binar.secondhand.model.network.response.GetNotification
-import id.finalproject.binar.secondhand.model.network.response.GetNotificationItem
-import id.finalproject.binar.secondhand.model.network.response.GetSellerOrder
-import id.finalproject.binar.secondhand.model.network.response.GetSellerOrderItem
+import id.finalproject.binar.secondhand.model.network.request.LoginRequest
+import id.finalproject.binar.secondhand.model.network.response.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.Call
 import retrofit2.http.*
+
 
 interface ApiService {
 
     //AUTH
-    @POST("auth/RegisterFragment")
-    suspend fun postRegister()
+    @Multipart
+    @POST("auth/register")
+    suspend fun postRegis(
+        @Part("full_name") full_name: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("password") password: RequestBody,
+        @Part("phone_number") phone_number: RequestBody,
+        @Part("address") address: RequestBody,
+        @Part image: MultipartBody.Part,
+        @Part("city") city: RequestBody
+    ) : PostRegisResponse
 
-    @POST("auth/LoginFragment")
-    suspend fun postLogin()
+    @Headers("Content-Type: application/json")
+    @POST("auth/login")
+    suspend fun postLogin(@Body req: LoginRequest) : PostLoginResponse
 
     @GET("auth/user/{id}")
     suspend fun getUserById(@Path("id") userId: Int, @Header("access_token") access_token: String)

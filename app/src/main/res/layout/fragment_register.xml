@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context="id.finalproject.binar.secondhand.fragment.auth.RegisterFragment">
 
-
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
@@ -16,7 +15,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
 
         <TextView
             android:id="@+id/textView12"
@@ -38,7 +36,7 @@
             android:textSize="12sp" />
 
         <EditText
-            android:id="@+id/nama_lengkap"
+            android:id="@+id/et_nama"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -63,7 +61,7 @@
             android:textSize="12sp" />
 
         <EditText
-            android:id="@+id/editTextTextEmailAddress2"
+            android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -100,6 +98,7 @@
             android:textColorHint="@color/dark_grey">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_pass"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textPassword"
@@ -108,10 +107,8 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-
-
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_regis"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -135,7 +132,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
-
         <TextView
             android:id="@+id/textView15"
             android:layout_width="wrap_content"
@@ -151,6 +147,5 @@
             android:textColor="@color/purple_binar"
             android:textStyle="bold"/>
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
