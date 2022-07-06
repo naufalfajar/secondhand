@@ -3,12 +3,12 @@ package id.finalproject.binar.secondhand.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
-import id.finalproject.binar.secondhand.repository.ProductRepository
+import id.finalproject.binar.secondhand.repository.CategoryRepository
 import javax.inject.Inject
 
 @HiltViewModel
-class ProductViewModel @Inject constructor(
-    repository: ProductRepository
+class CategoryViewModel @Inject constructor(
+    repository: CategoryRepository
 ) : ViewModel() {
-    val product = repository.getProduct().asLiveData()
+    val category = repository.getCategory().asLiveData()
 }

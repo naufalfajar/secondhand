@@ -1,41 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cd_category"
+    android:id="@+id/bt_category"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp"
-    android:backgroundTint="@color/purple_binar"
-    app:cardCornerRadius="12dp">
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingStart="16dp"
-        android:paddingTop="12dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="12dp">
-
-        <ImageView
-            android:id="@+id/iv_category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/cari" />
-
-        <TextView
-            android:id="@+id/tv_category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:fontFamily="@font/poppins"
-            android:text="hobi"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
-
-    </LinearLayout>
-
-
-</androidx.cardview.widget.CardView>
+    android:layout_height="54dp"
+    android:layout_marginEnd="16dp"
+    android:backgroundTint="@color/dark_purple"
+    android:backgroundTintMode="src_over"
+    android:drawableLeft="@drawable/ic_search"
+    android:fontFamily="@font/poppins"
+    android:textAllCaps="false"
+    android:textColor="@color/white"
+    android:textColorHint="@color/white"
+    android:textSize="14sp"
+    app:cornerRadius="12dp" />

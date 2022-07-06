@@ -1,6 +1,5 @@
 package id.finalproject.binar.secondhand.fragment.home
 
-//import id.finalproject.binar.secondhand.repository.local.BuyerProductRepository as buyerProductLocal
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -11,10 +10,12 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
 import id.finalproject.binar.secondhand.adapter.BannerAdapter
+import id.finalproject.binar.secondhand.adapter.HomeCategoryAdapter
 import id.finalproject.binar.secondhand.adapter.HomeProductAdapter
 import id.finalproject.binar.secondhand.databinding.FragmentHomeBinding
 import id.finalproject.binar.secondhand.repository.network.BannerRepository
@@ -22,6 +23,7 @@ import id.finalproject.binar.secondhand.repository.viewModelsFactory
 import id.finalproject.binar.secondhand.service.ApiClient
 import id.finalproject.binar.secondhand.service.ApiService
 import id.finalproject.binar.secondhand.util.Resource
+import id.finalproject.binar.secondhand.viewmodel.CategoryViewModel
 import id.finalproject.binar.secondhand.viewmodel.HomeViewModel
 import id.finalproject.binar.secondhand.viewmodel.ProductViewModel
 
@@ -31,6 +33,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val productViewModel: ProductViewModel by viewModels()
+    private val categoryViewModel: CategoryViewModel by viewModels()
 
     private lateinit var bannerAdapter: BannerAdapter
     private lateinit var handler: Handler
@@ -67,6 +70,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val productHomeAdapter = HomeProductAdapter()
+        val categoryHomeAdapter = HomeCategoryAdapter()
 
         binding.vpBanner.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -77,6 +81,7 @@ class HomeFragment : Fragment() {
         })
 
         observeProduct(productHomeAdapter)
+        observeCategory(categoryHomeAdapter)
 //        observeHome()
 //        observeBanner()
         initBanner()
@@ -122,11 +127,30 @@ class HomeFragment : Fragment() {
                 homeProductAdapter.submitList(result.data)
 
                 progressBar.isVisible = result is Resource.Loading && result.data.isNullOrEmpty()
-//                textViewError.isVisible = result is Resource.Error && result.data.isNullOrEmpty()
-//                textViewError.text = result.error?.localizedMessage
+                textViewError.isVisible = result is Resource.Error && result.data.isNullOrEmpty()
+                textViewError.text = result.error?.localizedMessage
             }
         }
     }
+
+    private fun observeCategory(homeCategoryAdapter: HomeCategoryAdapter) {
+        binding.apply {
+            listCategory.apply {
+                adapter = homeCategoryAdapter
+                layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            }
+
+            categoryViewModel.category.observe(viewLifecycleOwner) { result ->
+                homeCategoryAdapter.submitList(result.data)
+
+                progressBar.isVisible = result is Resource.Loading && result.data.isNullOrEmpty()
+                textViewError.isVisible = result is Resource.Error && result.data.isNullOrEmpty()
+                textViewError.text = result.error?.localizedMessage
+            }
+        }
+    }
+
 
 //    private fun observeBanner() {
 //        homeViewModel.getBanner().observe(viewLifecycleOwner) {
