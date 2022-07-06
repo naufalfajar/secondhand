@@ -1,46 +1,23 @@
-//package id.finalproject.binar.secondhand.model.local
-//
-//import android.content.Context
-//import androidx.room.Database
-//import androidx.room.Room
-//import androidx.room.RoomDatabase
-//import androidx.room.TypeConverters
-//import id.finalproject.binar.secondhand.database.dao.NotificationDao
-//import id.finalproject.binar.secondhand.model.local.converters.BuyerCategoryTypeConverters
-//import id.finalproject.binar.secondhand.model.local.dao.BuyerCategoryDao
-//import id.finalproject.binar.secondhand.model.local.dao.BuyerProductDao
-//import id.finalproject.binar.secondhand.model.local.entity.BuyerCategory
-//import id.finalproject.binar.secondhand.model.local.entity.BuyerProduct
-//import id.finalproject.binar.secondhand.model.local.entity.Notification
-//
-//@Database(
-//    entities = [BuyerProduct::class, BuyerCategory::class, Notification::class],
-//    version = 1,
-//    exportSchema = false
-//)
-//@TypeConverters(BuyerCategoryTypeConverters::class)
-//abstract class SecondHandDatabase : RoomDatabase() {
-//    abstract fun buyerProductDao(): BuyerProductDao
-////    abstract fun buyerCategoryDao(): BuyerCategoryDao
-//    abstract fun notificationDao(): NotificationDao
-//
-//    companion object {
-//        private var INSTANCE: SecondHandDatabase? = null
-//
-//        fun getInstance(context: Context): SecondHandDatabase? {
-//            if (INSTANCE == null) {
-//                synchronized(SecondHandDatabase::class) {
-//                    INSTANCE = Room.databaseBuilder(
-//                        context.applicationContext,
-//                        SecondHandDatabase::class.java, "Data.db"
-//                    ).build()
-//                }
-//            }
-//            return INSTANCE
-//        }
-//
-//        fun destroyInstance() {
-//            INSTANCE = null
-//        }
-//    }
-//}
+package id.finalproject.binar.secondhand.model.local
+
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import id.finalproject.binar.secondhand.database.dao.NotificationDao
+import id.finalproject.binar.secondhand.model.local.dao.CategoryDao
+import id.finalproject.binar.secondhand.model.local.dao.ProductDao
+import id.finalproject.binar.secondhand.model.local.entity.Category
+import id.finalproject.binar.secondhand.model.local.entity.Notification
+import id.finalproject.binar.secondhand.model.local.entity.Product
+
+@Database(
+    entities = [Product::class, Category::class, Notification::class],
+    version = 1,
+    exportSchema = false
+)
+//@TypeConverters(Category::class)
+abstract class SecondHandDatabase : RoomDatabase() {
+    abstract fun productDao(): ProductDao
+    abstract fun categoryDao(): CategoryDao
+    abstract fun notificationDao(): NotificationDao
+
+}

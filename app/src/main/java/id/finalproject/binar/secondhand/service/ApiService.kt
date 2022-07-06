@@ -2,8 +2,8 @@ package id.finalproject.binar.secondhand.service
 
 import id.finalproject.binar.secondhand.model.network.response.GetNotification
 import id.finalproject.binar.secondhand.model.network.response.GetNotificationItem
-import id.finalproject.binar.secondhand.model.network.response.buyer.GetBuyerProduct
-import id.finalproject.binar.secondhand.model.network.response.buyer.GetBuyerProductItem
+import id.finalproject.binar.secondhand.model.network.response.seller.GetBanner
+import id.finalproject.binar.secondhand.model.network.response.seller.GetBannerItem
 import id.finalproject.binar.secondhand.model.network.response.seller.GetSellerOrder
 import id.finalproject.binar.secondhand.model.network.response.seller.GetSellerOrderItem
 import retrofit2.http.*
@@ -30,13 +30,12 @@ interface ApiService {
     suspend fun postBanner(@Header("access_token") access_token: String)
 
     @GET("seller/banner")
-    suspend fun getBanner(@Header("access_token") access_token: String)
+    suspend fun getBanner(): GetBanner
 
     @GET("seller/banner/{id}")
     suspend fun getBannerById(
-        @Path("id") bannerId: Int,
-        @Header("access_token") access_token: String
-    )
+        @Path("id") bannerId: Int
+    ): GetBannerItem
 
     @DELETE("seller/banner/{id}")
     suspend fun delBannerById(
@@ -110,10 +109,10 @@ interface ApiService {
     //Product
 
     @GET("buyer/product")
-    suspend fun getProductBuyer(): GetBuyerProduct
+    suspend fun getProductBuyer()
 
     @GET("buyer/product/{id}")
-    suspend fun getProductByIdBuyer(@Path("id") productId: Int): GetBuyerProductItem
+    suspend fun getProductByIdBuyer(@Path("id") productId: Int)
 
     //Order
 

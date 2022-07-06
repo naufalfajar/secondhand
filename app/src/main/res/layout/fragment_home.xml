@@ -1,108 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="id.finalproject.binar.secondhand.fragment.home.HomeFragment">
 
-    <FrameLayout
-        android:id="@+id/banner"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="406dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vp_banner"
+        <FrameLayout
+            android:id="@+id/banner"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/watch" />
+            android:layout_height="406dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <!--        <me.relex.circleindicator.CircleIndicator3-->
-        <!--            android:id="@+id/circle_indicator"-->
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/vp_banner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
+
+        <!--        <com.smarteist.autoimageslider.SliderView-->
+        <!--            android:id="@+id/autoImageSlider"-->
         <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="48dp"-->
-        <!--            android:background="@color/transparent"-->
-        <!--            android:layout_marginTop="210dp"/>-->
+        <!--            android:layout_height="140dp"-->
+        <!--            android:layout_marginStart="10dp"-->
+        <!--            android:layout_marginLeft="10dp"-->
+        <!--            android:layout_marginTop="10dp"-->
+        <!--            android:layout_marginEnd="10dp"-->
+        <!--            android:layout_marginRight="10dp"-->
+        <!--            android:layout_marginBottom="10dp"-->
+        <!--            android:background="@color/white"-->
+        <!--            app:sliderAnimationDuration="200"-->
+        <!--            app:sliderAutoCycleDirection="back_and_forth"-->
+        <!--            app:sliderIndicatorAnimationDuration="600"-->
+        <!--            app:sliderIndicatorEnabled="true"-->
+        <!--            app:sliderIndicatorOrientation="horizontal"-->
+        <!--            app:sliderIndicatorPadding="5dp"-->
+        <!--            app:sliderIndicatorRadius="3dp"-->
+        <!--            app:sliderScrollTimeInSec="3" />-->
 
-    </FrameLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:src="@drawable/background_transparant_home"
+            app:layout_constraintBottom_toBottomOf="@id/banner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_HeaderCategory" />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:src="@drawable/background_transparant_home"
-        app:layout_constraintBottom_toBottomOf="@id/banner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_HeaderCategory" />
-
-    <EditText
-        android:id="@+id/et_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="38dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/background_search_bar"
-        android:ems="10"
-        android:fontFamily="@font/poppins"
-        android:gravity="center_vertical"
-        android:hint="Cari di second chance"
-        android:inputType="text"
-        android:paddingStart="24dp"
-        android:paddingTop="16dp"
-        android:paddingEnd="24dp"
-        android:paddingBottom="16dp"
-        android:textSize="14sp"
-        android:drawableEnd="@drawable/ic_search"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="38dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/background_search_bar"
+            android:drawableEnd="@drawable/ic_search"
+            android:ems="10"
+            android:fontFamily="@font/poppins"
+            android:gravity="center_vertical"
+            android:hint="Cari di second chance"
+            android:inputType="text"
+            android:paddingStart="24dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="16dp"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    <TextView
-        android:id="@+id/tv_HeaderCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="200dp"
-        android:fontFamily="@font/poppins_medium"
-        android:text="Telusuri semua kategori"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_search" />
+        <TextView
+            android:id="@+id/tv_HeaderCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="200dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Telusuri semua kategori"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_search" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_category"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_HeaderCategory" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_HeaderCategory" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_product"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/banner" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/banner" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/list_product" />
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/list_product" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <!--    <FrameLayout-->
@@ -225,14 +243,14 @@
     <!--        android:backgroundTint="@color/ungubinar"-->
     <!--        android:drawableLeft="@drawable/cari"-->
     <!--        android:gravity="center"-->
-<!--        android:text="Hobi"-->
-<!--        android:textColor="@color/white"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="1.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.25" />-->
+    <!--        android:text="Hobi"-->
+    <!--        android:textColor="@color/white"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="1.0"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintVertical_bias="0.25" />-->
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

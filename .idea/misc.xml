@@ -46,6 +46,7 @@
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/text_border.xml" value="0.1155" />
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/tombol.xml" value="0.1155" />
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/activity_auth.xml" value="0.16458333333333333" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/activity_buyer.xml" value="0.25271739130434784" />
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/activity_main.xml" value="0.16" />
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/activity_notification.xml" value="0.27447916666666666" />
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/activity_sell.xml" value="0.16458333333333333" />
@@ -56,7 +57,7 @@
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/fragment_buyer_notification.xml" value="0.27447916666666666" />
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/fragment_daftar_jual.xml" value="0.16458333333333333" />
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/fragment_form_jual.xml" value="0.27447916666666666" />
-        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/fragment_home.xml" value="0.2" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/fragment_home.xml" value="0.176" />
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/fragment_item_detail.xml" value="0.1408514492753623" />
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/fragment_login.xml" value="0.1" />
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/fragment_notification.xml" value="0.1" />
@@ -65,10 +66,11 @@
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/fragment_register.xml" value="0.27447916666666666" />
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/fragment_splash_screen.xml" value="0.16458333333333333" />
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/fragment_updateprofil.xml" value="0.27447916666666666" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/item_banner.xml" value="0.16458333333333333" />
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/item_bidder_info.xml" value="0.264" />
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/item_buyer_notification.xml" value="0.27219202898550726" />
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/item_category.xml" value="0.2" />
-        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/item_detail.xml" value="0.27447916666666666" />
+        <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/item_detail.xml" value="0.16" />
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/item_product_home.xml" value="0.2" />
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/item_swipe_image.xml" value="0.27219202898550726" />
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/layout/list_item.xml" value="0.27219202898550726" />

@@ -80,6 +80,12 @@ class NotificationFragment : Fragment() {
             bundle.putInt("id", id)
 //            notificationViewModel.patchNotifcationById(id).observe()
 //            findNavController().navigate(R.id.action_notificationFragment_to_bidderInfoFragment, bundle)
+
+//            val fragment: Fragment = BidderInfoFragment()
+//            val transaction = childFragmentManager.beginTransaction()
+//            fragment.arguments = bundle
+//            transaction.replace(R.id.fragmentContainerView, fragment)
+//            transaction.commit()
         }
         binding.rvData.apply {
             adapter = notificationAdapter
