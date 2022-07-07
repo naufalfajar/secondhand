@@ -2,7 +2,6 @@ package id.finalproject.binar.secondhand.fragment.home
 
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,47 +10,30 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
+import androidx.viewpager.widget.ViewPager
 import dagger.hilt.android.AndroidEntryPoint
+import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.adapter.BannerAdapter
+import id.finalproject.binar.secondhand.adapter.HomeBannerAdapter
 import id.finalproject.binar.secondhand.adapter.HomeCategoryAdapter
 import id.finalproject.binar.secondhand.adapter.HomeProductAdapter
 import id.finalproject.binar.secondhand.databinding.FragmentHomeBinding
-import id.finalproject.binar.secondhand.repository.network.BannerRepository
-import id.finalproject.binar.secondhand.repository.viewModelsFactory
-import id.finalproject.binar.secondhand.service.ApiClient
-import id.finalproject.binar.secondhand.service.ApiService
 import id.finalproject.binar.secondhand.util.Resource
-import id.finalproject.binar.secondhand.viewmodel.CategoryViewModel
 import id.finalproject.binar.secondhand.viewmodel.HomeViewModel
-import id.finalproject.binar.secondhand.viewmodel.ProductViewModel
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val productViewModel: ProductViewModel by viewModels()
-    private val categoryViewModel: CategoryViewModel by viewModels()
+    lateinit var viewPager: ViewPager
+    lateinit var viewPagerAdapter: BannerAdapter
+    lateinit var imageList: List<Int>
 
-    private lateinit var bannerAdapter: BannerAdapter
+    private val homeViewModel: HomeViewModel by viewModels()
+
+    //    private lateinit var bannerAdapter: BannerAdapter
     private lateinit var handler: Handler
-
-    private val apiService: ApiService by lazy { ApiClient.instance }
-
-    private val bannerRepository: BannerRepository by lazy {
-        BannerRepository(
-            apiService
-        )
-    }
-
-    private val homeViewModel: HomeViewModel by viewModelsFactory {
-        HomeViewModel(
-            bannerRepository,
-
-            )
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,50 +53,60 @@ class HomeFragment : Fragment() {
 
         val productHomeAdapter = HomeProductAdapter()
         val categoryHomeAdapter = HomeCategoryAdapter()
+        val bannerHomeAdapter = HomeBannerAdapter()
 
-        binding.vpBanner.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                handler.removeCallbacks(runnable)
-                handler.postDelayed(runnable, 2000)
-            }
-        })
+        viewPager = view.findViewById(R.id.vp_banner)
+
+        imageList = ArrayList<Int>()
+        imageList = imageList + R.drawable.great_watch
+        imageList = imageList + R.drawable.watch
+
+        viewPagerAdapter = BannerAdapter(requireContext(), imageList)
+
+        viewPager.adapter = viewPagerAdapter
+
+//        binding.vpBanner.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+//            override fun onPageSelected(position: Int) {
+//                super.onPageSelected(position)
+//                handler.removeCallbacks(runnable)
+//                handler.postDelayed(runnable, 2000)
+//            }
+//        })
 
         observeProduct(productHomeAdapter)
         observeCategory(categoryHomeAdapter)
-//        observeHome()
-//        observeBanner()
-        initBanner()
+//        observeBanner(bannerHomeAdapter)
+//        initBanner()
 
     }
 
-    override fun onPause() {
-        super.onPause()
+//    override fun onPause() {
+//        super.onPause()
+//
+//        handler.removeCallbacks(runnable)
+//    }
+//
+//    override fun onResume() {
+//        super.onResume()
+//
+//        handler.postDelayed(runnable, 2000)
+//    }
+//
+//    private val runnable = Runnable {
+//        binding.vpBanner.currentItem = binding.vpBanner.currentItem + 1
+//    }
 
-        handler.removeCallbacks(runnable)
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        handler.postDelayed(runnable, 2000)
-    }
-
-    private val runnable = Runnable {
-        binding.vpBanner.currentItem = binding.vpBanner.currentItem + 1
-    }
-
-    private fun initBanner() {
-        bannerAdapter = BannerAdapter(binding.vpBanner)
-        handler = Handler(Looper.myLooper()!!)
-        binding.vpBanner.apply {
-            adapter = bannerAdapter
-            offscreenPageLimit = 3
-            clipToPadding = false
-            clipChildren = false
-            getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
-        }
-    }
+//    private fun initBanner() {
+//        bannerAdapter = BannerAdapter(binding.vpBanner)
+//        handler = Handler(Looper.myLooper()!!)
+//        binding.vpBanner.apply {
+//            adapter = bannerAdapter
+//            offscreenPageLimit = 3
+//            clipToPadding = false
+//            clipChildren = false
+//            getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+//        }
+//    }
 
     private fun observeProduct(homeProductAdapter: HomeProductAdapter) {
         binding.apply {
@@ -123,7 +115,7 @@ class HomeFragment : Fragment() {
                 layoutManager = GridLayoutManager(requireContext(), 2)
             }
 
-            productViewModel.product.observe(viewLifecycleOwner) { result ->
+            homeViewModel.product.observe(viewLifecycleOwner) { result ->
                 homeProductAdapter.submitList(result.data)
 
                 progressBar.isVisible = result is Resource.Loading && result.data.isNullOrEmpty()
@@ -141,7 +133,7 @@ class HomeFragment : Fragment() {
                     LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             }
 
-            categoryViewModel.category.observe(viewLifecycleOwner) { result ->
+            homeViewModel.category.observe(viewLifecycleOwner) { result ->
                 homeCategoryAdapter.submitList(result.data)
 
                 progressBar.isVisible = result is Resource.Loading && result.data.isNullOrEmpty()
@@ -150,6 +142,18 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
+//    private fun observeBanner(homeBannerAdapter: HomeBannerAdapter){
+//        binding.apply {
+//            vpBanner.apply {
+//                adapter = homeBannerAdapter
+//            }
+//        }
+//
+//        homeViewModel.banner.observe(viewLifecycleOwner) { result ->
+//            homeBannerAdapter.submitList(result.data)
+//        }
+//    }
 
 
 //    private fun observeBanner() {

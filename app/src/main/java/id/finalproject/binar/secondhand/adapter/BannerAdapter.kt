@@ -1,76 +1,41 @@
 package id.finalproject.binar.secondhand.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.AsyncListDiffer
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
-import com.bumptech.glide.Glide
-import id.finalproject.binar.secondhand.databinding.ItemBannerBinding
-import id.finalproject.binar.secondhand.model.network.response.seller.GetBanner
-import id.finalproject.binar.secondhand.model.network.response.seller.GetBannerItem
+import android.widget.ImageView
+import android.widget.RelativeLayout
+import androidx.viewpager.widget.PagerAdapter
+import id.finalproject.binar.secondhand.R
+import java.util.*
 
-
-class BannerAdapter(private val viewPager2: ViewPager2) :
-    RecyclerView.Adapter<BannerAdapter.BannerViewHolder>() {
-
-    private val diffCallback = object : DiffUtil.ItemCallback<GetBannerItem>() {
-        override fun areItemsTheSame(
-            oldItem: GetBannerItem,
-            newItem: GetBannerItem
-        ): Boolean {
-            return oldItem.id == newItem.id
-        }
-
-        override fun areContentsTheSame(
-            oldItem: GetBannerItem,
-            newItem: GetBannerItem
-        ): Boolean {
-            return oldItem.hashCode() == newItem.hashCode()
-        }
+class BannerAdapter(val context: Context, val imageList: List<Int>) : PagerAdapter() {
+    override fun getCount(): Int {
+        return imageList.size
     }
 
-    private val listDiffer = AsyncListDiffer(this, diffCallback)
-
-    fun updateData(banner: GetBanner?) = listDiffer.submitList(banner)
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BannerViewHolder {
-//        val view =
-//            LayoutInflater.from(parent.context).inflate(R.layout.item_banner, parent, false)
-//        return BannerViewHolder(view)
-        val binding =
-            ItemBannerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return BannerViewHolder(binding)
+    override fun isViewFromObject(view: View, `object`: Any): Boolean {
+        return view === `object` as RelativeLayout
     }
 
-    override fun onBindViewHolder(holder: BannerViewHolder, position: Int) {
-        holder.bind(listDiffer.currentList[position])
-        if (position == listDiffer.currentList.size - 1) {
-            viewPager2.post(runnable)
-        }
+    override fun instantiateItem(container: ViewGroup, position: Int): Any {
+        val mLayoutInflater =
+            context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val itemView: View =
+            mLayoutInflater.inflate(R.layout.item_corousel_banner, container, false)
+
+        val imageView: ImageView = itemView.findViewById<View>(R.id.iv_banner) as ImageView
+
+        imageView.setImageResource(imageList.get(position))
+
+        Objects.requireNonNull(container).addView(itemView)
+
+        return itemView
     }
 
-    override fun getItemCount(): Int = listDiffer.currentList.size
+    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
 
-    inner class BannerViewHolder(private val binding: ItemBannerBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(item: GetBannerItem) {
-            binding.apply {
-                Glide.with(itemView.context)
-                    .load(item.imageUrl)
-                    .into(ivBanner)
-            }
-        }
-    }
-
-//    inner class BannerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-//        val imageView: ImageView = itemView.findViewById(R.id.iv_banner);
-//    }
-
-    private val runnable = Runnable {
-        listDiffer.currentList.addAll(listDiffer.currentList)
-        notifyDataSetChanged()
+        container.removeView(`object` as RelativeLayout)
     }
 }

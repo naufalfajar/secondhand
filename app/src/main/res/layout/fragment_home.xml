@@ -10,20 +10,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <FrameLayout
-            android:id="@+id/banner"
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/vp_banner"
             android:layout_width="match_parent"
             android:layout_height="406dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/vp_banner"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </FrameLayout>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!--        <com.smarteist.autoimageslider.SliderView-->
         <!--            android:id="@+id/autoImageSlider"-->
@@ -49,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:src="@drawable/background_transparant_home"
-            app:layout_constraintBottom_toBottomOf="@id/banner"
+            app:layout_constraintBottom_toBottomOf="@id/vp_banner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_HeaderCategory" />
@@ -95,7 +90,6 @@
             android:id="@+id/list_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_HeaderCategory" />
