@@ -1,15 +1,8 @@
 package id.finalproject.binar.secondhand.repository
 
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
-import id.finalproject.binar.secondhand.model.network.response.Product
 import id.finalproject.binar.secondhand.service.ApiService
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import org.json.JSONObject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class SellerAddProductRepository(private val apiService: ApiService) {
 
