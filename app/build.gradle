@@ -94,9 +94,6 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$glide_version"
     annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
 
-    // dependency sor slider view
-//    implementation "com.github.smarteist:autoimageslider:1.4.0"
-
     //Refresh
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
@@ -116,5 +113,5 @@ dependencies {
     // Gson
     implementation "com.google.code.gson:gson:2.9.0"
 
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.0"
 }
