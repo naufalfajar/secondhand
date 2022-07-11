@@ -29,13 +29,7 @@ class SellerAddProductRepository(private val apiService: ApiService) {
         access_token: String
     ) = apiService.getProductSeller(access_token)
 
-    suspend fun register(
-        full_name: RequestBody,
-        email: RequestBody,
-        password: RequestBody,
-        phone_number: RequestBody,
-        address: RequestBody,
-        image: MultipartBody.Part,
-        city: RequestBody
-    ) = apiService.postRegister(full_name,email,password,phone_number,address,image,city)
+    suspend fun getUser(
+        access_token: String
+    ) = apiService.getUser(access_token)
 }

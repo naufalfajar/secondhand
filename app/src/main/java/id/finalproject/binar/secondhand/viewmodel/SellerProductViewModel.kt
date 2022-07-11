@@ -41,29 +41,15 @@ class SellerProductViewModel(private val repository: SellerAddProductRepository)
         }
     }
 
-    fun postRegister(
-        full_name: RequestBody,
-        email: RequestBody,
-        password: RequestBody,
-        phone_number: RequestBody,
-        address: RequestBody,
-        image: MultipartBody.Part,
-        city: RequestBody
+    fun getUser(
+        access_token: String
     ) = liveData(Dispatchers.IO){
-
         emit(Resource.loading(null))
         try {
-            emit(Resource.success(repository.register(
-                full_name,
-                email,
-                password,
-                phone_number,
-                address,
-                image,
-                city
-            )))
-        } catch (e: Exception) {
-            emit(Resource.error(data = null, message = e.message ?: "Error Occurred!"))
+            emit(Resource.success(repository.getUser(access_token)))
+        } catch (e: Exception){
+            emit(Resource.error(data = null, message = e.message ?: "Error Occurred"))
         }
     }
+
 }

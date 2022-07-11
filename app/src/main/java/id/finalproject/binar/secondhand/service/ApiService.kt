@@ -30,6 +30,9 @@ interface ApiService {
     @PUT("auth/user/{id}")
     suspend fun putUserById(@Path("id") userId: Int, @Header("access_token") access_token: String)
 
+    @GET("auth/user")
+    suspend fun getUser(@Header("access_token") access_token: String) : Call<GetUserItem>
+
     //SELLER
 
     //Banner
