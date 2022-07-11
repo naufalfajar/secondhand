@@ -10,6 +10,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import id.finalproject.binar.secondhand.helper.SharedPreferences
 import id.finalproject.binar.secondhand.model.local.SecondHandDatabase
+import id.finalproject.binar.secondhand.service.ApiService
 import id.finalproject.binar.secondhand.service.SecondHandApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -31,6 +32,11 @@ object AppModule {
     @Singleton
     fun provideSecondHandApi(retrofit: Retrofit): SecondHandApi =
         retrofit.create(SecondHandApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideApiService(retrofit: Retrofit): ApiService =
+        retrofit.create(ApiService::class.java)
 
     @Provides
     @Singleton

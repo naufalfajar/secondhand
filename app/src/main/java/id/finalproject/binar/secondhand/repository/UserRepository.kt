@@ -4,8 +4,9 @@ import id.finalproject.binar.secondhand.model.network.request.LoginRequest
 import id.finalproject.binar.secondhand.service.ApiService
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import javax.inject.Inject
 
-class UserRepo(private val apiService: ApiService) {
+class UserRepository @Inject constructor(private val apiService: ApiService) {
     suspend fun postRegis(
         full_name: RequestBody,
         email: RequestBody,

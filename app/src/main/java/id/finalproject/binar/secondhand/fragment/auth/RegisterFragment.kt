@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.databinding.FragmentRegisterBinding
 import id.finalproject.binar.secondhand.model.network.Status
-import id.finalproject.binar.secondhand.repository.UserRepo
+import id.finalproject.binar.secondhand.repository.UserRepository
 import id.finalproject.binar.secondhand.repository.viewModelsFactory
 import id.finalproject.binar.secondhand.service.ApiClient
 import id.finalproject.binar.secondhand.service.ApiService
@@ -26,8 +26,8 @@ class RegisterFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val apiService: ApiService by lazy { ApiClient.instance }
-    private val userRepo: UserRepo by lazy { UserRepo(apiService) }
-    private val regisViewModel: RegisViewModel by viewModelsFactory { RegisViewModel(userRepo) }
+    private val userRepository: UserRepository by lazy { UserRepository(apiService) }
+    private val regisViewModel: RegisViewModel by viewModelsFactory { RegisViewModel(userRepository) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

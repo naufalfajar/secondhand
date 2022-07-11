@@ -7,27 +7,30 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import id.finalproject.binar.secondhand.MainActivity
 import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.databinding.FragmentLoginBinding
 import id.finalproject.binar.secondhand.model.network.Status
 import id.finalproject.binar.secondhand.model.network.request.LoginRequest
-import id.finalproject.binar.secondhand.repository.UserRepo
-import id.finalproject.binar.secondhand.repository.viewModelsFactory
+import id.finalproject.binar.secondhand.repository.UserRepository
 import id.finalproject.binar.secondhand.service.ApiClient
 import id.finalproject.binar.secondhand.service.ApiService
 import id.finalproject.binar.secondhand.viewmodel.LoginViewModel
 
-
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
+    private val loginViewModel: LoginViewModel by viewModels()
+
     private val apiService: ApiService by lazy { ApiClient.instance }
-    private val userRepo: UserRepo by lazy { UserRepo(apiService) }
-    private val loginViewModel: LoginViewModel by viewModelsFactory { LoginViewModel(userRepo) }
+    private val userRepository: UserRepository by lazy { UserRepository(apiService) }
+//    private val loginViewModel: LoginViewModel by viewModelsFactory { LoginViewModel(userRepository) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,7 +66,7 @@ class LoginFragment : Fragment() {
                     }
                     else -> {
                         val userReq = LoginRequest(email, pass)
-                        login(userReq)
+                        login(userReq, email)
 
                         etEmail.text.clear()
                         etPass.text!!.clear()
@@ -74,11 +77,14 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun login(req: LoginRequest) {
+    private fun login(req: LoginRequest, email: String) {
         loginViewModel.postLoginUser(req).observe(viewLifecycleOwner) {
-            when(it.status) {
+            when (it.status) {
                 Status.SUCCESS -> {
-                    val intent = Intent(this@LoginFragment.requireContext(), MainActivity::class.java)
+                    loginViewModel.saveDataLogin(it.data!!.accessToken, email)
+
+                    val intent =
+                        Intent(this@LoginFragment.requireContext(), MainActivity::class.java)
                     startActivity(intent)
                     requireActivity().finish()
 
