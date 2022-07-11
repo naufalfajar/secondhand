@@ -1,11 +1,14 @@
 package id.finalproject.binar.secondhand.di
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import id.finalproject.binar.secondhand.helper.SharedPreferences
 import id.finalproject.binar.secondhand.model.local.SecondHandDatabase
 import id.finalproject.binar.secondhand.service.SecondHandApi
 import retrofit2.Retrofit
@@ -33,4 +36,7 @@ object AppModule {
     @Singleton
     fun provideDatabase(app: Application): SecondHandDatabase =
         Room.databaseBuilder(app, SecondHandDatabase::class.java, "secondhand_database").build()
+
+    @Provides
+    fun provideSharedPreferences(@ApplicationContext context: Context) = SharedPreferences(context)
 }
