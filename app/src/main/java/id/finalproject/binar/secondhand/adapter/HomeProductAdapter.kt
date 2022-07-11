@@ -38,7 +38,7 @@ class HomeProductAdapter :
                         .load(product.image_url)
                         .into(ivProductImage)
                 } else {
-                    ivProductImage.setImageResource(R.drawable.ic_launcher_background)
+                    ivProductImage.setImageResource(R.drawable.noimage)
                 }
 
                 tvProductName.text = product.name

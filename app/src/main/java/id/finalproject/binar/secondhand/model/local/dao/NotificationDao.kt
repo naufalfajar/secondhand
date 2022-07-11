@@ -1,22 +1,25 @@
-package id.finalproject.binar.secondhand.database.dao
+package id.finalproject.binar.secondhand.model.local.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import id.finalproject.binar.secondhand.model.local.entity.Notification
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NotificationDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNotification(notification: Notification)
+    suspend fun insertNotification(notification: List<Notification>)
 
     @Query("SELECT * FROM notification")
-    fun getNotification(): LiveData<List<Notification>>
+    fun getNotification(): Flow<List<Notification>>
 
     @Query("SELECT * FROM notification WHERE id = :notificationId")
-    fun getNotificationById(notificationId: Int): LiveData<Notification>
+    suspend fun getNotificationById(notificationId: Int): Notification
+
+    @Query("DELETE FROM notification")
+    suspend fun deleteNotification()
 
 }

@@ -20,4 +20,5 @@ interface BannerDao {
 
     @Query("DELETE FROM banner")
     suspend fun deleteBanner()
+
 }

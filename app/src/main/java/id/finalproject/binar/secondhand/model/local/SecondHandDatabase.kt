@@ -2,9 +2,9 @@ package id.finalproject.binar.secondhand.model.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import id.finalproject.binar.secondhand.database.dao.NotificationDao
 import id.finalproject.binar.secondhand.model.local.dao.BannerDao
 import id.finalproject.binar.secondhand.model.local.dao.CategoryDao
+import id.finalproject.binar.secondhand.model.local.dao.NotificationDao
 import id.finalproject.binar.secondhand.model.local.dao.ProductDao
 import id.finalproject.binar.secondhand.model.local.entity.Banner
 import id.finalproject.binar.secondhand.model.local.entity.Category
