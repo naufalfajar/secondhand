@@ -10,6 +10,8 @@ import id.finalproject.binar.secondhand.model.network.response.seller.GetBanner
 import id.finalproject.binar.secondhand.model.network.response.seller.GetBannerItem
 import id.finalproject.binar.secondhand.model.network.response.seller.GetSellerOrder
 import id.finalproject.binar.secondhand.model.network.response.seller.GetSellerOrderItem
+import id.finalproject.binar.secondhand.model.network.request.LoginRequest
+import id.finalproject.binar.secondhand.model.network.response.*
 import retrofit2.http.*
 
 interface ApiService {
@@ -17,7 +19,7 @@ interface ApiService {
     //AUTH
     @Multipart
     @POST("auth/register")
-    suspend fun postRegister(
+    suspend fun postRegis(
         @Part("full_name") full_name: RequestBody,
         @Part("email") email: RequestBody,
         @Part("password") password: RequestBody,
@@ -25,10 +27,11 @@ interface ApiService {
         @Part("address") address: RequestBody,
         @Part image: MultipartBody.Part,
         @Part("city") city: RequestBody
-    )
+    ) : PostRegisResponse
 
-    @POST("auth/LoginFragment")
-    suspend fun postLogin()
+    @Headers("Content-Type: application/json")
+    @POST("auth/login")
+    suspend fun postLogin(@Body req: LoginRequest) : PostLoginResponse
 
     @GET("auth/user/{id}")
     suspend fun getUserById(@Path("id") userId: Int, @Header("access_token") access_token: String)
