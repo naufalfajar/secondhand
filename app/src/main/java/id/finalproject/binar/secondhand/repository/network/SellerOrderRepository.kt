@@ -1,4 +1,4 @@
-package id.finalproject.binar.secondhand.repository
+package id.finalproject.binar.secondhand.repository.network
 
 import id.finalproject.binar.secondhand.service.ApiService
 

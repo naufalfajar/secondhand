@@ -19,8 +19,8 @@ import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.adapter.BidderInfoAdapter
 import id.finalproject.binar.secondhand.databinding.FragmentBidderInfoBinding
 import id.finalproject.binar.secondhand.model.network.Status
-import id.finalproject.binar.secondhand.model.network.response.GetSellerOrderItem
-import id.finalproject.binar.secondhand.repository.SellerOrderRepository
+import id.finalproject.binar.secondhand.model.network.response.seller.GetSellerOrderItem
+import id.finalproject.binar.secondhand.repository.network.SellerOrderRepository
 import id.finalproject.binar.secondhand.repository.viewModelsFactory
 import id.finalproject.binar.secondhand.service.ApiClient
 import id.finalproject.binar.secondhand.service.ApiService
