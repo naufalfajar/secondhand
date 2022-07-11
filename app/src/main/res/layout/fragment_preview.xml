@@ -35,11 +35,12 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="260dp">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="10dp"
             >
 
             <com.google.android.material.card.MaterialCardView
@@ -203,7 +204,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:text="@string/lorem_ipsum"
+                        android:text="test"
                         android:textColor="@color/black"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
