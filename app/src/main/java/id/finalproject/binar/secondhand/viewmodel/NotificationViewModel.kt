@@ -1,51 +1,23 @@
 package id.finalproject.binar.secondhand.viewmodel
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
-import id.finalproject.binar.secondhand.model.network.Resource
+import androidx.lifecycle.asLiveData
+import dagger.hilt.android.lifecycle.HiltViewModel
+import id.finalproject.binar.secondhand.helper.SharedPreferences
 import id.finalproject.binar.secondhand.repository.NotificationRepository
-import kotlinx.coroutines.Dispatchers
+import javax.inject.Inject
 
-class NotificationViewModel(private val repository: NotificationRepository) : ViewModel() {
+@HiltViewModel
+class NotificationViewModel @Inject constructor(
+    repository: NotificationRepository,
+    sharedPref: SharedPreferences
+) : ViewModel() {
 
-    fun getNotification(access_token: String) = liveData(Dispatchers.IO) {
-        emit(Resource.loading(null))
-        try {
-            emit(Resource.success(repository.getNotification(access_token)))
-        } catch (e: Exception) {
-            emit(Resource.error(data = null, message = e.message ?: "Error Occurred!"))
-        }
-    }
+    val accessToken = sharedPref.getToken()!!
+    val isLogin = sharedPref.getLogin()
 
-    fun getNotificationById(notificationId: Int, access_token: String) = liveData(Dispatchers.IO) {
-        emit(Resource.loading(null))
-        try {
-            emit(
-                Resource.success(
-                    repository.getNotificationById(
-                        notificationId,
-                        access_token
-                    )
-                )
-            )
-        } catch (e: Exception) {
-            emit(Resource.error(data = null, message = e.message ?: "Error Occurred!"))
-        }
-    }
+    val notification = repository.getNotification(accessToken)
+        .asLiveData()
 
-    fun patchNotifcationById(notificationId: Int) = liveData(Dispatchers.IO) {
-        emit(Resource.loading(null))
-        try {
-            emit(
-                Resource.success(
-                    repository.patchNotificationById(
-                        notificationId,
-                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAbWFpbC5jb20iLCJpYXQiOjE2NTQ5MjcxODZ9.fghFryd8OPEHztZlrN50PtZj0EC7NWFVj2iPPN9xi1M"
-                    )
-                )
-            )
-        } catch (e: Exception) {
-            emit(Resource.error(data = null, message = e.message ?: "Error Occurred!"))
-        }
-    }
+
 }

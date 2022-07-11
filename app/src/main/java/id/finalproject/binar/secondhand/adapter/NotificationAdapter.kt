@@ -9,34 +9,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.databinding.ItemNotificationBinding
-import id.finalproject.binar.secondhand.model.network.response.GetNotification
-import id.finalproject.binar.secondhand.model.network.response.GetNotificationItem
+import id.finalproject.binar.secondhand.model.local.entity.Notification
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class NotificationAdapter(private val onClickListener: (id: Int, notification: GetNotificationItem) -> Unit) :
+class NotificationAdapter(private val onClickListener: (id: Int, notification: Notification) -> Unit) :
     RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder>() {
 
-    private val diffCallback = object : DiffUtil.ItemCallback<GetNotificationItem>() {
-        override fun areItemsTheSame(
-            oldItem: GetNotificationItem,
-            newItem: GetNotificationItem
-        ): Boolean {
-            return oldItem.id == newItem.id
-        }
+    private val diffCallback = object : DiffUtil.ItemCallback<Notification>() {
+        override fun areItemsTheSame(oldItem: Notification, newItem: Notification) =
+            oldItem.id == newItem.id
 
-        override fun areContentsTheSame(
-            oldItem: GetNotificationItem,
-            newItem: GetNotificationItem
-        ): Boolean {
-            return oldItem.hashCode() == newItem.hashCode()
-        }
+        override fun areContentsTheSame(oldItem: Notification, newItem: Notification) =
+            oldItem == newItem
     }
 
     private val listDiffer = AsyncListDiffer(this, diffCallback)
 
-    fun updateData(notification: GetNotification?) = listDiffer.submitList(notification)
+//    fun updateData(notification: GetNotification?) = listDiffer.submitList(notification)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationViewHolder {
         val binding =
@@ -53,38 +44,38 @@ class NotificationAdapter(private val onClickListener: (id: Int, notification: G
     inner class NotificationViewHolder(private val binding: ItemNotificationBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: GetNotificationItem) {
+        fun bind(item: Notification) {
             binding.apply {
                 if (item.status == "bid") {
                     tvType.text = "Penawaran Produk"
-                    tvNote.text = "Ditawar Rp" + item.bidPrice.toString()
+                    tvNote.text = "Ditawar Rp" + item.bid_price.toString()
                 } else {
                     tvType.text = "Berhasil Diterbitkan"
                     tvNote.isVisible = false
                 }
 
-                if (item.read) {
+                if (item.read!!) {
                     ivCircle.isVisible = false
                 }
 
-                val dateTime = item.transactionDate
+                val dateTime = item.transaction_date!!
                 tvTime.text = formatDate(
                     dateTime.slice(0..9),
                     "dd MMM"
                 ) + ", " + formatTime(dateTime.slice(11..18), "HH.mm")
 
-                if (item.imageUrl == null) {
+                if (item.image_url == null) {
                     ivPicture.setImageResource(R.drawable.ic_launcher_background)
                 } else {
                     Glide.with(itemView.context)
-                        .load(item.imageUrl)
+                        .load(item.image_url)
                         .into(ivPicture)
                 }
 
-                tvProductName.text = item.productId.toString()
+                tvProductName.text = item.product_id.toString()
 
                 itemNotification.setOnClickListener {
-                    onClickListener.invoke(item.id, item)
+                    onClickListener.invoke(item.id!!, item)
                 }
 
             }

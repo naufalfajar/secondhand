@@ -1,33 +1,26 @@
 package id.finalproject.binar.secondhand.model.local
-//
-//import android.content.Context
-//import androidx.room.Database
-//import androidx.room.Room
-//import androidx.room.RoomDatabase
-//import id.finalproject.binar.secondhand.database.dao.NotificationDao
-//import id.finalproject.binar.secondhand.database.entity.Notification
-//
-//@Database(entities = [Notification::class], version = 1, exportSchema = false)
-//abstract class SecondHandDatabase : RoomDatabase() {
-//    abstract fun notificationDao(): NotificationDao
-//
-//    companion object {
-//        private var INSTANCE: SecondHandDatabase? = null
-//
-//        fun getInstance(context: Context): SecondHandDatabase? {
-//            if (INSTANCE == null) {
-//                synchronized(SecondHandDatabase::class) {
-//                    INSTANCE = Room.databaseBuilder(
-//                        context.applicationContext,
-//                        SecondHandDatabase::class.java, "Data.db"
-//                    ).build()
-//                }
-//            }
-//            return INSTANCE
-//        }
-//
-//        fun destroyInstance() {
-//            INSTANCE = null
-//        }
-//    }
-//}
+
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import id.finalproject.binar.secondhand.model.local.dao.BannerDao
+import id.finalproject.binar.secondhand.model.local.dao.CategoryDao
+import id.finalproject.binar.secondhand.model.local.dao.NotificationDao
+import id.finalproject.binar.secondhand.model.local.dao.ProductDao
+import id.finalproject.binar.secondhand.model.local.entity.Banner
+import id.finalproject.binar.secondhand.model.local.entity.Category
+import id.finalproject.binar.secondhand.model.local.entity.Notification
+import id.finalproject.binar.secondhand.model.local.entity.Product
+
+@Database(
+    entities = [Product::class, Category::class, Banner::class, Notification::class],
+    version = 1,
+    exportSchema = false
+)
+//@TypeConverters(Category::class)
+abstract class SecondHandDatabase : RoomDatabase() {
+    abstract fun productDao(): ProductDao
+    abstract fun categoryDao(): CategoryDao
+    abstract fun bannerDao(): BannerDao
+    abstract fun notificationDao(): NotificationDao
+
+}

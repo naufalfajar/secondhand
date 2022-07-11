@@ -3,7 +3,7 @@ package id.finalproject.binar.secondhand.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import id.finalproject.binar.secondhand.model.network.Resource
-import id.finalproject.binar.secondhand.repository.SellerOrderRepository
+import id.finalproject.binar.secondhand.repository.network.SellerOrderRepository
 import kotlinx.coroutines.Dispatchers
 
 class SellerOrderViewModel(private val repository: SellerOrderRepository) : ViewModel() {

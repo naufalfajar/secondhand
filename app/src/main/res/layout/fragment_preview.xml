@@ -35,11 +35,12 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="260dp">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="10dp"
             >
 
             <com.google.android.material.card.MaterialCardView
@@ -69,9 +70,10 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/nama_item"
                         android:textColorHint="@color/black"
+                        android:fontFamily="@font/poppins_medium"
                         android:text=""
                         android:textStyle="bold"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         android:textColor="@color/black"
                         android:maxLines="1"
                         android:ellipsize="end"/>
@@ -83,6 +85,7 @@
                         android:layout_marginTop="5dp"
                         android:hint="@string/category_item"
                         android:text=""
+                        android:fontFamily="@font/poppins"
                         android:textSize="11sp"
                         android:maxLines="1"
                         android:ellipsize="end"/>
@@ -95,10 +98,11 @@
                         android:hint="@string/harga_item"
                         android:textColorHint="@color/black"
                         android:text=""
-                        android:textSize="16sp"
+                        android:fontFamily="@font/poppins"
+                        android:textSize="14sp"
                         android:textColor="@color/black"
                         android:maxLines="1"
-                        android:ellipsize="end"/>
+                        android:ellipsize="end" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -150,10 +154,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
-                            android:textSize="18sp"
+                            android:fontFamily="@font/poppins_medium"
                             android:textStyle="bold"
                             android:textColor="@color/black"
                             android:text=""
+                            android:textSize="14sp"
                             android:hint="@string/seller_name"
                             android:textColorHint="@color/black"/>
 
@@ -165,6 +170,7 @@
                             android:layout_marginTop="10dp"
                             android:textSize="11sp"
                             android:text=""
+                            android:fontFamily="@font/poppins"
                             android:hint="@string/seller_city"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -192,9 +198,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/deskripsi"
+                        android:fontFamily="@font/poppins_medium"
                         android:textColorHint="@color/black"
                         android:textStyle="bold"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textColor="@color/black"
                         android:text=""/>
 
@@ -203,8 +210,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:text="@string/lorem_ipsum"
-                        android:textColor="@color/black"/>
+                        android:text="test"
+                        android:fontFamily="@font/poppins"
+                        android:textSize="14sp"
+                        android:textColor="@color/black" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -221,7 +230,9 @@
         android:hint="Terbitkan"
         android:textColorHint="@color/white"
         android:text=""
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="14sp"
         android:backgroundTint="@color/dark_purple"
         app:cornerRadius="15dp"
-        android:layout_gravity="center|bottom"/>
+        android:layout_gravity="center|bottom" />
 </FrameLayout>
