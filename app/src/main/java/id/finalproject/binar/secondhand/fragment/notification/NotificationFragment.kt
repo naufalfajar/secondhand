@@ -1,5 +1,6 @@
 package id.finalproject.binar.secondhand.fragment.notification
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +11,11 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import dagger.hilt.android.AndroidEntryPoint
+import id.finalproject.binar.secondhand.AuthActivity
 import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.adapter.NotificationAdapter
 import id.finalproject.binar.secondhand.databinding.FragmentNotificationBinding
+import id.finalproject.binar.secondhand.helper.SharedPreferences
 import id.finalproject.binar.secondhand.model.local.entity.Notification
 import id.finalproject.binar.secondhand.util.Resource
 import id.finalproject.binar.secondhand.viewmodel.NotificationViewModel
@@ -25,6 +28,8 @@ class NotificationFragment : Fragment() {
     private val notificationViewModel: NotificationViewModel by viewModels()
 
     private lateinit var notificationAdapter: NotificationAdapter
+
+    private lateinit var sharedPref: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,9 +47,24 @@ class NotificationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (notificationViewModel.isLogin) {
+            observeNotification()
+            refreshLayout()
+        } else {
+            binding.apply {
+                notificationArea.isVisible = false
+                ifnotlogin.isVisible = true
+
+                btnLogin.setOnClickListener {
+                    val intent =
+                        Intent(this@NotificationFragment.requireContext(), AuthActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+        }
+
 //        initRecyclerView()
-        observeNotification()
-        refreshLayout()
+
 
     }
 
