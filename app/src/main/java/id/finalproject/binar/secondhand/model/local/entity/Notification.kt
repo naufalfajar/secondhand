@@ -1,46 +1,20 @@
 package id.finalproject.binar.secondhand.model.local.entity
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "notification")
 data class Notification(
-
-    @PrimaryKey
-    @ColumnInfo(name = "id")
-    val id: Int? = 0,
-
-    @ColumnInfo(name = "bid_price")
-    val bidPrice: Int = 0,
-
-    @ColumnInfo(name = "buyer_name")
-    val buyerName: String? = null,
-
-    @ColumnInfo(name = "createdAt")
+    @PrimaryKey val id: Int? = 0,
+    val bid_price: Int = 0,
+    val buyer_name: String? = null,
     val createdAt: String? = null,
-
-    @ColumnInfo(name = "image_url")
-    val imageUrl: String? = null,
-
-    @ColumnInfo(name = "product_id")
-    val productId: Int? = 0,
-
-    @ColumnInfo(name = "read")
-    val read: Boolean?,
-
-    @ColumnInfo(name = "receiver_id")
-    val receiverId: Int? = 0,
-
-    @ColumnInfo(name = "seller_name")
-    val sellerName: String? = null,
-
-    @ColumnInfo(name = "status")
+    val image_url: String? = null,
+    val product_id: Int? = 0,
+    val read: Boolean? = false,
+    val receiver_id: Int? = 0,
+    val seller_name: String? = null,
     val status: String? = null,
-
-    @ColumnInfo(name = "transaction_date")
-    val transactionDate: String? = null,
-
-    @ColumnInfo(name = "updatedAt")
+    val transaction_date: String? = null,
     val updatedAt: String? = null
 )

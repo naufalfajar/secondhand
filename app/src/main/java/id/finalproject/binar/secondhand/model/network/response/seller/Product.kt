@@ -1,4 +1,4 @@
-package id.finalproject.binar.secondhand.model.network.response
+package id.finalproject.binar.secondhand.model.network.response.seller
 
 
 import com.google.gson.annotations.SerializedName

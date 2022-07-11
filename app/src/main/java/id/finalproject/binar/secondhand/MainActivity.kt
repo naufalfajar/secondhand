@@ -11,51 +11,35 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import id.finalproject.binar.secondhand.databinding.ActivityMainBinding
 import id.finalproject.binar.secondhand.fragment.account.ProfilFragment
 import id.finalproject.binar.secondhand.fragment.home.HomeFragment
 import id.finalproject.binar.secondhand.fragment.notification.NotificationFragment
 import id.finalproject.binar.secondhand.fragment.sell.DaftarJualFragment
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-//    private lateinit var navController: NavController
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        val navHostFragment =
-//            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-//        navController = navHostFragment.navController
-//
-//        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-//        setupWithNavController(bottomNavigationView, navController)
-//
-//
-//        navController.addOnDestinationChangedListener { _, destination, _ ->
-//            when (destination.id) {
-//                R.id.loginFragment -> binding.bottomNavigationView.visibility = View.INVISIBLE
-//                R.id.registerFragment -> binding.bottomNavigationView.visibility = View.INVISIBLE
-//                R.id.bidderInfoFragment -> binding.bottomNavigationView.visibility = View.INVISIBLE
-//                R.id.formJualFragment -> binding.bottomNavigationView.visibility = View.INVISIBLE
-//                R.id.previewFragment -> binding.bottomNavigationView.visibility = View.INVISIBLE
-//                else -> binding.bottomNavigationView.visibility = View.VISIBLE
-//            }
-//        }
-
-//        setupBottomNavigationBar()
-        replaceFragment(HomeFragment())
         doubleBackToExit()
 
         if (intent.extras != null) {
             val bundle = intent.extras
-            snackbarAddProduct(bundle!!.getBoolean("addProduct"))
-            bundle.remove("addProduct")
+            if (bundle!!.getBoolean("addProduct")) {
+                replaceFragment(DaftarJualFragment())
+                snackbarAddProduct(bundle.getBoolean("addProduct"))
+                bundle.remove("addProduct")
+            }
+        } else {
+            replaceFragment(HomeFragment())
         }
 
         val mOnNavigationItemSelectedListener =
@@ -72,7 +56,7 @@ class MainActivity : AppCompatActivity() {
                     R.id.formJualFragment -> {
                         val intent = Intent(this, SellActivity::class.java)
                         startActivity(intent)
-                        return@OnNavigationItemSelectedListener true
+                        return@OnNavigationItemSelectedListener false
                     }
                     R.id.daftarJualFragment -> {
                         replaceFragment(DaftarJualFragment())

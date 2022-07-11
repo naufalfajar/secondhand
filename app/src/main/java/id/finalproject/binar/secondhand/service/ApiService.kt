@@ -1,12 +1,18 @@
 package id.finalproject.binar.secondhand.service
 
-import id.finalproject.binar.secondhand.model.network.request.LoginRequest
 import id.finalproject.binar.secondhand.model.network.response.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
+import id.finalproject.binar.secondhand.model.network.response.GetNotification
+import id.finalproject.binar.secondhand.model.network.response.GetNotificationItem
+import id.finalproject.binar.secondhand.model.network.response.seller.GetBanner
+import id.finalproject.binar.secondhand.model.network.response.seller.GetBannerItem
+import id.finalproject.binar.secondhand.model.network.response.seller.GetSellerOrder
+import id.finalproject.binar.secondhand.model.network.response.seller.GetSellerOrderItem
+import id.finalproject.binar.secondhand.model.network.request.LoginRequest
+import id.finalproject.binar.secondhand.model.network.response.*
 import retrofit2.http.*
-
 
 interface ApiService {
 
@@ -33,6 +39,9 @@ interface ApiService {
     @PUT("auth/user/{id}")
     suspend fun putUserById(@Path("id") userId: Int, @Header("access_token") access_token: String)
 
+    @GET("auth/user")
+    suspend fun getUser(@Header("access_token") access_token: String) : Call<GetUserItem>
+
     //SELLER
 
     //Banner
@@ -40,13 +49,12 @@ interface ApiService {
     suspend fun postBanner(@Header("access_token") access_token: String)
 
     @GET("seller/banner")
-    suspend fun getBanner(@Header("access_token") access_token: String)
+    suspend fun getBanner(): GetBanner
 
     @GET("seller/banner/{id}")
     suspend fun getBannerById(
-        @Path("id") bannerId: Int,
-        @Header("access_token") access_token: String
-    )
+        @Path("id") bannerId: Int
+    ): GetBannerItem
 
     @DELETE("seller/banner/{id}")
     suspend fun delBannerById(
@@ -68,11 +76,21 @@ interface ApiService {
     suspend fun deleteCategoryById(@Path("id") categoryId: Int)
 
     //Product
+    @Multipart
     @POST("seller/product")
-    suspend fun postProductSeller(@Header("access_token") access_token: String)
+    suspend fun postProductSeller(
+        @Header("access_token") access_token: String,
+        @Part("name") name: RequestBody,
+        @Part("description") description: RequestBody,
+        @Part("base_price") base_price: RequestBody,
+        @Part("category_ids") category_ids: RequestBody,
+        @Part("location") location: RequestBody,
+        @Part image: MultipartBody.Part
+    )
 
     @GET("seller/product")
-    suspend fun getProductSeller(@Header("access_token") access_token: String)
+    suspend fun getProductSeller(
+        @Header("access_token") access_token: String)
 
     @GET("seller/product/{id}")
     suspend fun getProductByIdSeller(
@@ -120,10 +138,7 @@ interface ApiService {
     //Product
 
     @GET("buyer/product")
-    suspend fun getProductBuyer(
-        @Query("status") status: String,
-        @Query("category_id") category_id: Int
-    )
+    suspend fun getProductBuyer()
 
     @GET("buyer/product/{id}")
     suspend fun getProductByIdBuyer(@Path("id") productId: Int)
