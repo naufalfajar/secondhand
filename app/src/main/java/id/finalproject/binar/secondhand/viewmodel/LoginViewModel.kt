@@ -1,4 +1,4 @@
-package id.finalproject.binar.secondhand.fragment.auth
+package id.finalproject.binar.secondhand.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData

@@ -17,6 +17,7 @@ import id.finalproject.binar.secondhand.repository.UserRepo
 import id.finalproject.binar.secondhand.repository.viewModelsFactory
 import id.finalproject.binar.secondhand.service.ApiClient
 import id.finalproject.binar.secondhand.service.ApiService
+import id.finalproject.binar.secondhand.viewmodel.LoginViewModel
 
 
 class LoginFragment : Fragment() {
