@@ -2,8 +2,8 @@ package id.finalproject.binar.secondhand.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import id.finalproject.binar.secondhand.R
@@ -12,8 +12,21 @@ import id.finalproject.binar.secondhand.model.local.entity.Product
 import java.text.NumberFormat
 import java.util.*
 
-class HomeProductAdapter :
-    ListAdapter<Product, HomeProductAdapter.ProductViewHolder>(ProductComparator()) {
+
+class HomeProductAdapter(private val onClickListener: (id: Int, product: Product) -> Unit) :
+    RecyclerView.Adapter<HomeProductAdapter.ProductViewHolder>() {
+
+    private val diffCallback = object : DiffUtil.ItemCallback<Product>() {
+        override fun areItemsTheSame(oldItem: Product, newItem: Product) =
+            oldItem.id == newItem.id
+
+        override fun areContentsTheSame(oldItem: Product, newItem: Product) =
+            oldItem == newItem
+    }
+
+    private val listDiffer = AsyncListDiffer(this, diffCallback)
+
+    fun updateData(product: List<Product>) = listDiffer.submitList(product)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val binding =
@@ -22,11 +35,10 @@ class HomeProductAdapter :
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        val currentItem = getItem(position)
-        if (currentItem != null) {
-            holder.bind(currentItem)
-        }
+        holder.bind(listDiffer.currentList[position])
     }
+
+    override fun getItemCount(): Int = listDiffer.currentList.size
 
     inner class ProductViewHolder(private val binding: ItemProductHomeBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -47,19 +59,11 @@ class HomeProductAdapter :
 
                 tvProductPrice.text = rupiah(product.base_price)
 
-//                itemProduct.setOnClickListener {
-//                    onClickListener.invoke(product.id, product)
-//                }
+                itemProduct.setOnClickListener {
+                    onClickListener.invoke(product.id!!, product)
+                }
             }
         }
-    }
-
-    class ProductComparator : DiffUtil.ItemCallback<Product>() {
-        override fun areItemsTheSame(oldItem: Product, newItem: Product) =
-            oldItem.name == newItem.name
-
-        override fun areContentsTheSame(oldItem: Product, newItem: Product) =
-            oldItem == newItem
     }
 
     fun rupiah(number: Int?): String {

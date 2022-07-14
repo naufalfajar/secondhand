@@ -29,4 +29,8 @@ class ProductRepository @Inject constructor(
 
         }
     )
+
+    suspend fun getProductById(productId: Int) {
+        productDao.getProductById(productId)
+    }
 }

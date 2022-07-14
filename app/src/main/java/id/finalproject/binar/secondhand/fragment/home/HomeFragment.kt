@@ -1,5 +1,6 @@
 package id.finalproject.binar.secondhand.fragment.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -12,12 +13,14 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager
 import dagger.hilt.android.AndroidEntryPoint
+import id.finalproject.binar.secondhand.BuyerActivity
 import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.adapter.BannerAdapter
 import id.finalproject.binar.secondhand.adapter.HomeBannerAdapter
 import id.finalproject.binar.secondhand.adapter.HomeCategoryAdapter
 import id.finalproject.binar.secondhand.adapter.HomeProductAdapter
 import id.finalproject.binar.secondhand.databinding.FragmentHomeBinding
+import id.finalproject.binar.secondhand.model.local.entity.Product
 import id.finalproject.binar.secondhand.util.Resource
 import id.finalproject.binar.secondhand.viewmodel.HomeViewModel
 
@@ -31,6 +34,8 @@ class HomeFragment : Fragment() {
     lateinit var imageList: List<Int>
 
     private val homeViewModel: HomeViewModel by viewModels()
+
+    private lateinit var homeProductAdapter: HomeProductAdapter
 
     //    private lateinit var bannerAdapter: BannerAdapter
     private lateinit var handler: Handler
@@ -51,7 +56,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val productHomeAdapter = HomeProductAdapter()
         val categoryHomeAdapter = HomeCategoryAdapter()
         val bannerHomeAdapter = HomeBannerAdapter()
 
@@ -73,7 +77,7 @@ class HomeFragment : Fragment() {
 //            }
 //        })
 
-        observeProduct(productHomeAdapter)
+        observeProduct()
         observeCategory(categoryHomeAdapter)
 //        observeBanner(bannerHomeAdapter)
 //        initBanner()
@@ -108,7 +112,18 @@ class HomeFragment : Fragment() {
 //        }
 //    }
 
-    private fun observeProduct(homeProductAdapter: HomeProductAdapter) {
+    private fun observeProduct() {
+
+        homeProductAdapter = HomeProductAdapter { id: Int, product: Product ->
+            val bundle = Bundle()
+            bundle.putInt("id", id)
+
+            val intent = Intent(this@HomeFragment.requireContext(), BuyerActivity::class.java)
+            intent.putExtras(bundle)
+            startActivity(intent, bundle)
+
+        }
+
         binding.apply {
             listProduct.apply {
                 adapter = homeProductAdapter
@@ -116,7 +131,7 @@ class HomeFragment : Fragment() {
             }
 
             homeViewModel.product.observe(viewLifecycleOwner) { result ->
-                homeProductAdapter.submitList(result.data)
+                homeProductAdapter.updateData(result.data!!)
 
                 progressBar.isVisible = result is Resource.Loading && result.data.isNullOrEmpty()
                 textViewError.isVisible = result is Resource.Error && result.data.isNullOrEmpty()
