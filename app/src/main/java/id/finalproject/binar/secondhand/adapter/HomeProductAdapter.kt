@@ -55,7 +55,14 @@ class HomeProductAdapter(private val onClickListener: (id: Int, product: Product
 
                 tvProductName.text = product.name
 
-                tvProductCategory.text = product.categories
+                var category = ""
+
+                for (i in product.Categories) {
+                    category = category + "," + i.name
+                }
+
+                //Tanda koma didepan masih kena print
+                tvProductCategory.text = category
 
                 tvProductPrice.text = rupiah(product.base_price)
 
