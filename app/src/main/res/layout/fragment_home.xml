@@ -20,6 +20,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:elevation="4dp"
+            app:layout_constraintBottom_toTopOf="@id/tv_HeaderCategory"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <!--        <com.smarteist.autoimageslider.SliderView-->
         <!--            android:id="@+id/autoImageSlider"-->
         <!--            android:layout_width="match_parent"-->
