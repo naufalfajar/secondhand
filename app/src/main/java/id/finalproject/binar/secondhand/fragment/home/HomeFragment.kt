@@ -2,7 +2,6 @@ package id.finalproject.binar.secondhand.fragment.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +18,7 @@ import id.finalproject.binar.secondhand.adapter.BannerAdapter
 import id.finalproject.binar.secondhand.adapter.HomeCategoryAdapter
 import id.finalproject.binar.secondhand.adapter.HomeProductAdapter
 import id.finalproject.binar.secondhand.databinding.FragmentHomeBinding
+import id.finalproject.binar.secondhand.model.local.entity.Category
 import id.finalproject.binar.secondhand.model.local.entity.Product
 import id.finalproject.binar.secondhand.util.Resource
 import id.finalproject.binar.secondhand.viewmodel.HomeViewModel
@@ -32,10 +32,11 @@ class HomeFragment : Fragment() {
     private val homeViewModel: HomeViewModel by viewModels()
 
     private lateinit var homeProductAdapter: HomeProductAdapter
+    private lateinit var homeCategoryAdapter: HomeCategoryAdapter
     private lateinit var bannerAdapter: BannerAdapter
     private lateinit var indicators: CircleIndicator
 
-    private lateinit var handler: Handler
+    private var selectedCategoryId: Int? = -1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,10 +54,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val categoryHomeAdapter = HomeCategoryAdapter()
-
         observeProduct()
-        observeCategory(categoryHomeAdapter)
+        observeCategory()
         observeBanner()
 
     }
@@ -95,7 +94,26 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun observeCategory(homeCategoryAdapter: HomeCategoryAdapter) {
+    private fun observeCategory() {
+        homeCategoryAdapter = HomeCategoryAdapter(requireContext()) { id: Int, category: Category ->
+            selectedCategoryId = id
+
+//            if (id == -1) {
+//                homeViewModel.getProductByCategory(null)
+//            } else {
+//                val categoryId = id
+//                homeViewModel.getProductByCategory(categoryId)
+//            }
+
+//            val bundle = Bundle()
+//            bundle.putInt("id", id)
+
+//            val intent = Intent(this@HomeFragment.requireContext(), BuyerActivity::class.java)
+//            intent.putExtras(bundle)
+//            startActivity(intent, bundle)
+
+        }
+
         binding.apply {
             listCategory.apply {
                 adapter = homeCategoryAdapter
@@ -104,7 +122,7 @@ class HomeFragment : Fragment() {
             }
 
             homeViewModel.category.observe(viewLifecycleOwner) { result ->
-                homeCategoryAdapter.submitList(result.data)
+                homeCategoryAdapter.updateData(result.data!!)
 
                 progressBar.isVisible = result is Resource.Loading && result.data.isNullOrEmpty()
 
@@ -137,6 +155,7 @@ class HomeFragment : Fragment() {
 
                 indicators = requireView().findViewById(R.id.indicator) as CircleIndicator
                 indicators.setViewPager(vpBanner)
+
 
                 progressBar.isVisible = result is Resource.Loading && result.data.isNullOrEmpty()
 
