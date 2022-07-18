@@ -9,12 +9,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import id.finalproject.binar.secondhand.AuthActivity
 import id.finalproject.binar.secondhand.databinding.FragmentProfilBinding
+import id.finalproject.binar.secondhand.helper.SharedPreferences
 
 
 class ProfilFragment : Fragment() {
 
     private var _binding: FragmentProfilBinding? = null
     private val binding get() = _binding!!
+    private lateinit var sharedPrefs: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +33,7 @@ class ProfilFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sharedPrefs = SharedPreferences(requireContext())
 
         binding.apply {
             btnToUpdate.setOnClickListener { toUpdate() }
@@ -44,6 +47,7 @@ class ProfilFragment : Fragment() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setMessage("Yakin ingin keluar?")
             .setPositiveButton("Ya") { _, _ ->
+                sharedPrefs.sessionDelete()
                 val intent = Intent(this@ProfilFragment.requireContext(), AuthActivity::class.java)
                 startActivity(intent)
                 requireActivity().finish()

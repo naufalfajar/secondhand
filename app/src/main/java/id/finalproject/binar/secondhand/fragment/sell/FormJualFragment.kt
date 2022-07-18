@@ -9,6 +9,7 @@ import android.content.pm.PackageManager
 import android.database.Cursor
 import android.graphics.Bitmap
 import android.net.Uri
+import android.opengl.Visibility
 import android.os.Bundle
 import android.os.Environment
 import android.provider.DocumentsContract
@@ -23,14 +24,20 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.net.toUri
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.chip.Chip
+import id.finalproject.binar.secondhand.AuthActivity
 import id.finalproject.binar.secondhand.MainActivity
 import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.databinding.FragmentFormJualBinding
+import id.finalproject.binar.secondhand.helper.SharedPreferences
 import id.finalproject.binar.secondhand.model.network.Status
+import id.finalproject.binar.secondhand.repository.CategoryRepository
 import id.finalproject.binar.secondhand.repository.SellerAddProductRepository
 import id.finalproject.binar.secondhand.repository.viewModelsFactory
 import id.finalproject.binar.secondhand.service.ApiClient
@@ -51,9 +58,13 @@ class FormJualFragment : Fragment() {
     private val apiService: ApiService by lazy { ApiClient.instance }
     private val sellerAddProductRepository: SellerAddProductRepository by lazy {SellerAddProductRepository(apiService)}
     private val sellerProductViewModel: SellerProductViewModel by viewModelsFactory {SellerProductViewModel(sellerAddProductRepository)}
+    private lateinit var sharedPref: SharedPreferences
 
+    private lateinit var accessToken: String
     private lateinit var body: PostProductRequestBody
     private var path: String = ""
+    private val arrayCategoryId: ArrayList<Int> = ArrayList()
+    private val arrayCategoryName: ArrayList<String> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,24 +74,43 @@ class FormJualFragment : Fragment() {
 
         (activity as AppCompatActivity?)!!.supportActionBar?.hide()
 
-
         val kategori = resources.getStringArray(R.array.kategori)
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, kategori)
         binding.autoCompleteTextView.setAdapter(arrayAdapter)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        toPreviewPage()
-        toDaftarJualPage()
-        binding.imageView2.setOnClickListener {
-            checkingPermissions()
+        sharedPref = SharedPreferences(requireContext())
+        if (sharedPref.getLogin()) {
+            accessToken = sharedPref.getToken().toString()
+            toPreviewPage()
+            toDaftarJualPage()
+
+            if(path.isNotEmpty()){
+                binding.imageView2.setImageURI(path.toUri())
+            }
+
+            binding.imageView2.setOnClickListener {
+                checkingPermissions()
+            }
+            binding.arrowBack.setOnClickListener {
+                findNavController().popBackStack()
+            }
+        } else {
+            binding.apply {
+                clContent.visibility = View.INVISIBLE
+                ifnotlogin.isVisible = true
+
+                btnLogin.setOnClickListener {
+                    val intent =
+                        Intent(this@FormJualFragment.requireContext(), AuthActivity::class.java)
+                    startActivity(intent)
+                }
+            }
         }
-        binding.arrowBack.setOnClickListener {
-            
-        }
+
     }
 
     private fun toPreviewPage() {
@@ -92,6 +122,24 @@ class FormJualFragment : Fragment() {
     private fun toDaftarJualPage() {
         binding.btnTerbitkan.setOnClickListener{
             processData()
+        }
+    }
+
+    private fun createChips(idCategory: Int, categoryName: String) {
+        val chip = Chip(requireContext())
+        chip.apply {
+            text = categoryName
+            isCloseIconVisible = true
+            isClickable = true
+            isCheckable = false
+            binding.chipGroup.addView(chip as View)
+            setOnCloseIconClickListener {
+                // Hapus view chips
+                binding.chipGroup.removeView(chip as View)
+                // Hapus element pada ArrayList
+                arrayCategoryId.remove(idCategory)
+                arrayCategoryName.remove(categoryName)
+            }
         }
     }
 
@@ -108,7 +156,6 @@ class FormJualFragment : Fragment() {
                 val imageFile = File(path)
                 addProduct(productName, productPrice,productDescription, productCategory, location, imageFile)
                 observePost()
-
             }
         }
     }
@@ -164,11 +211,57 @@ class FormJualFragment : Fragment() {
             binding.etDeskripsiProduk.error = "Silahkan masukkan lokasi!"
             return false
         }
-        if (path.isNullOrEmpty()) {
+        if (path.isEmpty()) {
             binding.textView6.error = "Silahkan upload Gambar"
             return false
         }
         return true
+    }
+
+    private fun addProduct(name: String, price: String, description: String, category: String, location: String,
+                           imageFile: File
+    ) {
+        val namebody = name.toRequestBody("text/plain".toMediaType())
+        val priceBody = price.toRequestBody("text/plain".toMediaType())
+        val descriptionBody = description.toRequestBody("text/plain".toMediaType())
+        val categoryBody = category.toRequestBody("text/plain".toMediaType())
+        val locationBody = location.toRequestBody("text/plain".toMediaType())
+
+        val imageBody = imageFile.asRequestBody("image/png".toMediaTypeOrNull())
+        val image = MultipartBody.Part.createFormData("image", imageFile.name, imageBody)
+
+        body = PostProductRequestBody(namebody, priceBody, descriptionBody, categoryBody, locationBody, image)
+    }
+
+    private fun observePost(
+    ){
+        sellerProductViewModel.postProduct(
+//            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGFzZEBnbWFpbC5jb20iLCJpYXQiOjE2NTY0OTgyMjh9.l25knICph9-8ZBanO08PHTMhzMr4kJGabGekEvx2Djw",
+            accessToken,
+            body.nameBody,
+            body.descriptionBody,
+            body.priceBody,
+            body.categoryBody,
+            body.locationBody,
+            body.image
+        ).observe(viewLifecycleOwner){
+            when (it.status) {
+                Status.SUCCESS -> {
+                    val bundle = Bundle()
+                    bundle.putBoolean("addProduct", true)
+
+                    val intent = Intent(this@FormJualFragment.requireContext(), MainActivity::class.java)
+                    intent.putExtras(bundle)
+                    startActivity(intent, bundle)
+                    requireActivity().finish()
+                    Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
+                }
+                Status.ERROR -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+                else -> {}
+            }
+        }
     }
 
     private fun checkingPermissions() {
@@ -201,6 +294,7 @@ class FormJualFragment : Fragment() {
         }
     }
 
+    //------------------------------------------------------------------------
     private fun showPermissionDeniedDialog() {
         AlertDialog.Builder(requireContext())
             .setTitle("Permission Denied")
@@ -231,8 +325,6 @@ class FormJualFragment : Fragment() {
             binding.imageView2.setImageURI(result)
 
             path = getRealPathFromURI(requireContext(), result!!)!!
-
-            binding.imageView2.background = null
         }
 
     private fun openGallery() {
@@ -245,12 +337,10 @@ class FormJualFragment : Fragment() {
             if (result.resultCode == Activity.RESULT_OK && result.data != null) {
                 val bitmap = result.data!!.extras?.get("data") as Bitmap
 
-
                 val tempUri = getImageUriFromBitmap(requireContext(), bitmap)
                 path = getRealPathFromURI(requireContext(), tempUri)!!
 
                 binding.imageView2.setImageBitmap(bitmap)
-                binding.imageView2.background = null
             }
         }
 
@@ -265,52 +355,6 @@ class FormJualFragment : Fragment() {
         val path = MediaStore.Images.Media.insertImage(context.contentResolver, bitmap, "Title", null)
         return Uri.parse(path.toString())
     }
-
-    private fun addProduct(name: String, price: String, description: String, category: String, location: String,
-                           imageFile: File
-    ) {
-        val namebody = name.toRequestBody("text/plain".toMediaType())
-        val priceBody = price.toRequestBody("text/plain".toMediaType())
-        val descriptionBody = description.toRequestBody("text/plain".toMediaType())
-        val categoryBody = category.toRequestBody("text/plain".toMediaType())
-        val locationBody = location.toRequestBody("text/plain".toMediaType())
-
-        val imageBody = imageFile.asRequestBody("image/png".toMediaTypeOrNull())
-        val image = MultipartBody.Part.createFormData("image", imageFile.name, imageBody)
-
-        body = PostProductRequestBody(namebody, priceBody, descriptionBody, categoryBody, locationBody, image)
-    }
-
-    private fun observePost(
-    ){
-        sellerProductViewModel.postProduct(
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGFzZEBnbWFpbC5jb20iLCJpYXQiOjE2NTY0OTgyMjh9.l25knICph9-8ZBanO08PHTMhzMr4kJGabGekEvx2Djw",
-            body.nameBody,
-            body.descriptionBody,
-            body.priceBody,
-            body.categoryBody,
-            body.locationBody,
-            body.image
-        ).observe(viewLifecycleOwner){
-            when (it.status) {
-                Status.SUCCESS -> {
-                    val bundle = Bundle()
-                    bundle.putBoolean("addProduct", true)
-
-                    val intent = Intent(this@FormJualFragment.requireContext(), MainActivity::class.java)
-                    intent.putExtras(bundle)
-                    startActivity(intent, bundle)
-                    requireActivity().finish()
-                    Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
-                }
-                Status.ERROR -> {
-                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-                }
-                else -> {}
-            }
-        }
-    }
-
     private fun getRealPathFromURI(context: Context, uri: Uri): String? {
         when {
             // DocumentProvider

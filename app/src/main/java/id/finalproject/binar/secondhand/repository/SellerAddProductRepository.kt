@@ -1,5 +1,6 @@
 package id.finalproject.binar.secondhand.repository
 
+import id.finalproject.binar.secondhand.model.network.response.GetUserItem
 import id.finalproject.binar.secondhand.service.ApiService
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -24,5 +25,5 @@ class SellerAddProductRepository(private val apiService: ApiService) {
 
     suspend fun getUser(
         access_token: String
-    ) = apiService.getUser(access_token)
+    ): GetUserItem = apiService.getUser(access_token)
 }

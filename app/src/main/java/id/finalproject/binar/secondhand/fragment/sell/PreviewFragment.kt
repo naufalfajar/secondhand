@@ -7,14 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.findNavController
+import com.bumptech.glide.Glide
 import id.finalproject.binar.secondhand.MainActivity
 import id.finalproject.binar.secondhand.databinding.FragmentPreviewBinding
+import id.finalproject.binar.secondhand.helper.SharedPreferences
 import id.finalproject.binar.secondhand.model.network.Status
+import id.finalproject.binar.secondhand.model.network.response.GetUserItem
 import id.finalproject.binar.secondhand.repository.SellerAddProductRepository
+import id.finalproject.binar.secondhand.repository.toRp
 import id.finalproject.binar.secondhand.repository.viewModelsFactory
 import id.finalproject.binar.secondhand.service.ApiClient
 import id.finalproject.binar.secondhand.service.ApiService
@@ -33,7 +37,11 @@ class PreviewFragment : Fragment() {
     private val apiService: ApiService by lazy { ApiClient.instance }
     private val sellerAddProductRepository: SellerAddProductRepository by lazy { SellerAddProductRepository(apiService) }
     private val sellerProductViewModel: SellerProductViewModel by viewModelsFactory { SellerProductViewModel(sellerAddProductRepository) }
+
+    private lateinit var sharedPrefs: SharedPreferences
+    private lateinit var accessToken: String
     private lateinit var body: PostProductRequestBody
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,9 +54,25 @@ class PreviewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getProductData()
-        toFormJualPage()
-        postProduct()
+        sharedPrefs = SharedPreferences(requireContext())
+        if(sharedPrefs.getLogin()){
+            accessToken = sharedPrefs.getToken().toString()
+            getProductData()
+            toFormJualPage()
+            postProduct()
+        }
+    }
+
+    private fun toFormJualPage() {
+        binding.btnBack.setOnClickListener {
+            it.findNavController().popBackStack()
+        }
+    }
+
+    private fun postProduct() {
+        binding.btnTerbitkan2.setOnClickListener {
+            observePost()
+        }
     }
 
     private fun getProductData(){
@@ -66,9 +90,11 @@ class PreviewFragment : Fragment() {
                 tvDeskripsi.text = description
                 tvItemNama.text = name
                 tvItemCategory.text = category
-                tvItemHarga.text = price
+                tvItemHarga.text = price.toInt().toRp()
+                vpImage.setImageURI(path.toUri())
             }
             addProduct(name,price,description,category,location,imageFile)
+            observeSellerInfo()
         }
     }
 
@@ -87,23 +113,11 @@ class PreviewFragment : Fragment() {
         body = PostProductRequestBody(namebody, priceBody, descriptionBody, categoryBody, locationBody, image)
     }
 
-    private fun toFormJualPage() {
-        binding.btnBack.setOnClickListener {
-            it.findNavController().popBackStack()
-        }
-    }
-
-    private fun postProduct() {
-        binding.btnTerbitkan2.setOnClickListener {
-            getProductData()
-            observePost()
-        }
-    }
-
     private fun observePost(
     ){
         sellerProductViewModel.postProduct(
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGFzZEBnbWFpbC5jb20iLCJpYXQiOjE2NTY0OTgyMjh9.l25knICph9-8ZBanO08PHTMhzMr4kJGabGekEvx2Djw",
+//            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGFzZEBnbWFpbC5jb20iLCJpYXQiOjE2NTY0OTgyMjh9.l25knICph9-8ZBanO08PHTMhzMr4kJGabGekEvx2Djw",
+            accessToken,
             body.nameBody,
             body.descriptionBody,
             body.priceBody,
@@ -113,21 +127,6 @@ class PreviewFragment : Fragment() {
         ).observe(viewLifecycleOwner){
             when (it.status) {
                 Status.SUCCESS -> {
-                    Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
-                }
-                Status.ERROR -> {
-                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-                }
-                else -> {}
-            }
-        }
-
-        sellerProductViewModel.getUser(
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGFzZEBnbWFpbC5jb20iLCJpYXQiOjE2NTY0OTgyMjh9.l25knICph9-8ZBanO08PHTMhzMr4kJGabGekEvx2Djw"
-        ).observe(viewLifecycleOwner){
-            when (it.status) {
-                Status.SUCCESS -> {
-                    val str = it.data.toString()
                     val bundle = Bundle()
                     bundle.putBoolean("addProduct", true)
 
@@ -135,7 +134,7 @@ class PreviewFragment : Fragment() {
                     intent.putExtras(bundle)
                     startActivity(intent, bundle)
                     requireActivity().finish()
-                    Toast.makeText(requireContext(), it.data.toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
                 }
                 Status.ERROR -> {
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
@@ -145,4 +144,26 @@ class PreviewFragment : Fragment() {
         }
     }
 
+    private fun observeSellerInfo(){
+        sellerProductViewModel.getUser(
+//            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGFzZEBnbWFpbC5jb20iLCJpYXQiOjE2NTY0OTgyMjh9.l25knICph9-8ZBanO08PHTMhzMr4kJGabGekEvx2Djw"
+        accessToken
+        ).observe(viewLifecycleOwner){
+            when (it.status) {
+                Status.SUCCESS -> {
+                    it.data?.let { it1 -> setSellerInfo(it1) }
+                }
+                Status.ERROR -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+                else -> {}
+            }
+        }
+    }
+
+    private fun setSellerInfo(sellerInfo: GetUserItem){
+        Glide.with(this).load(sellerInfo.imageUrl).into(binding.ivSellerInfo)
+        binding.tvSellerNama.text = sellerInfo.fullName
+        binding.tvSellerCity.text = sellerInfo.city
+    }
 }

@@ -6,6 +6,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import java.text.NumberFormat
+import java.util.*
+
+fun Int.toRp() : String{
+    val locale = Locale("in","ID")
+    val numberFormat = NumberFormat.getCurrencyInstance(locale)
+    numberFormat.maximumFractionDigits = 0
+    return  numberFormat.format(this)
+}
 
 inline fun <reified T : ViewModel> ComponentActivity.viewModelsFactory(crossinline viewModelInitialization: () -> T): Lazy<T> {
     return viewModels {

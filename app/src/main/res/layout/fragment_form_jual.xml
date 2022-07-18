@@ -3,14 +3,59 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context="id.finalproject.binar.secondhand.fragment.sell.FormJualFragment"
     android:id="@+id/layout_formJual">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_formproduk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ifnotlogin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tv_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Yah, Kamu belum login"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Login"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                app:cornerRadius="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_message" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
         <LinearLayout
             android:id="@+id/ll_top"
             android:layout_width="match_parent"
@@ -44,7 +89,6 @@
 
 
         </LinearLayout>
-
         <ScrollView
             android:id="@+id/sv_formproduct"
             android:layout_width="match_parent"
@@ -169,7 +213,11 @@
                         android:textSize="14sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
-
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chip_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp" />
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="15dp" />
@@ -180,7 +228,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:fontFamily="@font/poppins"
-                    android:text="Nama Produk"
+                    android:text="Deskripsi Produk"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -190,7 +238,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/custom_et"
                     android:fontFamily="@font/poppins"
-                    android:hint="Nama Produk"
+                    android:hint="Deskripsi"
                     android:paddingStart="15dp"
                     android:paddingTop="15dp"
                     android:paddingBottom="50dp"
@@ -214,12 +262,11 @@
                     android:id="@+id/imageView2"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:background="@drawable/add_image"
+                    android:src="@drawable/ic_add_image"
                     android:scaleType="fitCenter" />
 
             </LinearLayout>
         </ScrollView>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -261,11 +308,8 @@
                 android:textColorHint="@color/white"
                 android:textSize="14sp"
                 app:cornerRadius="15dp" />
-
         </LinearLayout>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

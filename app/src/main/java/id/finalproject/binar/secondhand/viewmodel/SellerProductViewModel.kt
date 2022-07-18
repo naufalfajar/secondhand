@@ -1,14 +1,18 @@
 package id.finalproject.binar.secondhand.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
+import id.finalproject.binar.secondhand.helper.SharedPreferences
 import id.finalproject.binar.secondhand.model.network.Resource
+import id.finalproject.binar.secondhand.repository.CategoryRepository
 import id.finalproject.binar.secondhand.repository.SellerAddProductRepository
 import kotlinx.coroutines.Dispatchers
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
-class SellerProductViewModel(private val repository: SellerAddProductRepository): ViewModel() {
+class SellerProductViewModel(
+    private val repository: SellerAddProductRepository): ViewModel() {
 
     fun postProduct(
         access_token: String,
@@ -26,18 +30,9 @@ class SellerProductViewModel(private val repository: SellerAddProductRepository)
                 image
             )))
         } catch (e: Exception) {
-            emit(Resource.error(data = null, message = e.message ?: "Error Occurred!"))
-        }
-    }
-
-    fun getProduct(
-        access_token: String
-    ) = liveData(Dispatchers.IO){
-        emit(Resource.loading(null))
-        try {
-            emit(Resource.success(repository.getProduct(access_token)))
-        } catch (e: Exception){
-            emit(Resource.error(data = null, message = e.message ?: "Error Occurred"))
+            emit(Resource.error(
+                data = null,
+                message = e.message ?: "Error Occurred!"))
         }
     }
 

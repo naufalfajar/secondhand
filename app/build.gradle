@@ -114,4 +114,6 @@ dependencies {
     implementation "com.google.code.gson:gson:2.9.0"
 
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.0"
+
+    implementation 'io.github.elye:loaderviewlibrary:3.0.0'
 }
