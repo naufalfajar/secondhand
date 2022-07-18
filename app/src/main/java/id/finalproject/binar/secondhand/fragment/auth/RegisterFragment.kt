@@ -113,7 +113,7 @@ class RegisterFragment : Fragment() {
             image1,
             city1
         ).observe(viewLifecycleOwner) {
-            when(it.status) {
+            when(it!!.status) {
                 Status.SUCCESS -> {
                     findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
                     Toast.makeText(requireContext(), "Regis Berhasil.", Toast.LENGTH_SHORT).show()

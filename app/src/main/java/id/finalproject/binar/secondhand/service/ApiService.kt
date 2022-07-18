@@ -33,11 +33,21 @@ interface ApiService {
     @POST("auth/login")
     suspend fun postLogin(@Body req: LoginRequest) : PostLoginResponse
 
-    @GET("auth/user/{id}")
-    suspend fun getUserById(@Path("id") userId: Int, @Header("access_token") access_token: String)
+    @GET("auth/user")
+    suspend fun getUser(@Header("access_token") access_token: String) : GetUserResponse
 
-    @PUT("auth/user/{id}")
-    suspend fun putUserById(@Path("id") userId: Int, @Header("access_token") access_token: String)
+    @Multipart
+    @PUT("auth/user")
+    suspend fun putUser(
+        @Header("access_token") access_token: String,
+        @Part("full_name") full_name: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("password") password: RequestBody,
+        @Part("phone_number") phone_number: RequestBody,
+        @Part("address") address: RequestBody,
+        @Part image: MultipartBody.Part?,
+        @Part("city") city: RequestBody
+    ) : PostRegisResponse
 
     @GET("auth/user")
     suspend fun getUser(@Header("access_token") access_token: String) : Call<GetUserItem>

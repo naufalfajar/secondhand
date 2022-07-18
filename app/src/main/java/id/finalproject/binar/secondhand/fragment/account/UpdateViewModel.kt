@@ -1,4 +1,4 @@
-package id.finalproject.binar.secondhand.fragment.auth
+package id.finalproject.binar.secondhand.fragment.account
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
@@ -9,8 +9,10 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.HttpException
 
-class RegisViewModel(private val userRepo: UserRepo): ViewModel() {
-    fun postRegisUser(
+class UpdateViewModel(private val userRepo: UserRepo): ViewModel() {
+
+    fun putUpdateUser(
+        access_token: String,
         full_name: RequestBody,
         email: RequestBody,
         password: RequestBody,
@@ -21,9 +23,21 @@ class RegisViewModel(private val userRepo: UserRepo): ViewModel() {
     ) = liveData(Dispatchers.IO) {
         emit(Resource.loading(null))
         try {
-            emit(Resource.success(userRepo.postRegis(
-                full_name, email, password, phone_number,
-                address, image, city)))
+            emit(Resource.success(userRepo.putUser(
+                access_token, full_name, email,
+                password, phone_number, address, image, city)))
+        } catch (e: Exception) {
+            emit(
+                Resource.error(data = null, message = e.message ?: "Error Occurred!")
+            )
+        }
+    }
+
+    fun getUser(access_token: String) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            emit(
+                Resource.success(userRepo.getUser(access_token)))
         } catch (e: Exception) {
             emit(
                 (e as? HttpException)!!.response()?.errorBody()?.string()?.let {

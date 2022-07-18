@@ -24,4 +24,26 @@ class UserRepo(private val apiService: ApiService) {
         city)
 
     suspend fun postLogin(req: LoginRequest) = apiService.postLogin(req)
+
+    suspend fun getUser(access_token: String) = apiService.getUser(access_token)
+
+    suspend fun putUser(
+        access_token: String,
+        full_name: RequestBody,
+        email: RequestBody,
+        password: RequestBody,
+        phone_number: RequestBody,
+        address: RequestBody,
+        image: MultipartBody.Part,
+        city: RequestBody
+    ) = apiService.putUser(
+        access_token,
+        full_name,
+        email,
+        password,
+        phone_number,
+        address,
+        image,
+        city
+    )
 }
