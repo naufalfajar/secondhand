@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/aulia/AndroidStudioProjects/secondhand/app/src/main/res/drawable/unclicked_button.xml" value="0.1" />
+        <entry key="..\:/Users/aulia/AndroidStudioProjects/secondhand/app/src/main/res/layout/fragment_tab_diminati.xml" value="0.1" />
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable-v24/button_border.xml" value="0.1075" />
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/back.xml" value="0.1785" />
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/background_search_bar.xml" value="0.1155" />

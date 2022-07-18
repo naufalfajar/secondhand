@@ -10,7 +10,11 @@
         android:id="@+id/previewFragment"
         android:name="id.finalproject.binar.secondhand.fragment.sell.PreviewFragment"
         android:label="fragment_preview"
-        tools:layout="@layout/fragment_preview" />
+        tools:layout="@layout/fragment_preview" >
+        <action
+            android:id="@+id/action_previewFragment_to_daftarJualFragment2"
+            app:destination="@id/daftarJualFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/formJualFragment"
         android:name="id.finalproject.binar.secondhand.fragment.sell.FormJualFragment"
@@ -19,5 +23,21 @@
         <action
             android:id="@+id/action_formJualFragment_to_previewFragment"
             app:destination="@id/previewFragment" />
+        <action
+            android:id="@+id/action_formJualFragment_to_daftarJualFragment2"
+            app:destination="@id/daftarJualFragment2" />
     </fragment>
+    <fragment
+        android:id="@+id/daftarJualFragment2"
+        android:name="id.finalproject.binar.secondhand.fragment.sell.DaftarJualFragment"
+        android:label="fragment_daftar_jual"
+        tools:layout="@layout/fragment_daftar_jual" >
+        <action
+            android:id="@+id/action_daftarJualFragment2_to_bidderInfoFragment"
+            app:destination="@id/bidderInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bidderInfoFragment"
+        android:name="id.finalproject.binar.secondhand.fragment.notification.BidderInfoFragment"
+        android:label="BidderInfoFragment" />
 </navigation>
