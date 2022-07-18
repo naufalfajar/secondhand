@@ -15,7 +15,8 @@ class HomeViewModel @Inject constructor(
     bannerRepository: BannerRepository
 ) : ViewModel() {
 
-    val product = productRepository.getProduct().asLiveData()
-    val category = categoryRepository.getCategory().asLiveData()
-    val banner = bannerRepository.getBanner().asLiveData()
+    val getProduct = productRepository.getProduct().asLiveData()
+    val getCategory = categoryRepository.getCategory().asLiveData()
+    val getBanner = bannerRepository.getBanner().asLiveData()
+
 }

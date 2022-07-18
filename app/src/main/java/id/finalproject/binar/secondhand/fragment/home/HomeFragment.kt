@@ -54,13 +54,13 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        observeProduct()
+        observeProduct(null, null)
         observeCategory()
         observeBanner()
 
     }
 
-    private fun observeProduct() {
+    private fun observeProduct(categoryId: Int?, category: Category?) {
 
         homeProductAdapter = HomeProductAdapter { id: Int, product: Product ->
             val bundle = Bundle()
@@ -78,8 +78,14 @@ class HomeFragment : Fragment() {
                 layoutManager = GridLayoutManager(requireContext(), 2)
             }
 
-            homeViewModel.product.observe(viewLifecycleOwner) { result ->
-                homeProductAdapter.updateData(result.data!!)
+            homeViewModel.getProduct.observe(viewLifecycleOwner) { result ->
+                if (categoryId == -1 || categoryId == null) {
+                    homeProductAdapter.updateData(result.data!!)
+                } else {
+                    homeProductAdapter.updateData(result.data!!.filter {
+                        it.Categories.contains(category)
+                    })
+                }
 
                 progressBar.isVisible = result is Resource.Loading && result.data.isNullOrEmpty()
 
@@ -98,19 +104,7 @@ class HomeFragment : Fragment() {
         homeCategoryAdapter = HomeCategoryAdapter(requireContext()) { id: Int, category: Category ->
             selectedCategoryId = id
 
-//            if (id == -1) {
-//                homeViewModel.getProductByCategory(null)
-//            } else {
-//                val categoryId = id
-//                homeViewModel.getProductByCategory(categoryId)
-//            }
-
-//            val bundle = Bundle()
-//            bundle.putInt("id", id)
-
-//            val intent = Intent(this@HomeFragment.requireContext(), BuyerActivity::class.java)
-//            intent.putExtras(bundle)
-//            startActivity(intent, bundle)
+            observeProduct(id, category)
 
         }
 
@@ -121,8 +115,14 @@ class HomeFragment : Fragment() {
                     LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             }
 
-            homeViewModel.category.observe(viewLifecycleOwner) { result ->
-                homeCategoryAdapter.updateData(result.data!!)
+            homeViewModel.getCategory.observe(viewLifecycleOwner) { result ->
+                val listcategory: MutableList<Category> = mutableListOf()
+                listcategory.add(Category(-1, "Semua"))
+                for (i in result.data!!) {
+                    listcategory.add(i)
+                }
+
+                homeCategoryAdapter.updateData(listcategory)
 
                 progressBar.isVisible = result is Resource.Loading && result.data.isNullOrEmpty()
 
@@ -140,15 +140,11 @@ class HomeFragment : Fragment() {
 
     private fun observeBanner() {
         binding.apply {
-            homeViewModel.banner.observe(viewLifecycleOwner) { result ->
+            homeViewModel.getBanner.observe(viewLifecycleOwner) { result ->
                 val listbanner: MutableList<String> = mutableListOf()
                 for (i in result.data!!) {
                     listbanner.add(i.image_url!!)
                 }
-//                val listbanner : List<String> = emptyList()
-//                for (i in result.data!!){
-//                    listbanner.plus(i.image_url)
-//                }
 
                 bannerAdapter = BannerAdapter(requireContext(), listbanner)
                 vpBanner.adapter = bannerAdapter

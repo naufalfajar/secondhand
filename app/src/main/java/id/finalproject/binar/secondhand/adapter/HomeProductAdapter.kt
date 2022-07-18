@@ -61,6 +61,10 @@ class HomeProductAdapter(private val onClickListener: (id: Int, product: Product
                     category = category + "," + i.name
                 }
 
+                if (category != "") {
+                    category = category.substring(1)
+                }
+
                 //Tanda koma didepan masih kena print
                 tvProductCategory.text = category
 
