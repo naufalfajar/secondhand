@@ -5,9 +5,10 @@ import id.finalproject.binar.secondhand.model.local.entity.Banner
 import id.finalproject.binar.secondhand.model.local.entity.Category
 import id.finalproject.binar.secondhand.model.local.entity.Notification
 import id.finalproject.binar.secondhand.model.local.entity.Product
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Path
+import id.finalproject.binar.secondhand.model.network.response.PostBuyerOrderResponse
+import okhttp3.RequestBody
+import retrofit2.Response
+import retrofit2.http.*
 
 interface SecondHandApi {
 
@@ -50,4 +51,11 @@ interface SecondHandApi {
         @Header("access_token") access_token: String
     ): Notification
 
+    @Multipart
+    @POST("buyer/order")
+    suspend fun postOrderBuyer(
+        @Header("access_token") access_token: String,
+        @Part("product_id") product_id: RequestBody,
+        @Part("bid_price") bid_price: RequestBody
+    ) : Response<PostBuyerOrderResponse>
 }
