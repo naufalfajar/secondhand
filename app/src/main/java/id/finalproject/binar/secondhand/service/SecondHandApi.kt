@@ -1,10 +1,7 @@
 package id.finalproject.binar.secondhand.service
 
 import id.finalproject.binar.secondhand.BuildConfig
-import id.finalproject.binar.secondhand.model.local.entity.Banner
-import id.finalproject.binar.secondhand.model.local.entity.Category
-import id.finalproject.binar.secondhand.model.local.entity.Notification
-import id.finalproject.binar.secondhand.model.local.entity.Product
+import id.finalproject.binar.secondhand.model.local.entity.*
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
@@ -49,5 +46,9 @@ interface SecondHandApi {
         @Path("id") notificationId: Int,
         @Header("access_token") access_token: String
     ): Notification
+
+    //Sell List Product
+    @GET("seller/product")
+    suspend fun getProductSeller(@Header("access_token") access_token: String): List<ProductSeller>
 
 }

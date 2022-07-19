@@ -1,6 +1,5 @@
 package id.finalproject.binar.secondhand.fragment.sell
 
-import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +7,12 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.adapter.DaftarJualAdapter
 import id.finalproject.binar.secondhand.databinding.FragmentDaftarJualBinding
-import id.finalproject.binar.secondhand.databinding.FragmentItemDetailBinding
 
+@AndroidEntryPoint
 class DaftarJualFragment : Fragment() {
 
     private var _binding: FragmentDaftarJualBinding? = null
