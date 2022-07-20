@@ -47,6 +47,7 @@ class ProfilFragment : Fragment() {
                 val intent = Intent(this@ProfilFragment.requireContext(), AuthActivity::class.java)
                 startActivity(intent)
                 requireActivity().finish()
+
             }
             .setNegativeButton("Tidak") {dialog, _->
                 dialog.dismiss()
