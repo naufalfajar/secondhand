@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import id.finalproject.binar.secondhand.BuyerActivity
+import id.finalproject.binar.secondhand.SellActivity
 import id.finalproject.binar.secondhand.adapter.SellListProductAdapter
 import id.finalproject.binar.secondhand.databinding.FragmentTabProdukBinding
 import id.finalproject.binar.secondhand.model.local.entity.ProductSeller
@@ -54,9 +55,16 @@ class TabProdukFragment : Fragment() {
             val bundle = Bundle()
             bundle.putInt("id", id)
 
-            val intent = Intent(this@TabProdukFragment.requireContext(), BuyerActivity::class.java)
-            intent.putExtras(bundle)
-            startActivity(intent, bundle)
+            if (id == -1) {
+                val intent =
+                    Intent(this@TabProdukFragment.requireContext(), SellActivity::class.java)
+                startActivity(intent)
+            } else {
+                val intent =
+                    Intent(this@TabProdukFragment.requireContext(), BuyerActivity::class.java)
+                intent.putExtras(bundle)
+                startActivity(intent, bundle)
+            }
 
         }
 
@@ -74,7 +82,7 @@ class TabProdukFragment : Fragment() {
                     listproduct.add(i)
                 }
 
-                sellListProductAdapter.updateData(result.data)
+                sellListProductAdapter.updateData(listproduct)
 
                 progressBar.isVisible = result is Resource.Loading && result.data.isNullOrEmpty()
 

@@ -2,6 +2,7 @@ package id.finalproject.binar.secondhand.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -44,30 +45,35 @@ class SellListProductAdapter(private val onClickListener: (id: Int, product: Pro
 
         fun bind(product: ProductSeller) {
             binding.apply {
-                if (product.image_url != null) {
-                    Glide.with(itemView.context)
-                        .load(product.image_url)
-                        .into(ivProductImage)
+
+                if (product.id == -1) {
+                    listproduct.isVisible = false
+                    nothing.isVisible = true
                 } else {
-                    ivProductImage.setImageResource(R.drawable.noimage)
+                    if (product.image_url != null) {
+                        Glide.with(itemView.context)
+                            .load(product.image_url)
+                            .into(ivProductImage)
+                    } else {
+                        ivProductImage.setImageResource(R.drawable.noimage)
+                    }
+
+                    tvProductName.text = product.name
+
+                    var category = ""
+
+                    for (i in product.Categories) {
+                        category = category + ", " + i.name
+                    }
+
+                    if (category != "") {
+                        category = category.substring(1)
+                    }
+
+                    tvProductCategory.text = category
+
+                    tvProductPrice.text = rupiah(product.base_price)
                 }
-
-                tvProductName.text = product.name
-
-                var category = ""
-
-                for (i in product.Categories) {
-                    category = category + ", " + i.name
-                }
-
-                if (category != "") {
-                    category = category.substring(1)
-                }
-
-                tvProductCategory.text = category
-
-                tvProductPrice.text = rupiah(product.base_price)
-
                 itemProduct.setOnClickListener {
                     onClickListener.invoke(product.id!!, product)
                 }
