@@ -26,9 +26,7 @@ class NotificationFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val notificationViewModel: NotificationViewModel by viewModels()
-
     private lateinit var notificationAdapter: NotificationAdapter
-
     private lateinit var sharedPref: SharedPreferences
 
     override fun onCreateView(
