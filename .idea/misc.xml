@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Fajar Maulana/AndroidStudioProjects/sprint3fajar/app/src/main/res/layout/fragment_notification.xml" value="0.21784420289855072" />
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable-v24/button_border.xml" value="0.1075" />
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/back.xml" value="0.1785" />
         <entry key="..\:/izaz/BINAR/PROJECT AKHIR/app/src/main/res/drawable/background_search_bar.xml" value="0.1155" />
@@ -91,7 +92,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

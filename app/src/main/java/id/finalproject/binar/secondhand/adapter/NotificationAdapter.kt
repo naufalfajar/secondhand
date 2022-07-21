@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.databinding.ItemNotificationBinding
 import id.finalproject.binar.secondhand.model.local.entity.Notification
+import id.finalproject.binar.secondhand.model.network.response.GetNotification
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -27,7 +28,7 @@ class NotificationAdapter(private val onClickListener: (id: Int, notification: N
 
     private val listDiffer = AsyncListDiffer(this, diffCallback)
 
-//    fun updateData(notification: GetNotification?) = listDiffer.submitList(notification)
+    fun updateData(notification: List<Notification>?) = listDiffer.submitList(notification)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationViewHolder {
         val binding =

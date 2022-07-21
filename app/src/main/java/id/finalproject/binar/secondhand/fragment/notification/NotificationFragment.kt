@@ -115,14 +115,21 @@ class NotificationFragment : Fragment() {
 
             notificationViewModel.notification.observe(viewLifecycleOwner) { result ->
                 pbNotification.isVisible = result is Resource.Loading && result.data.isNullOrEmpty()
+                notificationAdapter.updateData(result.data)
 //                textViewError.isVisible = result is Resource.Error && result.data.isNullOrEmpty()
+
 //                textViewError.text = result.error?.localizedMessage
             }
         }
     }
 
+
+
 //    private fun observeNotification() {
-//        notificationViewModel.getNotification("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAbWFpbC5jb20iLCJpYXQiOjE2NTQ5MjcxODZ9.fghFryd8OPEHztZlrN50PtZj0EC7NWFVj2iPPN9xi1M")
+//        notificationViewModel.notification.observe(viewLifecycleOwner){
+//            when (it.)
+//        }
+//        notificationViewModel.notification("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAbWFpbC5jb20iLCJpYXQiOjE2NTQ5MjcxODZ9.fghFryd8OPEHztZlrN50PtZj0EC7NWFVj2iPPN9xi1M")
 //            .observe(viewLifecycleOwner) {
 //                when (it.status) {
 //                    Status.SUCCESS -> {
