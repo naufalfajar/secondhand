@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.databinding.FragmentDaftarJualBinding
 import id.finalproject.binar.secondhand.repository.SellerAddProductRepository
@@ -13,15 +15,13 @@ import id.finalproject.binar.secondhand.repository.viewModelsFactory
 import id.finalproject.binar.secondhand.service.ApiClient
 import id.finalproject.binar.secondhand.service.ApiService
 import id.finalproject.binar.secondhand.viewmodel.SellerProductViewModel
-
+@AndroidEntryPoint
 class DaftarJualFragment : Fragment() {
 
     private var _binding: FragmentDaftarJualBinding? = null
     private val binding get() = _binding!!
 
-    private val apiService: ApiService by lazy { ApiClient.instance }
-    private val sellerAddProductRepository: SellerAddProductRepository by lazy { SellerAddProductRepository(apiService) }
-    private val sellerProductViewModel: SellerProductViewModel by viewModelsFactory { SellerProductViewModel(sellerAddProductRepository) }
+    private val sellerProductViewModel: SellerProductViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
