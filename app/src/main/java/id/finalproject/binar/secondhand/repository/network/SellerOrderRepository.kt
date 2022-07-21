@@ -7,4 +7,5 @@ class SellerOrderRepository(private val apiService: ApiService) {
 
     suspend fun getOrderByIdSeller(orderId: Int, access_token: String) =
         apiService.getOrderByIdSeller(orderId, access_token)
+
 }

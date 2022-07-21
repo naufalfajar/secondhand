@@ -4,7 +4,7 @@ import id.finalproject.binar.secondhand.service.ApiService
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
-class SellerAddProductRepository(private val apiService: ApiService) {
+class    SellerAddProductRepository(private val apiService: ApiService) {
 
     suspend fun postProduct(
         access_token: String,

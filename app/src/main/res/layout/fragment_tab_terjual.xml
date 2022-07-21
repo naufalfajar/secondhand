@@ -5,11 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".fragment.sell.TabTerjualFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:gravity="center"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_Terjual"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Halaman Tab Terjual" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>
