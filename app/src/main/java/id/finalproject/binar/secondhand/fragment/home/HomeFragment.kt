@@ -1,39 +1,43 @@
 package id.finalproject.binar.secondhand.fragment.home
 
+import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewpager.widget.ViewPager
 import dagger.hilt.android.AndroidEntryPoint
+import id.finalproject.binar.secondhand.BuyerActivity
 import id.finalproject.binar.secondhand.R
+import id.finalproject.binar.secondhand.SearchActivity
 import id.finalproject.binar.secondhand.adapter.BannerAdapter
-import id.finalproject.binar.secondhand.adapter.HomeBannerAdapter
 import id.finalproject.binar.secondhand.adapter.HomeCategoryAdapter
 import id.finalproject.binar.secondhand.adapter.HomeProductAdapter
 import id.finalproject.binar.secondhand.databinding.FragmentHomeBinding
+import id.finalproject.binar.secondhand.model.local.entity.Category
+import id.finalproject.binar.secondhand.model.local.entity.Product
 import id.finalproject.binar.secondhand.util.Resource
 import id.finalproject.binar.secondhand.viewmodel.HomeViewModel
+import me.relex.circleindicator.CircleIndicator
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    lateinit var viewPager: ViewPager
-    lateinit var viewPagerAdapter: BannerAdapter
-    lateinit var imageList: List<Int>
-
     private val homeViewModel: HomeViewModel by viewModels()
 
-    //    private lateinit var bannerAdapter: BannerAdapter
-    private lateinit var handler: Handler
+    private lateinit var homeProductAdapter: HomeProductAdapter
+    private lateinit var homeCategoryAdapter: HomeCategoryAdapter
+    private lateinit var bannerAdapter: BannerAdapter
+    private lateinit var indicators: CircleIndicator
+
+    private var selectedCategoryId: Int? = -1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,81 +55,67 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val productHomeAdapter = HomeProductAdapter()
-        val categoryHomeAdapter = HomeCategoryAdapter()
-        val bannerHomeAdapter = HomeBannerAdapter()
+        observeProduct(null, null)
+        observeCategory()
+        observeBanner()
 
-        viewPager = view.findViewById(R.id.vp_banner)
-
-        imageList = ArrayList<Int>()
-        imageList = imageList + R.drawable.great_watch
-        imageList = imageList + R.drawable.watch
-
-        viewPagerAdapter = BannerAdapter(requireContext(), imageList)
-
-        viewPager.adapter = viewPagerAdapter
-
-//        binding.vpBanner.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-//            override fun onPageSelected(position: Int) {
-//                super.onPageSelected(position)
-//                handler.removeCallbacks(runnable)
-//                handler.postDelayed(runnable, 2000)
-//            }
-//        })
-
-        observeProduct(productHomeAdapter)
-        observeCategory(categoryHomeAdapter)
-//        observeBanner(bannerHomeAdapter)
-//        initBanner()
+        binding.apply {
+            etSearch.setOnClickListener {
+                val intent = Intent(this@HomeFragment.requireContext(), SearchActivity::class.java)
+                startActivity(intent)
+            }
+        }
 
     }
 
-//    override fun onPause() {
-//        super.onPause()
-//
-//        handler.removeCallbacks(runnable)
-//    }
-//
-//    override fun onResume() {
-//        super.onResume()
-//
-//        handler.postDelayed(runnable, 2000)
-//    }
-//
-//    private val runnable = Runnable {
-//        binding.vpBanner.currentItem = binding.vpBanner.currentItem + 1
-//    }
+    private fun observeProduct(categoryId: Int?, category: Category?) {
 
-//    private fun initBanner() {
-//        bannerAdapter = BannerAdapter(binding.vpBanner)
-//        handler = Handler(Looper.myLooper()!!)
-//        binding.vpBanner.apply {
-//            adapter = bannerAdapter
-//            offscreenPageLimit = 3
-//            clipToPadding = false
-//            clipChildren = false
-//            getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
-//        }
-//    }
+        homeProductAdapter = HomeProductAdapter { id: Int, product: Product ->
+            val bundle = Bundle()
+            bundle.putInt("id", id)
 
-    private fun observeProduct(homeProductAdapter: HomeProductAdapter) {
+            val intent = Intent(this@HomeFragment.requireContext(), BuyerActivity::class.java)
+            intent.putExtras(bundle)
+            startActivity(intent, bundle)
+
+        }
+
         binding.apply {
             listProduct.apply {
                 adapter = homeProductAdapter
                 layoutManager = GridLayoutManager(requireContext(), 2)
             }
 
-            homeViewModel.product.observe(viewLifecycleOwner) { result ->
-                homeProductAdapter.submitList(result.data)
+            homeViewModel.getProduct.observe(viewLifecycleOwner) { result ->
+                if (categoryId == -1 || categoryId == null) {
+                    homeProductAdapter.updateData(result.data!!)
+                } else {
+                    homeProductAdapter.updateData(result.data!!.filter {
+                        it.Categories.contains(category)
+                    })
+                }
 
                 progressBar.isVisible = result is Resource.Loading && result.data.isNullOrEmpty()
-                textViewError.isVisible = result is Resource.Error && result.data.isNullOrEmpty()
-                textViewError.text = result.error?.localizedMessage
+
+                if (result is Resource.Error && result.data.isNullOrEmpty()) {
+                    Toast.makeText(
+                        requireContext(),
+                        result.error?.localizedMessage,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }
 
-    private fun observeCategory(homeCategoryAdapter: HomeCategoryAdapter) {
+    private fun observeCategory() {
+        homeCategoryAdapter = HomeCategoryAdapter(requireContext()) { id: Int, category: Category ->
+            selectedCategoryId = id
+
+            observeProduct(id, category)
+
+        }
+
         binding.apply {
             listCategory.apply {
                 adapter = homeCategoryAdapter
@@ -133,42 +123,55 @@ class HomeFragment : Fragment() {
                     LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             }
 
-            homeViewModel.category.observe(viewLifecycleOwner) { result ->
-                homeCategoryAdapter.submitList(result.data)
+            homeViewModel.getCategory.observe(viewLifecycleOwner) { result ->
+                val listcategory: MutableList<Category> = mutableListOf()
+                listcategory.add(Category(-1, "Semua"))
+                for (i in result.data!!) {
+                    listcategory.add(i)
+                }
+
+                homeCategoryAdapter.updateData(listcategory)
 
                 progressBar.isVisible = result is Resource.Loading && result.data.isNullOrEmpty()
-                textViewError.isVisible = result is Resource.Error && result.data.isNullOrEmpty()
-                textViewError.text = result.error?.localizedMessage
+
+                if (result is Resource.Error && result.data.isNullOrEmpty()) {
+                    Toast.makeText(
+                        requireContext(),
+                        result.error?.localizedMessage,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }
 
-//    private fun observeBanner(homeBannerAdapter: HomeBannerAdapter){
-//        binding.apply {
-//            vpBanner.apply {
-//                adapter = homeBannerAdapter
-//            }
-//        }
-//
-//        homeViewModel.banner.observe(viewLifecycleOwner) { result ->
-//            homeBannerAdapter.submitList(result.data)
-//        }
-//    }
+
+    private fun observeBanner() {
+        binding.apply {
+            homeViewModel.getBanner.observe(viewLifecycleOwner) { result ->
+                val listbanner: MutableList<String> = mutableListOf()
+                for (i in result.data!!) {
+                    listbanner.add(i.image_url!!)
+                }
+
+                bannerAdapter = BannerAdapter(requireContext(), listbanner)
+                vpBanner.adapter = bannerAdapter
+
+                indicators = requireView().findViewById(R.id.indicator) as CircleIndicator
+                indicators.setViewPager(vpBanner)
 
 
-//    private fun observeBanner() {
-//        homeViewModel.getBanner().observe(viewLifecycleOwner) {
-//            when (it.status) {
-//                Status.SUCCESS -> {
-//                    bannerAdapter.updateData(it.data)
-//                    binding.progressBar.isVisible = false
-//                }
-//                Status.ERROR -> {
-//                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-//                }
-//                else -> {}
-//            }
-//        }
-//    }
+                progressBar.isVisible = result is Resource.Loading && result.data.isNullOrEmpty()
+
+                if (result is Resource.Error && result.data.isNullOrEmpty()) {
+                    Toast.makeText(
+                        requireContext(),
+                        result.error?.localizedMessage,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+    }
 }
 

@@ -10,16 +10,15 @@ import androidx.navigation.fragment.findNavController
 import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.databinding.FragmentRegisterBinding
 import id.finalproject.binar.secondhand.model.network.Status
-import id.finalproject.binar.secondhand.repository.UserRepo
+import id.finalproject.binar.secondhand.repository.UserRepository
 import id.finalproject.binar.secondhand.repository.viewModelsFactory
 import id.finalproject.binar.secondhand.service.ApiClient
 import id.finalproject.binar.secondhand.service.ApiService
+import id.finalproject.binar.secondhand.viewmodel.RegisViewModel
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import java.io.File
 
 class RegisterFragment : Fragment() {
 
@@ -27,8 +26,8 @@ class RegisterFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val apiService: ApiService by lazy { ApiClient.instance }
-    private val userRepo: UserRepo by lazy { UserRepo(apiService) }
-    private val regisViewModel: RegisViewModel by viewModelsFactory { RegisViewModel(userRepo) }
+    private val userRepository: UserRepository by lazy { UserRepository(apiService) }
+    private val regisViewModel: RegisViewModel by viewModelsFactory { RegisViewModel(userRepository) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -95,7 +94,7 @@ class RegisterFragment : Fragment() {
         city: String
     ) {
         val file = ""
-        val reqFile = RequestBody.create("image/jpg".toMediaTypeOrNull(), file)
+        val reqFile = file.toRequestBody("image/jpg".toMediaTypeOrNull())
         val nama1 = nama.toRequestBody("text/plain".toMediaType())
         val email1 = email.toRequestBody("text/plain".toMediaType())
         val pass1 = pass.toRequestBody("text/plain".toMediaType())

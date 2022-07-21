@@ -23,15 +23,16 @@
             android:layout_marginStart="20dp"
             android:layout_marginBottom="40dp"
             android:text="Daftar"
+            android:fontFamily="@font/poppins_bold"
             android:textColor="@color/black"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textSize="24sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="Nama"
+            android:fontFamily="@font/poppins"
             android:textColor="@color/black"
             android:textSize="12sp" />
 
@@ -46,6 +47,7 @@
             android:ems="10"
             android:textSize="14sp"
             android:hint="Nama Lengkap"
+            android:fontFamily="@font/poppins"
             android:textColorHint="@color/dark_grey"
             android:inputType="textEmailAddress"
             android:padding="16dp" />
@@ -56,6 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="Email"
+            android:fontFamily="@font/poppins"
             android:layout_marginTop="15dp"
             android:textColor="@color/black"
             android:textSize="12sp" />
@@ -71,6 +74,7 @@
             android:ems="10"
             android:textSize="14sp"
             android:hint="Contoh: johndee@gmail.com"
+            android:fontFamily="@font/poppins"
             android:textColorHint="@color/dark_grey"
             android:inputType="textEmailAddress"
             android:padding="16dp" />
@@ -82,6 +86,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
             android:text="Password"
+            android:fontFamily="@font/poppins"
             android:textColor="@color/black"
             android:textSize="12sp" />
 
@@ -102,6 +107,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textPassword"
+                android:fontFamily="@font/poppins"
                 android:background="@drawable/text_border"
                 android:textSize="14sp"/>
 
@@ -117,6 +123,8 @@
             android:backgroundTint="@color/purple_binar"
             android:padding="16dp"
             android:text="Daftar"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="14sp"
             android:textAllCaps="false"
             app:cornerRadius="16dp" />
     </LinearLayout>
@@ -137,15 +145,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sudah punya akun?   "
-            android:textColor="@color/black"/>
+            android:fontFamily="@font/poppins"
+            android:textSize="14sp"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tv_or_options"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Masuk di sini"
+            android:fontFamily="@font/poppins_bold"
             android:textColor="@color/purple_binar"
-            android:textStyle="bold"/>
+            android:textSize="14sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

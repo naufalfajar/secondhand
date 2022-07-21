@@ -10,5 +10,7 @@ import javax.inject.Inject
 class ProductViewModel @Inject constructor(
     repository: ProductRepository
 ) : ViewModel() {
+
     val product = repository.getProduct().asLiveData()
+
 }

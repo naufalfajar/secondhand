@@ -23,11 +23,14 @@ import id.finalproject.binar.secondhand.repository.viewModelsFactory
 import id.finalproject.binar.secondhand.service.ApiClient
 import id.finalproject.binar.secondhand.service.ApiService
 import kotlin.math.log
+import id.finalproject.binar.secondhand.helper.SharedPreferences
+
 
 class ProfilFragment : Fragment() {
 
     private var _binding: FragmentProfilBinding? = null
     private val binding get() = _binding!!
+    private lateinit var sharedPrefs: SharedPreferences
 
     private lateinit var sharedPref: SharedPreferences
 
@@ -105,5 +108,18 @@ class ProfilFragment : Fragment() {
                 else -> {}
             }
         }
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setMessage("Yakin ingin keluar?")
+            .setPositiveButton("Ya") { _, _ ->
+                sharedPrefs.sessionDelete()
+                val intent = Intent(this@ProfilFragment.requireContext(), AuthActivity::class.java)
+                startActivity(intent)
+                requireActivity().finish()
+
+            }
+            .setNegativeButton("Tidak") {dialog, _->
+                dialog.dismiss()
+            }
+            .show()
     }
 }

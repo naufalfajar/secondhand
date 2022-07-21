@@ -6,12 +6,9 @@ import okhttp3.RequestBody
 import retrofit2.Call
 import id.finalproject.binar.secondhand.model.network.response.GetNotification
 import id.finalproject.binar.secondhand.model.network.response.GetNotificationItem
-import id.finalproject.binar.secondhand.model.network.response.seller.GetBanner
-import id.finalproject.binar.secondhand.model.network.response.seller.GetBannerItem
-import id.finalproject.binar.secondhand.model.network.response.seller.GetSellerOrder
-import id.finalproject.binar.secondhand.model.network.response.seller.GetSellerOrderItem
 import id.finalproject.binar.secondhand.model.network.request.LoginRequest
 import id.finalproject.binar.secondhand.model.network.response.*
+import id.finalproject.binar.secondhand.model.network.response.seller.*
 import retrofit2.http.*
 
 interface ApiService {
@@ -93,7 +90,7 @@ interface ApiService {
         @Part("category_ids") category_ids: RequestBody,
         @Part("location") location: RequestBody,
         @Part image: MultipartBody.Part
-    )
+    ) : PostProductResponse
 
     @GET("seller/product")
     suspend fun getProductSeller(
@@ -153,7 +150,11 @@ interface ApiService {
     //Order
 
     @POST("buyer/order")
-    suspend fun postOrderBuyer(@Header("access_token") access_token: String)
+    suspend fun postOrderBuyer(
+        @Header("access_token") access_token: String,
+        @Part("product_id") product_id: RequestBody,
+        @Part("bid_price") bid_price: RequestBody
+    ) : PostBuyerOrderResponse
 
     @GET("buyer/order")
     suspend fun getOrderBuyer(@Header("access_token") access_token: String)
