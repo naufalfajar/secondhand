@@ -5,8 +5,8 @@ import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import id.finalproject.binar.secondhand.model.local.converters.CategoryConverters
 
-@Entity(tableName = "product")
-data class Product(
+@Entity(tableName = "product_seller")
+data class ProductSeller(
 
     @PrimaryKey val id: Int? = 0,
     val base_price: Int,

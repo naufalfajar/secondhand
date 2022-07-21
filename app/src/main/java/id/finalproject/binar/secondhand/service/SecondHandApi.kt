@@ -11,6 +11,10 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
+import id.finalproject.binar.secondhand.model.local.entity.*
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.Path
 
 interface SecondHandApi {
 
@@ -69,4 +73,8 @@ interface SecondHandApi {
     @GET("auth/user")
     suspend fun getUser(
         @Header("access_token") access_token: String) : GetUserItem
+    //Sell List Product
+    @GET("seller/product")
+    suspend fun getProductSeller(@Header("access_token") access_token: String): List<ProductSeller>
+
 }

@@ -2,31 +2,31 @@ package id.finalproject.binar.secondhand.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.databinding.ItemProductHomeBinding
-import id.finalproject.binar.secondhand.model.local.entity.Product
+import id.finalproject.binar.secondhand.model.local.entity.ProductSeller
 import java.text.NumberFormat
 import java.util.*
 
+class SellListProductAdapter(private val onClickListener: (id: Int, product: ProductSeller) -> Unit) :
+    RecyclerView.Adapter<SellListProductAdapter.ProductViewHolder>() {
 
-class HomeProductAdapter(private val onClickListener: (id: Int, product: Product) -> Unit) :
-    RecyclerView.Adapter<HomeProductAdapter.ProductViewHolder>() {
-
-    private val diffCallback = object : DiffUtil.ItemCallback<Product>() {
-        override fun areItemsTheSame(oldItem: Product, newItem: Product) =
+    private val diffCallback = object : DiffUtil.ItemCallback<ProductSeller>() {
+        override fun areItemsTheSame(oldItem: ProductSeller, newItem: ProductSeller) =
             oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: Product, newItem: Product) =
+        override fun areContentsTheSame(oldItem: ProductSeller, newItem: ProductSeller) =
             oldItem == newItem
     }
 
     private val listDiffer = AsyncListDiffer(this, diffCallback)
 
-    fun updateData(product: List<Product>) = listDiffer.submitList(product)
+    fun updateData(product: List<ProductSeller>) = listDiffer.submitList(product)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val binding =
@@ -43,32 +43,37 @@ class HomeProductAdapter(private val onClickListener: (id: Int, product: Product
     inner class ProductViewHolder(private val binding: ItemProductHomeBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(product: Product) {
+        fun bind(product: ProductSeller) {
             binding.apply {
-                if (product.image_url != null) {
-                    Glide.with(itemView.context)
-                        .load(product.image_url)
-                        .into(ivProductImage)
+
+                if (product.id == -1) {
+                    listproduct.isVisible = false
+                    nothing.isVisible = true
                 } else {
-                    ivProductImage.setImageResource(R.drawable.noimage)
+                    if (product.image_url != null) {
+                        Glide.with(itemView.context)
+                            .load(product.image_url)
+                            .into(ivProductImage)
+                    } else {
+                        ivProductImage.setImageResource(R.drawable.noimage)
+                    }
+
+                    tvProductName.text = product.name
+
+                    var category = ""
+
+                    for (i in product.Categories) {
+                        category = category + ", " + i.name
+                    }
+
+                    if (category != "") {
+                        category = category.substring(1)
+                    }
+
+                    tvProductCategory.text = category
+
+                    tvProductPrice.text = rupiah(product.base_price)
                 }
-
-                tvProductName.text = product.name
-
-                var category = ""
-
-                for (i in product.Categories) {
-                    category = category + ", " + i.name
-                }
-
-                if (category != "") {
-                    category = category.substring(1)
-                }
-
-                tvProductCategory.text = category
-
-                tvProductPrice.text = rupiah(product.base_price)
-
                 itemProduct.setOnClickListener {
                     onClickListener.invoke(product.id!!, product)
                 }
@@ -84,5 +89,3 @@ class HomeProductAdapter(private val onClickListener: (id: Int, product: Product
     }
 
 }
-
-

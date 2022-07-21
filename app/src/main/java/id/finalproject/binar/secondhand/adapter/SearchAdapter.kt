@@ -7,14 +7,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import id.finalproject.binar.secondhand.R
-import id.finalproject.binar.secondhand.databinding.ItemProductHomeBinding
+import id.finalproject.binar.secondhand.databinding.ItemSearchBinding
 import id.finalproject.binar.secondhand.model.local.entity.Product
 import java.text.NumberFormat
 import java.util.*
 
-
-class HomeProductAdapter(private val onClickListener: (id: Int, product: Product) -> Unit) :
-    RecyclerView.Adapter<HomeProductAdapter.ProductViewHolder>() {
+class SearchAdapter(private val onClickListener: (id: Int, product: Product) -> Unit) :
+    RecyclerView.Adapter<SearchAdapter.ProductViewHolder>() {
 
     private val diffCallback = object : DiffUtil.ItemCallback<Product>() {
         override fun areItemsTheSame(oldItem: Product, newItem: Product) =
@@ -30,7 +29,7 @@ class HomeProductAdapter(private val onClickListener: (id: Int, product: Product
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val binding =
-            ItemProductHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ProductViewHolder(binding)
     }
 
@@ -40,7 +39,7 @@ class HomeProductAdapter(private val onClickListener: (id: Int, product: Product
 
     override fun getItemCount(): Int = listDiffer.currentList.size
 
-    inner class ProductViewHolder(private val binding: ItemProductHomeBinding) :
+    inner class ProductViewHolder(private val binding: ItemSearchBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(product: Product) {
@@ -48,9 +47,9 @@ class HomeProductAdapter(private val onClickListener: (id: Int, product: Product
                 if (product.image_url != null) {
                     Glide.with(itemView.context)
                         .load(product.image_url)
-                        .into(ivProductImage)
+                        .into(ivPicture)
                 } else {
-                    ivProductImage.setImageResource(R.drawable.noimage)
+                    ivPicture.setImageResource(R.drawable.noimage)
                 }
 
                 tvProductName.text = product.name
@@ -65,11 +64,11 @@ class HomeProductAdapter(private val onClickListener: (id: Int, product: Product
                     category = category.substring(1)
                 }
 
-                tvProductCategory.text = category
+                tvCategory.text = category
 
                 tvProductPrice.text = rupiah(product.base_price)
 
-                itemProduct.setOnClickListener {
+                itemSearch.setOnClickListener {
                     onClickListener.invoke(product.id!!, product)
                 }
             }
@@ -84,5 +83,3 @@ class HomeProductAdapter(private val onClickListener: (id: Int, product: Product
     }
 
 }
-
-
