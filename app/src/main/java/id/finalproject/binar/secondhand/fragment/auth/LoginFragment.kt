@@ -1,6 +1,8 @@
 package id.finalproject.binar.secondhand.fragment.auth
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,9 +17,6 @@ import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.databinding.FragmentLoginBinding
 import id.finalproject.binar.secondhand.model.network.Status
 import id.finalproject.binar.secondhand.model.network.request.LoginRequest
-import id.finalproject.binar.secondhand.repository.UserRepository
-import id.finalproject.binar.secondhand.service.ApiClient
-import id.finalproject.binar.secondhand.service.ApiService
 import id.finalproject.binar.secondhand.viewmodel.LoginViewModel
 
 @AndroidEntryPoint
@@ -28,9 +27,7 @@ class LoginFragment : Fragment() {
 
     private val loginViewModel: LoginViewModel by viewModels()
 
-    private val apiService: ApiService by lazy { ApiClient.instance }
-    private val userRepository: UserRepository by lazy { UserRepository(apiService) }
-//    private val loginViewModel: LoginViewModel by viewModelsFactory { LoginViewModel(userRepository) }
+    private lateinit var sharedPref: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +44,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sharedPref = requireContext().getSharedPreferences("ini_token", Context.MODE_PRIVATE)
         btnLogin()
         tvRegis()
     }
@@ -88,13 +86,13 @@ class LoginFragment : Fragment() {
                     startActivity(intent)
                     requireActivity().finish()
 
-                    it.status.name.let { it1 ->
-                        Toast.makeText(requireContext(), it1, Toast.LENGTH_SHORT).show()
+                    it.status.name.let {
+                        Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
                     }
                 }
                 Status.ERROR -> {
-                    it.message.let { it1 ->
-                        Toast.makeText(requireContext(), it1, Toast.LENGTH_SHORT).show()
+                    it.message.let {
+                        Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
                     }
                 }
                 else -> {}

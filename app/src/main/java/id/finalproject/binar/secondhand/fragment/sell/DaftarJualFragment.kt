@@ -4,24 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 import id.finalproject.binar.secondhand.R
+import id.finalproject.binar.secondhand.adapter.DaftarJualAdapter
 import id.finalproject.binar.secondhand.databinding.FragmentDaftarJualBinding
-import id.finalproject.binar.secondhand.repository.SellerAddProductRepository
-import id.finalproject.binar.secondhand.repository.viewModelsFactory
-import id.finalproject.binar.secondhand.service.ApiClient
-import id.finalproject.binar.secondhand.service.ApiService
-import id.finalproject.binar.secondhand.viewmodel.SellerProductViewModel
 
+@AndroidEntryPoint
 class DaftarJualFragment : Fragment() {
 
     private var _binding: FragmentDaftarJualBinding? = null
     private val binding get() = _binding!!
-
-    private val apiService: ApiService by lazy { ApiClient.instance }
-    private val sellerAddProductRepository: SellerAddProductRepository by lazy { SellerAddProductRepository(apiService) }
-    private val sellerProductViewModel: SellerProductViewModel by viewModelsFactory { SellerProductViewModel(sellerAddProductRepository) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,16 +26,40 @@ class DaftarJualFragment : Fragment() {
         return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    private fun toProfile(){
-        binding.llSellerprofile.setOnClickListener {
-//            findNavController().navigate(R.id.action)
+        val adapter = DaftarJualAdapter(this)
+        binding.viewPager.adapter = adapter
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.text = TAB_TITLES[position]
+            tab.setIcon(IMAGE_LIST[position])
+        }.attach()
+
+        val tabs = binding.tabLayout.getChildAt(0) as ViewGroup
+        for (i in 0 until tabs.childCount ) {
+            val tab = tabs.getChildAt(i)
+            val layoutParams = tab.layoutParams as LinearLayout.LayoutParams
+            layoutParams.marginEnd = 16
+            layoutParams.marginStart = 16
+            tab.layoutParams = layoutParams
+            binding.tabLayout.requestLayout()
         }
+
     }
 
+    companion object{
+        private val TAB_TITLES = mutableListOf<String>(
+            "Produk",
+            "Diminati",
+            "Terjual"
+        )
+
+        private val IMAGE_LIST = mutableListOf<Int>(
+            R.drawable.ic_box_grey,
+            R.drawable.ic_fav_grey,
+            R.drawable.ic_dollar_grey
+        )
+    }
 
 }

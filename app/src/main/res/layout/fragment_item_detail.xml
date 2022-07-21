@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/fl_item_detail_page"
-    tools:context="id.finalproject.binar.secondhand.fragment.home.ItemDetailFragment">
+    tools:context="id.finalproject.binar.secondhand.fragment.sell.PreviewFragment">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"

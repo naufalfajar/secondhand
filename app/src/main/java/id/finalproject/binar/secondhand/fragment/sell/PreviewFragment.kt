@@ -6,18 +6,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
+import androidx.core.net.toUri
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import dagger.hilt.android.AndroidEntryPoint
 import id.finalproject.binar.secondhand.MainActivity
+import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.databinding.FragmentPreviewBinding
+import id.finalproject.binar.secondhand.helper.SharedPreferences
 import id.finalproject.binar.secondhand.model.network.Status
-import id.finalproject.binar.secondhand.repository.SellerAddProductRepository
-import id.finalproject.binar.secondhand.repository.viewModelsFactory
-import id.finalproject.binar.secondhand.service.ApiClient
-import id.finalproject.binar.secondhand.service.ApiService
+import id.finalproject.binar.secondhand.model.network.response.GetUserItem
+import id.finalproject.binar.secondhand.repository.toRp
 import id.finalproject.binar.secondhand.viewmodel.SellerProductViewModel
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -25,15 +32,22 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
-
+@AndroidEntryPoint
 class PreviewFragment : Fragment() {
     private var _binding: FragmentPreviewBinding? = null
     private val binding get() = _binding!!
 
-    private val apiService: ApiService by lazy { ApiClient.instance }
-    private val sellerAddProductRepository: SellerAddProductRepository by lazy { SellerAddProductRepository(apiService) }
-    private val sellerProductViewModel: SellerProductViewModel by viewModelsFactory { SellerProductViewModel(sellerAddProductRepository) }
+    private val sellerProductViewModel: SellerProductViewModel by viewModels()
+
+    private lateinit var sharedPrefs: SharedPreferences
+    private lateinit var accessToken: String
     private lateinit var body: PostProductRequestBody
+    private lateinit var formBundle: Bundle
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        getProductData()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,29 +60,58 @@ class PreviewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getProductData()
+        sharedPrefs = SharedPreferences(requireContext())
+        if(sharedPrefs.getLogin()){
+            accessToken = sharedPrefs.getToken().toString()
+            postProduct()
+        }
         toFormJualPage()
-        postProduct()
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, backPressedCallback)
+    }
+
+    private val backPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            setFragmentResult("backFromPreview", bundleOf("bundleKey" to formBundle))
+            findNavController().popBackStack()
+        }
+    }
+
+    private fun toFormJualPage() {
+        binding.btnBack.setOnClickListener {
+            setFragmentResult("backFromPreview", bundleOf("bundleKey" to formBundle))
+            it.findNavController().popBackStack()
+        }
+    }
+
+    private fun postProduct() {
+        binding.btnTerbitkan2.setOnClickListener {
+            observePost()
+        }
     }
 
     private fun getProductData(){
         setFragmentResultListener("requestKey") { _, bundle ->
-            val formBundle = bundle.getBundle("bundleKey")
-            val name = formBundle?.getString("name").toString()
-            val price = formBundle?.getString("price").toString()
-            val description = formBundle?.getString("description").toString()
-            val category = formBundle?.getString("category").toString()
-            val location = formBundle?.getString("location").toString()
-            val path = formBundle?.getString("path").toString()
+            formBundle = bundle.getBundle("bundleKey")!!
+            val name = formBundle.getString("name").toString()
+            val price = formBundle.getString("price").toString()
+            val description = formBundle.getString("description").toString()
+            val categoryId = formBundle.getIntegerArrayList("categoryId")!!.joinToString()
+            val categoryName = formBundle.getStringArrayList("categoryName")!!.joinToString()
+            var location = formBundle.getString("location").toString()
+            val path = formBundle.getString("path").toString()
             val imageFile = File(path)
+
+            if (location.isEmpty()) location = "Unknown"
 
             binding.apply {
                 tvDeskripsi.text = description
                 tvItemNama.text = name
-                tvItemCategory.text = category
-                tvItemHarga.text = price
+                tvItemCategory.text = categoryName
+                tvItemHarga.text = price.toInt().toRp()
+                vpImage.setImageURI(path.toUri())
             }
-            addProduct(name,price,description,category,location,imageFile)
+            addProduct(name,price,description,categoryId,location,imageFile)
+            observeSellerInfo()
         }
     }
 
@@ -87,23 +130,10 @@ class PreviewFragment : Fragment() {
         body = PostProductRequestBody(namebody, priceBody, descriptionBody, categoryBody, locationBody, image)
     }
 
-    private fun toFormJualPage() {
-        binding.btnBack.setOnClickListener {
-            it.findNavController().popBackStack()
-        }
-    }
-
-    private fun postProduct() {
-        binding.btnTerbitkan2.setOnClickListener {
-            getProductData()
-            observePost()
-        }
-    }
-
     private fun observePost(
     ){
         sellerProductViewModel.postProduct(
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGFzZEBnbWFpbC5jb20iLCJpYXQiOjE2NTY0OTgyMjh9.l25knICph9-8ZBanO08PHTMhzMr4kJGabGekEvx2Djw",
+            accessToken,
             body.nameBody,
             body.descriptionBody,
             body.priceBody,
@@ -113,21 +143,6 @@ class PreviewFragment : Fragment() {
         ).observe(viewLifecycleOwner){
             when (it.status) {
                 Status.SUCCESS -> {
-                    Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
-                }
-                Status.ERROR -> {
-                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-                }
-                else -> {}
-            }
-        }
-
-        sellerProductViewModel.getUser(
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGFzZEBnbWFpbC5jb20iLCJpYXQiOjE2NTY0OTgyMjh9.l25knICph9-8ZBanO08PHTMhzMr4kJGabGekEvx2Djw"
-        ).observe(viewLifecycleOwner){
-            when (it.status) {
-                Status.SUCCESS -> {
-                    val str = it.data.toString()
                     val bundle = Bundle()
                     bundle.putBoolean("addProduct", true)
 
@@ -135,7 +150,7 @@ class PreviewFragment : Fragment() {
                     intent.putExtras(bundle)
                     startActivity(intent, bundle)
                     requireActivity().finish()
-                    Toast.makeText(requireContext(), it.data.toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
                 }
                 Status.ERROR -> {
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
@@ -145,4 +160,31 @@ class PreviewFragment : Fragment() {
         }
     }
 
+    private fun observeSellerInfo(){
+        sellerProductViewModel.getUser(
+        accessToken
+        ).observe(viewLifecycleOwner){
+            when (it.status) {
+                Status.SUCCESS -> {
+                    it.data?.let { it1 -> setSellerInfo(it1) }
+                }
+                Status.ERROR -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+                else -> {}
+            }
+        }
+    }
+
+    private fun setSellerInfo(sellerInfo: GetUserItem){
+        if(sellerInfo.imageUrl.isNullOrEmpty()){
+            Glide.with(this).load(R.drawable.profile_picture).into(binding.ivSellerInfo)
+        }else
+            Glide.with(this).load(sellerInfo.imageUrl).into(binding.ivSellerInfo)
+        if(sellerInfo.city.isEmpty()){
+            binding.tvSellerCity.text = "Unknown"
+        }else
+            binding.tvSellerCity.text = sellerInfo.city
+        binding.tvSellerNama.text = sellerInfo.fullName
+    }
 }

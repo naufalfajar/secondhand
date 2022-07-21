@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import id.finalproject.binar.secondhand.BuyerActivity
 import id.finalproject.binar.secondhand.R
+import id.finalproject.binar.secondhand.SearchActivity
 import id.finalproject.binar.secondhand.adapter.BannerAdapter
 import id.finalproject.binar.secondhand.adapter.HomeCategoryAdapter
 import id.finalproject.binar.secondhand.adapter.HomeProductAdapter
@@ -57,6 +58,13 @@ class HomeFragment : Fragment() {
         observeProduct(null, null)
         observeCategory()
         observeBanner()
+
+        binding.apply {
+            etSearch.setOnClickListener {
+                val intent = Intent(this@HomeFragment.requireContext(), SearchActivity::class.java)
+                startActivity(intent)
+            }
+        }
 
     }
 

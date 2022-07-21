@@ -7,6 +7,7 @@ import id.finalproject.binar.secondhand.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.HttpException
 
 class RegisViewModel(private val userRepository: UserRepository) : ViewModel() {
     fun postRegisUser(
@@ -29,9 +30,14 @@ class RegisViewModel(private val userRepository: UserRepository) : ViewModel() {
                 )
             )
         } catch (e: Exception) {
-            emit(Resource.error(
-                data = null,
-                message = e.message ?: "Gagal dimuat!"))
+            emit(
+                (e as? HttpException)!!.response()?.errorBody()?.string()?.let {
+                    Resource.error(
+                        data = null,
+                        message = it
+                    )
+                }
+            )
         }
     }
 }

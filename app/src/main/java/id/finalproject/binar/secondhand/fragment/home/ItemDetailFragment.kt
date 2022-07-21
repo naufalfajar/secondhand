@@ -26,6 +26,8 @@ import id.finalproject.binar.secondhand.viewmodel.BuyerViewModel
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import id.finalproject.binar.secondhand.service.ApiClient
+import id.finalproject.binar.secondhand.service.ApiService
 
 @AndroidEntryPoint
 class ItemDetailFragment : Fragment() {

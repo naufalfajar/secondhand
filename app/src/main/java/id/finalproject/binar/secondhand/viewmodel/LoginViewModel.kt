@@ -43,3 +43,23 @@ class LoginViewModel @Inject constructor(
 
     }
 }
+//
+//class LoginViewModel(private val userRepo: UserRepo): ViewModel() {
+//    fun postLoginUser(req: LoginRequest) = liveData(Dispatchers.IO) {
+//        emit(Resource.loading(null))
+//        try {
+//            emit(
+//                Resource.success(userRepo.postLogin(req))
+//            )
+//        } catch (e: Exception) {
+//            emit(
+//                (e as? HttpException)!!.response()?.errorBody()?.string()?.let {
+//                    Resource.error(
+//                        data = null,
+//                        message = it
+//                    )
+//                }
+//            )
+//        }
+//    }
+//}
