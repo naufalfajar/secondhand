@@ -8,10 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import id.finalproject.binar.secondhand.AuthActivity
-import id.finalproject.binar.secondhand.R
+import id.finalproject.binar.secondhand.ProfileActivity
 import id.finalproject.binar.secondhand.databinding.FragmentProfilBinding
 import id.finalproject.binar.secondhand.helper.SharedPreferences
 import id.finalproject.binar.secondhand.model.network.Status
@@ -60,7 +59,9 @@ class ProfilFragment : Fragment() {
     private fun tvUpdate() {
         binding.apply {
             btnToUpdate.setOnClickListener {
-                findNavController().navigate(R.id.action_profilFragment3_to_updateProfilFragment2)
+                val intent =
+                    Intent(this@ProfilFragment.requireContext(), ProfileActivity::class.java)
+                startActivity(intent)
             }
         }
     }

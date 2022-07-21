@@ -3,25 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_profil"
-    app:startDestination="@id/profilFragment3">
-
-    <fragment
-        android:id="@+id/profilFragment3"
-        android:name="id.finalproject.binar.secondhand.fragment.account.ProfilFragment"
-        android:label="fragment_profil"
-        tools:layout="@layout/fragment_profil" >
-        <action
-            android:id="@+id/action_profilFragment3_to_updateProfilFragment2"
-            app:destination="@id/updateProfilFragment2" />
-    </fragment>
+    app:startDestination="@id/updateProfilFragment2">
 
     <fragment
         android:id="@+id/updateProfilFragment2"
         android:name="id.finalproject.binar.secondhand.fragment.account.UpdateProfilFragment"
         android:label="fragment_updateprofil"
-        tools:layout="@layout/fragment_updateprofil" >
-        <action
-            android:id="@+id/action_updateProfilFragment2_to_profilFragment3"
-            app:destination="@id/profilFragment3" />
-    </fragment>
+        tools:layout="@layout/fragment_updateprofil" />
 </navigation>
