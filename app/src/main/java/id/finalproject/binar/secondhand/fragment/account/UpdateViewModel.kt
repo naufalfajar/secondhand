@@ -15,7 +15,7 @@ class UpdateViewModel(private val userRepo: UserRepo): ViewModel() {
         access_token: String,
         full_name: RequestBody,
         email: RequestBody,
-        password: RequestBody,
+//        password: RequestBody,
         phone_number: RequestBody,
         address: RequestBody,
         image: MultipartBody.Part,
@@ -25,7 +25,8 @@ class UpdateViewModel(private val userRepo: UserRepo): ViewModel() {
         try {
             emit(Resource.success(userRepo.putUser(
                 access_token, full_name, email,
-                password, phone_number, address, image, city)))
+//                password,
+                phone_number, address, image, city)))
         } catch (e: Exception) {
             emit(
                 Resource.error(data = null, message = e.message ?: "Error Occurred!")

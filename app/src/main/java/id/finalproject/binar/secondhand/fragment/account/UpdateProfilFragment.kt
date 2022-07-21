@@ -48,8 +48,8 @@ class UpdateProfilFragment : Fragment() {
 
     private lateinit var sharedPref: SharedPreferences
     private var path: String = ""
-    private var pass = ""
-    private var email = ""
+//    private var email = ""
+//    private var pass = ""
 
     private val apiService: ApiService by lazy { ApiClient.instance }
     private val userRepo: UserRepo by lazy { UserRepo(apiService) }
@@ -86,6 +86,8 @@ class UpdateProfilFragment : Fragment() {
         binding.apply {
             btnEdit.setOnClickListener {
                 val token = sharedPref.getString("token", "null")
+                val email = sharedPref.getString("email", "null")
+//                val pass = sharedPref.getString("pass", "null")
                 val imageFile1 = File(path)
                 val nama = etNama.text.toString()
                 val kota = etKota.text.toString()
@@ -110,8 +112,8 @@ class UpdateProfilFragment : Fragment() {
                             update(
                                 token = token,
                                 nama = nama,
-                                email = email,
-                                pass = pass,
+                                email = email!!,
+//                                pass = pass!!,
                                 phoneNumber = phone,
                                 address = alamat,
                                 imageFile = imageFile1,
@@ -129,7 +131,7 @@ class UpdateProfilFragment : Fragment() {
         token: String,
         nama: String,
         email: String,
-        pass: String,
+//        pass: String,
         phoneNumber: String,
         address: String,
         imageFile: File,
@@ -138,7 +140,7 @@ class UpdateProfilFragment : Fragment() {
         val reqFile = imageFile.asRequestBody("image/jpg".toMediaTypeOrNull())
         val nama1 = nama.toRequestBody("text/plain".toMediaType())
         val email1 = email.toRequestBody("text/plain".toMediaType())
-        val pass1 = pass.toRequestBody("text/plain".toMediaType())
+//        val pass1 = pass.toRequestBody("text/plain".toMediaType())
         val phoneNumber1 = phoneNumber.toRequestBody("text/plain".toMediaType())
         val address1 = address.toRequestBody("text/plain".toMediaType())
         val image1 = MultipartBody.Part.createFormData("image", imageFile.name, reqFile)
@@ -148,7 +150,7 @@ class UpdateProfilFragment : Fragment() {
             token,
             nama1,
             email1,
-            pass1,
+//            pass1,
             phoneNumber1,
             address1,
             image1,
@@ -181,8 +183,13 @@ class UpdateProfilFragment : Fragment() {
                         etAlamat.setText(it.data.address)
                         etPhone.setText(it.data.phoneNumber)
 
-                        email = it.data.email
-                        pass = it.data.password
+//                        email = it.data.email
+//                        pass = it.data.password
+
+                        val editor = sharedPref.edit()
+                        editor.putString("email", it.data.email)
+//                        editor.putString("pass", it.data.password)
+                        editor.apply()
                     }
                 }
                 Status.ERROR -> {
@@ -193,6 +200,10 @@ class UpdateProfilFragment : Fragment() {
                 else -> {}
             }
         }
+    }
+
+    private fun back() {
+        findNavController().popBackStack()
     }
 
     private fun ivProfile() {
@@ -301,10 +312,6 @@ class UpdateProfilFragment : Fragment() {
 //                binding.imageView2.background = null
             }
         }
-
-    private fun back() {
-        findNavController().popBackStack()
-    }
 
     private fun getRealPathFromURI(context: Context, uri: Uri): String? {
         when {

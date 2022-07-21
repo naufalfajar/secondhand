@@ -42,15 +42,12 @@ interface ApiService {
         @Header("access_token") access_token: String,
         @Part("full_name") full_name: RequestBody,
         @Part("email") email: RequestBody,
-        @Part("password") password: RequestBody,
+//        @Part("password") password: RequestBody,
         @Part("phone_number") phone_number: RequestBody,
         @Part("address") address: RequestBody,
         @Part image: MultipartBody.Part?,
         @Part("city") city: RequestBody
     ) : PostRegisResponse
-
-    @GET("auth/user")
-    suspend fun getUser(@Header("access_token") access_token: String) : Call<GetUserItem>
 
     //SELLER
 
