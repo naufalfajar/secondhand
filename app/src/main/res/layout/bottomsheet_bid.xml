@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="400dp"
@@ -14,7 +13,6 @@
             android:id="@+id/cv_elips"
             android:layout_width="75dp"
             android:layout_height="5dp"
-            app:cardCornerRadius="50dp"
             android:backgroundTint="@color/bot_sheet_elips"
             android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +30,6 @@
             app:layout_constraintTop_toBottomOf="@id/cv_elips">
 
             <TextView
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Masukkan Harga Tawarmu"
@@ -56,9 +53,10 @@
                 android:id="@+id/cv_item_bid"
                 android:layout_width="match_parent"
                 android:layout_height="75dp"
-                android:backgroundTint="@color/white"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="2dp"
+                app:cardElevation="1dp"
+                app:strokeColor="@color/light_gray"
+                app:strokeWidth="0.3dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
@@ -69,8 +67,8 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp">
 
@@ -78,12 +76,13 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_gravity="center"
-                        app:cardCornerRadius="20dp">
+                        app:cardCornerRadius="10dp">
 
                         <ImageView
                             android:id="@+id/iv_item_bid"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:scaleType="fitXY"
                             android:src="@mipmap/ic_launcher"
                             android:contentDescription="@string/seller_picture" />
 
@@ -98,6 +97,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
+                            android:layout_marginTop="5dp"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             android:textColor="@color/black"
@@ -130,11 +130,13 @@
                 android:textSize="14sp"/>
 
             <EditText
+                android:id="@+id/et_bid_price"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:background="@drawable/et_border"
                 android:hint="Rp 0,00"
                 android:textSize="11sp"
+                android:inputType="number"
                 android:layout_gravity="center"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"/>

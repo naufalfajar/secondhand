@@ -16,6 +16,7 @@ fun Int.toRp() : String{
     return  numberFormat.format(this)
 }
 
+
 inline fun <reified T : ViewModel> ComponentActivity.viewModelsFactory(crossinline viewModelInitialization: () -> T): Lazy<T> {
     return viewModels {
         object : ViewModelProvider.Factory {

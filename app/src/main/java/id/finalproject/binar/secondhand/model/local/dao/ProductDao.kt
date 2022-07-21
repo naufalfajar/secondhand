@@ -13,11 +13,14 @@ interface ProductDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertProduct(product: List<Product>)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertProductDetail(product: Product)
+
     @Query("SELECT * FROM product")
     fun getProduct(): Flow<List<Product>>
 
     @Query("SELECT * FROM product WHERE id = :productId")
-    fun getProductById(productId: Int): Product
+    fun getProductById(productId: Int): Flow<Product>
 
     @Query("DELETE FROM product")
     suspend fun deleteProduct()

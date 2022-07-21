@@ -3,12 +3,13 @@ package id.finalproject.binar.secondhand
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import dagger.hilt.android.AndroidEntryPoint
 import id.finalproject.binar.secondhand.databinding.ActivityBuyerBinding
 import id.finalproject.binar.secondhand.fragment.home.ItemDetailFragment
 
+@AndroidEntryPoint
 class BuyerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBuyerBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,7 +18,6 @@ class BuyerActivity : AppCompatActivity() {
 
         if (intent.extras != null) {
             val bundle = intent.extras
-//            val productId = bundle!!.getInt("id")
 
             val fragment: Fragment = ItemDetailFragment()
             val transaction = supportFragmentManager.beginTransaction()
@@ -25,6 +25,5 @@ class BuyerActivity : AppCompatActivity() {
             transaction.replace(R.id.fragmentContainerView, fragment)
             transaction.commit()
         }
-
     }
 }
