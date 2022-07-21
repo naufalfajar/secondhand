@@ -1,21 +1,20 @@
-package id.finalproject.binar.secondhand.fragment.account
+package id.finalproject.binar.secondhand.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import id.finalproject.binar.secondhand.model.network.Resource
-import id.finalproject.binar.secondhand.repository.UserRepo
+import id.finalproject.binar.secondhand.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.HttpException
 
-class UpdateViewModel(private val userRepo: UserRepo): ViewModel() {
+class UpdateViewModel(private val userRepo: UserRepository) : ViewModel() {
 
     fun putUpdateUser(
         access_token: String,
         full_name: RequestBody,
         email: RequestBody,
-//        password: RequestBody,
         phone_number: RequestBody,
         address: RequestBody,
         image: MultipartBody.Part,
@@ -25,7 +24,6 @@ class UpdateViewModel(private val userRepo: UserRepo): ViewModel() {
         try {
             emit(Resource.success(userRepo.putUser(
                 access_token, full_name, email,
-//                password,
                 phone_number, address, image, city)))
         } catch (e: Exception) {
             emit(

@@ -25,17 +25,16 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.databinding.FragmentUpdateprofilBinding
 import id.finalproject.binar.secondhand.model.network.Status
-import id.finalproject.binar.secondhand.repository.UserRepo
+import id.finalproject.binar.secondhand.repository.UserRepository
 import id.finalproject.binar.secondhand.repository.viewModelsFactory
 import id.finalproject.binar.secondhand.service.ApiClient
 import id.finalproject.binar.secondhand.service.ApiService
+import id.finalproject.binar.secondhand.viewmodel.UpdateViewModel
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.ByteArrayOutputStream
@@ -48,11 +47,9 @@ class UpdateProfilFragment : Fragment() {
 
     private lateinit var sharedPref: SharedPreferences
     private var path: String = ""
-//    private var email = ""
-//    private var pass = ""
 
     private val apiService: ApiService by lazy { ApiClient.instance }
-    private val userRepo: UserRepo by lazy { UserRepo(apiService) }
+    private val userRepo: UserRepository by lazy { UserRepository(apiService) }
     private val updateViewModel: UpdateViewModel by viewModelsFactory { UpdateViewModel(userRepo) }
 
     override fun onCreateView(
@@ -433,34 +430,18 @@ class UpdateProfilFragment : Fragment() {
         const val REQUEST_CODE_PERMISSION = 100
     }
 
-    /**
-     * @param uri The Uri to check.
-     * @return Whether the Uri authority is ExternalStorageProvider.
-     */
     private fun isExternalStorageDocument(uri: Uri): Boolean {
         return "com.android.externalstorage.documents" == uri.authority
     }
 
-    /**
-     * @param uri The Uri to check.
-     * @return Whether the Uri authority is DownloadsProvider.
-     */
     private fun isDownloadsDocument(uri: Uri): Boolean {
         return "com.android.providers.downloads.documents" == uri.authority
     }
 
-    /**
-     * @param uri The Uri to check.
-     * @return Whether the Uri authority is MediaProvider.
-     */
     private fun isMediaDocument(uri: Uri): Boolean {
         return "com.android.providers.media.documents" == uri.authority
     }
 
-    /**
-     * @param uri The Uri to check.
-     * @return Whether the Uri authority is Google Photos.
-     */
     private fun isGooglePhotosUri(uri: Uri): Boolean {
         return "com.google.android.apps.photos.content" == uri.authority
     }

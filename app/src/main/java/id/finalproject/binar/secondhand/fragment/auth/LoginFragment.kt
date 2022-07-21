@@ -17,9 +17,6 @@ import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.databinding.FragmentLoginBinding
 import id.finalproject.binar.secondhand.model.network.Status
 import id.finalproject.binar.secondhand.model.network.request.LoginRequest
-import id.finalproject.binar.secondhand.repository.UserRepository
-import id.finalproject.binar.secondhand.service.ApiClient
-import id.finalproject.binar.secondhand.service.ApiService
 import id.finalproject.binar.secondhand.viewmodel.LoginViewModel
 
 @AndroidEntryPoint
@@ -31,10 +28,6 @@ class LoginFragment : Fragment() {
     private val loginViewModel: LoginViewModel by viewModels()
 
     private lateinit var sharedPref: SharedPreferences
-
-    private val apiService: ApiService by lazy { ApiClient.instance }
-    private val userRepository: UserRepository by lazy { UserRepository(apiService) }
-//    private val loginViewModel: LoginViewModel by viewModelsFactory { LoginViewModel(userRepository) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

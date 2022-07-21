@@ -1,29 +1,25 @@
 package id.finalproject.binar.secondhand.fragment.account
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import id.finalproject.binar.secondhand.AuthActivity
-import id.finalproject.binar.secondhand.MainActivity
 import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.databinding.FragmentProfilBinding
+import id.finalproject.binar.secondhand.helper.SharedPreferences
 import id.finalproject.binar.secondhand.model.network.Status
-import id.finalproject.binar.secondhand.repository.UserRepo
+import id.finalproject.binar.secondhand.repository.UserRepository
 import id.finalproject.binar.secondhand.repository.viewModelsFactory
 import id.finalproject.binar.secondhand.service.ApiClient
 import id.finalproject.binar.secondhand.service.ApiService
-import kotlin.math.log
-import id.finalproject.binar.secondhand.helper.SharedPreferences
+import id.finalproject.binar.secondhand.viewmodel.ProfileViewModel
 
 
 class ProfilFragment : Fragment() {
@@ -32,10 +28,8 @@ class ProfilFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var sharedPrefs: SharedPreferences
 
-    private lateinit var sharedPref: SharedPreferences
-
     private val apiService: ApiService by lazy { ApiClient.instance }
-    private val userRepo: UserRepo by lazy { UserRepo(apiService) }
+    private val userRepo: UserRepository by lazy { UserRepository(apiService) }
     private val profileViewModel: ProfileViewModel by viewModelsFactory { ProfileViewModel(userRepo) }
 
 
@@ -54,11 +48,11 @@ class ProfilFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        sharedPref = requireContext().getSharedPreferences("ini_token", Context.MODE_PRIVATE)
-        val token = sharedPref.getString("token", "null")
-        if (token != null) {
-            observeData(token)
-        }
+//        sharedPrefs = requireContext().getSharedPreferences("ini_token", Context.MODE_PRIVATE)
+//        val token = sharedPrefs.getString("token", "null")
+//        if (token != null) {
+//            observeData(token)
+//        }
         tvUpdate()
         logout()
     }
