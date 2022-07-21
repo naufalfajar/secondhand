@@ -1,6 +1,8 @@
 package id.finalproject.binar.secondhand.fragment.auth
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +30,8 @@ class LoginFragment : Fragment() {
 
     private val loginViewModel: LoginViewModel by viewModels()
 
+    private lateinit var sharedPref: SharedPreferences
+
     private val apiService: ApiService by lazy { ApiClient.instance }
     private val userRepository: UserRepository by lazy { UserRepository(apiService) }
 //    private val loginViewModel: LoginViewModel by viewModelsFactory { LoginViewModel(userRepository) }
@@ -47,6 +51,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sharedPref = requireContext().getSharedPreferences("ini_token", Context.MODE_PRIVATE)
         btnLogin()
         tvRegis()
     }
@@ -88,13 +93,13 @@ class LoginFragment : Fragment() {
                     startActivity(intent)
                     requireActivity().finish()
 
-                    it.status.name.let { it1 ->
-                        Toast.makeText(requireContext(), it1, Toast.LENGTH_SHORT).show()
+                    it.status.name.let {
+                        Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
                     }
                 }
                 Status.ERROR -> {
-                    it.message.let { it1 ->
-                        Toast.makeText(requireContext(), it1, Toast.LENGTH_SHORT).show()
+                    it.message.let {
+                        Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
                     }
                 }
                 else -> {}
