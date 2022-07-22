@@ -1,17 +1,14 @@
 package id.finalproject.binar.secondhand.service
 
 import id.finalproject.binar.secondhand.BuildConfig
-import id.finalproject.binar.secondhand.model.local.entity.Banner
-import id.finalproject.binar.secondhand.model.local.entity.Category
-import id.finalproject.binar.secondhand.model.local.entity.Notification
-import id.finalproject.binar.secondhand.model.local.entity.Product
+import id.finalproject.binar.secondhand.model.local.entity.*
+import id.finalproject.binar.secondhand.model.network.response.GetUserItem
 import id.finalproject.binar.secondhand.model.network.response.PostBuyerOrderResponse
+import id.finalproject.binar.secondhand.model.network.response.seller.PostProductResponse
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
-import id.finalproject.binar.secondhand.model.local.entity.*
-import id.finalproject.binar.secondhand.model.network.response.GetUserItem
-import okhttp3.MultipartBody
 
 interface SecondHandApi {
 

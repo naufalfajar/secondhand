@@ -7,6 +7,7 @@ import id.finalproject.binar.secondhand.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
 import retrofit2.HttpException
 
+
 class ProfileViewModel(private val userRepo: UserRepository) : ViewModel() {
     fun getUser(access_token: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(null))

@@ -15,7 +15,6 @@ import id.finalproject.binar.secondhand.AuthActivity
 import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.adapter.NotificationAdapter
 import id.finalproject.binar.secondhand.databinding.FragmentNotificationBinding
-import id.finalproject.binar.secondhand.helper.SharedPreferences
 import id.finalproject.binar.secondhand.model.local.entity.Notification
 import id.finalproject.binar.secondhand.util.Resource
 import id.finalproject.binar.secondhand.viewmodel.NotificationViewModel
@@ -27,7 +26,6 @@ class NotificationFragment : Fragment() {
 
     private val notificationViewModel: NotificationViewModel by viewModels()
     private lateinit var notificationAdapter: NotificationAdapter
-    private lateinit var sharedPref: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
