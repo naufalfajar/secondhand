@@ -2,6 +2,7 @@ package id.finalproject.binar.secondhand.repository
 
 import androidx.room.withTransaction
 import id.finalproject.binar.secondhand.model.local.SecondHandDatabase
+import id.finalproject.binar.secondhand.service.ApiService
 import id.finalproject.binar.secondhand.service.SecondHandApi
 import id.finalproject.binar.secondhand.util.networkBoundResource
 import kotlinx.coroutines.delay

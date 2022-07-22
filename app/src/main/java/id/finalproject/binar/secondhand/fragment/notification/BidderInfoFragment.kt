@@ -18,6 +18,7 @@ import com.google.android.material.snackbar.Snackbar
 import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.adapter.BidderInfoAdapter
 import id.finalproject.binar.secondhand.databinding.FragmentBidderInfoBinding
+import id.finalproject.binar.secondhand.helper.SharedPreferences
 import id.finalproject.binar.secondhand.model.network.Status
 import id.finalproject.binar.secondhand.model.network.response.seller.GetSellerOrderItem
 import id.finalproject.binar.secondhand.repository.network.SellerOrderRepository
@@ -33,6 +34,8 @@ class BidderInfoFragment : Fragment() {
     private lateinit var bidderInfoAdapter: BidderInfoAdapter
 
     private val apiService: ApiService by lazy { ApiClient.instance }
+
+    private lateinit var sharedPref: SharedPreferences
 
     private val sellerOrderRepository: SellerOrderRepository by lazy {
         SellerOrderRepository(
@@ -64,6 +67,8 @@ class BidderInfoFragment : Fragment() {
         binding.ivBack.setOnClickListener {
             findNavController().popBackStack()
         }
+
+        sharedPref = SharedPreferences(requireContext())
 
         val notificationId = arguments?.getInt("id")
 
@@ -127,7 +132,8 @@ class BidderInfoFragment : Fragment() {
     }
 
     private fun observeOrder() {
-        sellerOrderViewModel.getOrderSeller().observe(viewLifecycleOwner) {
+        val token = sharedPref.getToken()
+        sellerOrderViewModel.getOrderSeller(token!!).observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
                     bidderInfoAdapter.updateData(it.data)
@@ -143,7 +149,8 @@ class BidderInfoFragment : Fragment() {
     }
 
     private fun observeContact(orderId: Int, view: View) {
-        sellerOrderViewModel.getOrderByIdSeller(orderId).observe(viewLifecycleOwner) {
+        val token = sharedPref.getToken()
+        sellerOrderViewModel.getOrderByIdSeller(orderId, token!!).observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
                     val tvBuyerName = view.findViewById<Button>(R.id.tv_BuyerName)
@@ -164,6 +171,10 @@ class BidderInfoFragment : Fragment() {
             }
         }
 
+    }
+
+    companion object{
+        const val EXTRA_ORDER_ID = "extra_order_id"
     }
 
 }
