@@ -8,7 +8,7 @@ import id.finalproject.binar.secondhand.model.local.dao.*
 import id.finalproject.binar.secondhand.model.local.entity.*
 
 @Database(
-    entities = [Product::class, Category::class, Banner::class, Notification::class, ProductSeller::class, User::class],
+    entities = [Product::class, Category::class, Banner::class, Notification::class, ProductSeller::class],
     version = 1,
     exportSchema = false
 )
