@@ -89,6 +89,8 @@ class PreviewFragment : Fragment() {
         }
     }
 
+
+
     private fun getProductData(){
         setFragmentResultListener("requestKey") { _, bundle ->
             formBundle = bundle.getBundle("bundleKey")!!

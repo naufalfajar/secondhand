@@ -57,6 +57,8 @@ class ItemDetailFragment : Fragment() {
 
         val productId = arguments!!.getInt("id")
         getData(productId)
+        getSellerInfo(productId)
+
         backArrow()
         bottomSheetDialog(productId)
     }
@@ -64,6 +66,26 @@ class ItemDetailFragment : Fragment() {
     private fun backArrow(){
         binding.btnBack.setOnClickListener {
             activity?.onBackPressed()
+        }
+    }
+
+    private fun getSellerInfo(id: Int){
+        buyerViewModel.getSellerInfo(id).observe(viewLifecycleOwner){
+            when (it.status) {
+                Status.SUCCESS -> {
+                    binding.apply {
+                        val sellerNama = it.data?.user?.fullName ?: "Unknown"
+                        val sellerCity = it.data?.user?.city ?: "Unknown"
+                        tvSellerNama.text = sellerNama
+                        tvSellerCity.text = sellerCity
+                        Glide.with(requireContext()).load(it.data?.user?.imageUrl ?: R.drawable.profile_picture).into(ivSellerInfo)
+                    }
+                }
+                Status.ERROR -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+                else -> {}
+            }
         }
     }
 
@@ -89,13 +111,6 @@ class ItemDetailFragment : Fragment() {
             }
         }
     }
-
-    private fun setSellerInfo(sellerInfo: GetUserItem){
-        Glide.with(this).load(sellerInfo.imageUrl).into(binding.ivSellerInfo)
-        binding.tvSellerNama.text = sellerInfo.fullName
-        binding.tvSellerCity.text = sellerInfo.city
-    }
-
 
     private fun bottomSheetDialog(id: Int){
         val btnSend = binding.fabItemDetail

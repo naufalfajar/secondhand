@@ -2,6 +2,7 @@ package id.finalproject.binar.secondhand.service
 
 import id.finalproject.binar.secondhand.BuildConfig
 import id.finalproject.binar.secondhand.model.local.entity.*
+import id.finalproject.binar.secondhand.model.network.response.GetSellerInfoForBuyer
 import id.finalproject.binar.secondhand.model.network.response.GetUserItem
 import id.finalproject.binar.secondhand.model.network.response.PostBuyerOrderResponse
 import id.finalproject.binar.secondhand.model.network.response.seller.PostProductResponse
@@ -78,4 +79,7 @@ interface SecondHandApi {
         @Part("product_id") product_id: RequestBody,
         @Part("bid_price") bid_price: RequestBody
     ) : Response<PostBuyerOrderResponse>
+
+    @GET("buyer/product/{id}")
+    suspend fun getProductByIdFromBuyer(@Path("id") productId: Int): GetSellerInfoForBuyer
 }

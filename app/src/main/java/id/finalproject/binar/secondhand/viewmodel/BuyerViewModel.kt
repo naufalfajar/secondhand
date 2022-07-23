@@ -42,4 +42,16 @@ class BuyerViewModel @Inject constructor(private val productRepository: ProductR
         }
     }
 
+    fun getSellerInfo(
+        productId: Int
+    ) = liveData(Dispatchers.IO){
+        try {
+            emit(Resource.success(productRepository.getSellerInfo(productId)))
+        } catch (e: Exception) {
+            emit(Resource.error(
+                data = null,
+                message = e.message ?: "Error Occurred!"))
+        }
+    }
+
 }

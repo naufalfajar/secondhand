@@ -74,7 +74,7 @@ class SearchFragment : Fragment() {
 
             homeViewModel.getProduct.observe(viewLifecycleOwner) { result ->
                 val filter = result.data!!.filter {
-                    it.name == search
+                    it.name!!.contains(search, ignoreCase = true)
                 }
                 searchAdapter.updateData(filter)
 
