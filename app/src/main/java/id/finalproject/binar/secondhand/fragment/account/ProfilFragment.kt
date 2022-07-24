@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -42,10 +43,23 @@ class ProfilFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val token = profileViewModel.token.toString()
-        observeData(token)
-        tvUpdate()
-        logout()
+        if (profileViewModel.login) {
+            val token = profileViewModel.token.toString()
+            observeData(token)
+            tvUpdate()
+            logout()
+        } else {
+            binding.apply {
+                profileArea.isVisible = false
+                ifnotlogin.isVisible = true
+
+                btnLogin.setOnClickListener {
+                    val intent =
+                        Intent(this@ProfilFragment.requireContext(), AuthActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+        }
     }
 
     private fun tvUpdate() {

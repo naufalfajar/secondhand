@@ -171,6 +171,8 @@ class UpdateProfilFragment : Fragment() {
                         etKota.setText(it.data.city)
                         etAlamat.setText(it.data.address)
                         etPhone.setText(it.data.phoneNumber)
+
+//                        path = it.data.imageUrl
                     }
                 }
                 Status.ERROR -> {

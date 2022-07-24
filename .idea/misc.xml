@@ -4,9 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/aulia/AndroidStudioProjects/secondhand/app/src/main/res/layout/activity_buyer.xml" value="0.1490036231884058" />
+        <entry key="..\:/Users/aulia/AndroidStudioProjects/secondhand/app/src/main/res/layout/activity_profile.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/aulia/AndroidStudioProjects/secondhand/app/src/main/res/layout/fragment_daftar_jual.xml" value="0.1953125" />
+        <entry key="..\:/Users/aulia/AndroidStudioProjects/secondhand/app/src/main/res/layout/fragment_profil.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/aulia/AndroidStudioProjects/secondhand/app/src/main/res/layout/fragment_tab_diminati.xml" value="0.17391304347826086" />
         <entry key="..\:/Users/aulia/AndroidStudioProjects/secondhand/app/src/main/res/layout/fragment_tab_terjual.xml" value="0.36302083333333335" />
+        <entry key="..\:/Users/aulia/AndroidStudioProjects/secondhand/app/src/main/res/layout/fragment_updateprofil.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/aulia/AndroidStudioProjects/secondhand/app/src/main/res/layout/item_diminati.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/aulia/AndroidStudioProjects/secondhand/app/src/main/res/layout/item_notification.xml" value="0.36302083333333335" />
         <entry key="..\:/Users/aulia/AndroidStudioProjects/secondhand/app/src/main/res/layout/item_terjual.xml" value="0.21354166666666666" />
@@ -95,15 +98,9 @@
         <entry key="..\:/izaz/BINAR/SecondHand/app/src/main/res/layout/fragment_notifikasi.xml" value="0.176" />
         <entry key="..\:/izaz/BINAR/SecondHand/app/src/main/res/layout/item_bidder_info.xml" value="0.2" />
         <entry key="..\:/izaz/BINAR/SecondHand/app/src/main/res/layout/item_notification.xml" value="0.264" />
-        <entry key="..\:/izaz/BINAR/projectfinal/app/src/main/res/layout/fragment_daftar_jual.xml" value="0.1" />
-        <entry key="..\:/izaz/BINAR/projectfinal/app/src/main/res/layout/fragment_notification.xml" value="0.27447916666666666" />
-        <entry key="..\:/izaz/BINAR/projectfinal/app/src/main/res/layout/fragment_tab_produk.xml" value="0.1" />
-        <entry key="..\:/izaz/BINAR/projectfinal/app/src/main/res/layout/fragment_tab_terjual.xml" value="0.1265625" />
-        <entry key="..\:/izaz/BINAR/projectfinal/app/src/main/res/layout/fragment_updateprofil.xml" value="0.1265625" />
-        <entry key="..\:/izaz/BINAR/projectfinal/app/src/main/res/layout/item_category.xml" value="0.25416666666666665" />
-        <entry key="..\:/izaz/BINAR/projectfinal/app/src/main/res/layout/item_corousel_banner.xml" value="0.1265625" />
-        <entry key="..\:/izaz/BINAR/projectfinal/app/src/main/res/layout/item_history.xml" value="0.2" />
-        <entry key="..\:/izaz/BINAR/projectfinal/app/src/main/res/layout/item_notification.xml" value="0.1265625" />
+        <entry key="..\:/secondhand/app/src/main/res/layout/fragment_daftar_jual.xml" value="0.22447916666666667" />
+        <entry key="..\:/secondhand/app/src/main/res/layout/fragment_item_detail.xml" value="0.1" />
+        <entry key="..\:/secondhand/app/src/main/res/layout/fragment_profil.xml" value="0.1" />
       </map>
     </option>
   </component>

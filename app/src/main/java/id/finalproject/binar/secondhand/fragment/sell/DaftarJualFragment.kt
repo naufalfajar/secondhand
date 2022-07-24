@@ -80,12 +80,14 @@ class DaftarJualFragment : Fragment() {
     private fun observeUser() {
         sellListViewModel.getUser.observe(viewLifecycleOwner) { result ->
             binding.apply {
-                val data = result.data!!
-                Glide.with(llSellerprofile.context)
-                    .load(data.image_url)
-                    .into(imageView3)
-                tvNama.text = data.full_name
-                tvCity.text = data.city
+                val data = result.data
+                if (data != null) {
+                    Glide.with(requireContext())
+                        .load(data.image_url)
+                        .into(imageView3)
+                    tvNama.text = data.full_name
+                    tvCity.text = data.city
+                }
             }
         }
     }
