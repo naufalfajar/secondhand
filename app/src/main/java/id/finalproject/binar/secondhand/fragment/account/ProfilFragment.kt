@@ -8,29 +8,24 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import dagger.hilt.android.AndroidEntryPoint
 import id.finalproject.binar.secondhand.AuthActivity
 import id.finalproject.binar.secondhand.ProfileActivity
+import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.databinding.FragmentProfilBinding
-import id.finalproject.binar.secondhand.helper.SharedPreferences
 import id.finalproject.binar.secondhand.model.network.Status
-import id.finalproject.binar.secondhand.repository.UserRepository
-import id.finalproject.binar.secondhand.repository.viewModelsFactory
-import id.finalproject.binar.secondhand.service.ApiClient
-import id.finalproject.binar.secondhand.service.ApiService
 import id.finalproject.binar.secondhand.viewmodel.ProfileViewModel
 
-
+@AndroidEntryPoint
 class ProfilFragment : Fragment() {
 
     private var _binding: FragmentProfilBinding? = null
     private val binding get() = _binding!!
-    private lateinit var sharedPrefs: SharedPreferences
 
-    private val apiService: ApiService by lazy { ApiClient.instance }
-    private val userRepo: UserRepository by lazy { UserRepository(apiService) }
-    private val profileViewModel: ProfileViewModel by viewModelsFactory { ProfileViewModel(userRepo) }
-
+    private val profileViewModel: ProfileViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,11 +42,8 @@ class ProfilFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        sharedPrefs = requireContext().getSharedPreferences("ini_token", Context.MODE_PRIVATE)
-//        val token = sharedPrefs.getString("token", "null")
-//        if (token != null) {
-//            observeData(token)
-//        }
+        val token = profileViewModel.token.toString()
+        observeData(token)
         tvUpdate()
         logout()
     }
@@ -59,8 +51,7 @@ class ProfilFragment : Fragment() {
     private fun tvUpdate() {
         binding.apply {
             btnToUpdate.setOnClickListener {
-                val intent =
-                    Intent(this@ProfilFragment.requireContext(), ProfileActivity::class.java)
+                val intent = Intent(this@ProfilFragment.requireContext(), ProfileActivity::class.java)
                 startActivity(intent)
             }
         }
@@ -72,8 +63,8 @@ class ProfilFragment : Fragment() {
                 val builder = AlertDialog.Builder(requireContext())
                 builder.setMessage("Yakin ingin keluar?")
                     .setPositiveButton("Ya") { _, _ ->
-                        val intent =
-                            Intent(this@ProfilFragment.requireContext(), AuthActivity::class.java)
+                        profileViewModel.deleteSesi()
+                        val intent = Intent(this@ProfilFragment.requireContext(), AuthActivity::class.java)
                         startActivity(intent)
                         requireActivity().finish()
                     }
@@ -103,18 +94,5 @@ class ProfilFragment : Fragment() {
                 else -> {}
             }
         }
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setMessage("Yakin ingin keluar?")
-            .setPositiveButton("Ya") { _, _ ->
-                sharedPrefs.sessionDelete()
-                val intent = Intent(this@ProfilFragment.requireContext(), AuthActivity::class.java)
-                startActivity(intent)
-                requireActivity().finish()
-
-            }
-            .setNegativeButton("Tidak") {dialog, _->
-                dialog.dismiss()
-            }
-            .show()
     }
 }
