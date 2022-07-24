@@ -16,6 +16,7 @@ import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.adapter.NotificationAdapter
 import id.finalproject.binar.secondhand.databinding.FragmentNotificationBinding
 import id.finalproject.binar.secondhand.model.local.entity.Notification
+import id.finalproject.binar.secondhand.model.local.entity.ProductSeller
 import id.finalproject.binar.secondhand.util.Resource
 import id.finalproject.binar.secondhand.viewmodel.NotificationViewModel
 
@@ -91,6 +92,12 @@ class NotificationFragment : Fragment() {
             }
 
             notificationViewModel.notification.observe(viewLifecycleOwner) { result ->
+                val listnotification: MutableList<Notification> = mutableListOf()
+                for (i in result.data!!) {
+                    listnotification.add(i)
+                }
+                notificationAdapter.updateData(listnotification)
+
                 pbNotification.isVisible = result is Resource.Loading && result.data.isNullOrEmpty()
                 nothing.isVisible = result is Resource.Error && result.data.isNullOrEmpty()
                 nothing.text = result.error?.localizedMessage
