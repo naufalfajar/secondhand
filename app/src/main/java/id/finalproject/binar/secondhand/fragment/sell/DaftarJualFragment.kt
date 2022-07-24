@@ -45,7 +45,7 @@ class DaftarJualFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (sellListViewModel.isLogin) {
-            observeUser()
+//            observeUser()
             val adapter = DaftarJualAdapter(this)
             binding.viewPager.adapter = adapter
             TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
