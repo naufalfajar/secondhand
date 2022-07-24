@@ -68,6 +68,11 @@ interface SecondHandApi {
     @GET("auth/user")
     suspend fun getUser(
         @Header("access_token") access_token: String) : GetUserItem
+
+    @GET("auth/user")
+    suspend fun getUserData(
+        @Header("access_token") access_token: String) : User
+
     //Sell List Product
     @GET("seller/product")
     suspend fun getProductSeller(@Header("access_token") access_token: String): List<ProductSeller>
@@ -82,4 +87,8 @@ interface SecondHandApi {
 
     @GET("buyer/product/{id}")
     suspend fun getProductByIdFromBuyer(@Path("id") productId: Int): GetSellerInfoForBuyer
+
+    //History
+    @GET("history")
+    suspend fun getHistory(@Header("access_token") access_token: String): List<History>
 }

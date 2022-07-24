@@ -9,7 +9,7 @@ import id.finalproject.binar.secondhand.model.local.dao.*
 import id.finalproject.binar.secondhand.model.local.entity.*
 
 @Database(
-    entities = [Product::class, Category::class, Banner::class, Notification::class, ProductSeller::class],
+    entities = [Product::class, Category::class, Banner::class, Notification::class, ProductSeller::class, History::class, User::class],
     version = 1,
     exportSchema = false
 )
@@ -20,5 +20,7 @@ abstract class SecondHandDatabase : RoomDatabase() {
     abstract fun bannerDao(): BannerDao
     abstract fun notificationDao(): NotificationDao
     abstract fun productSellerDao(): ProductSellerDao
+    abstract fun historyDao(): HistoryDao
+    abstract fun userDao(): UserDao
 
 }

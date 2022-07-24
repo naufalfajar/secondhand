@@ -6,15 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import id.finalproject.binar.secondhand.AuthActivity
+import id.finalproject.binar.secondhand.BuyerActivity
 import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.adapter.DaftarJualAdapter
+import id.finalproject.binar.secondhand.adapter.HomeProductAdapter
 import id.finalproject.binar.secondhand.databinding.FragmentDaftarJualBinding
+import id.finalproject.binar.secondhand.model.local.entity.Category
+import id.finalproject.binar.secondhand.model.local.entity.Product
+import id.finalproject.binar.secondhand.util.Resource
 import id.finalproject.binar.secondhand.viewmodel.SellListViewModel
 
 @AndroidEntryPoint
@@ -53,6 +61,7 @@ class DaftarJualFragment : Fragment() {
                 tab.layoutParams = layoutParams
                 binding.tabLayout.requestLayout()
             }
+            observeUser()
         } else {
             binding.apply {
                 sellListArea.isVisible = false
@@ -66,6 +75,19 @@ class DaftarJualFragment : Fragment() {
             }
         }
 
+    }
+
+    private fun observeUser() {
+        sellListViewModel.getUser.observe(viewLifecycleOwner) { result ->
+            binding.apply {
+                val data = result.data!!
+                Glide.with(llSellerprofile.context)
+                    .load(data.image_url)
+                    .into(imageView3)
+                tvNama.text = data.full_name
+                tvCity.text = data.city
+            }
+        }
     }
 
     companion object{

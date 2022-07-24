@@ -32,11 +32,7 @@ class ProductConverter {
             image_name = json.getString("image_name"),
             location = json.getString("location"),
             user_id = json.getInt("user_id"),
-            status = json.getString("status"),
-            createdAt = null,
-            updatedAt = null,
-            description = null,
-            Categories = null
+            status = json.getString("status")
             )
     }
 
