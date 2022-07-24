@@ -27,7 +27,7 @@ class NotificationAdapter(private val onClickListener: (id: Int, notification: N
 
     private val listDiffer = AsyncListDiffer(this, diffCallback)
 
-//    fun updateData(notification: GetNotification?) = listDiffer.submitList(notification)
+    fun updateData(notification: List<Notification>) = listDiffer.submitList(notification)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationViewHolder {
         val binding =
@@ -58,11 +58,11 @@ class NotificationAdapter(private val onClickListener: (id: Int, notification: N
                     ivCircle.isVisible = false
                 }
 
-                val dateTime = item.transaction_date!!
-                tvTime.text = formatDate(
-                    dateTime.slice(0..9),
-                    "dd MMM"
-                ) + ", " + formatTime(dateTime.slice(11..18), "HH.mm")
+//                val dateTime = item.transaction_date!!
+//                tvTime.text = formatDate(
+//                    dateTime.slice(0..9),
+//                    "dd MMM"
+//                ) + ", " + formatTime(dateTime.slice(11..18), "HH.mm")
 
                 if (item.image_url == null) {
                     ivPicture.setImageResource(R.drawable.ic_launcher_background)

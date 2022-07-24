@@ -45,6 +45,7 @@ class DaftarJualFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (sellListViewModel.isLogin) {
+            observeUser()
             val adapter = DaftarJualAdapter(this)
             binding.viewPager.adapter = adapter
             TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
@@ -61,7 +62,6 @@ class DaftarJualFragment : Fragment() {
                 tab.layoutParams = layoutParams
                 binding.tabLayout.requestLayout()
             }
-            observeUser()
         } else {
             binding.apply {
                 sellListArea.isVisible = false
