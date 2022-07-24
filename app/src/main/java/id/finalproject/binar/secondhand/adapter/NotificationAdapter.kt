@@ -72,7 +72,7 @@ class NotificationAdapter(private val onClickListener: (id: Int, notification: N
                         .into(ivPicture)
                 }
 
-                tvProductName.text = item.product_id.toString()
+                tvProductName.text = item.Product!!.name
 
                 itemNotification.setOnClickListener {
                     onClickListener.invoke(item.id!!, item)
