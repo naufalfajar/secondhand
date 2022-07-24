@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -59,8 +60,6 @@ class NotificationFragment : Fragment() {
             }
         }
 
-//        initRecyclerView()
-
 
     }
 
@@ -70,31 +69,11 @@ class NotificationFragment : Fragment() {
         val swipe: SwipeRefreshLayout = view.findViewById(R.id.refresh_layout)
 
         swipe.setOnRefreshListener {
-//            initRecyclerView()
             observeNotification()
             swipe.isRefreshing = false
         }
 
     }
-
-//    private fun initRecyclerView() {
-//        notificationAdapter = NotificationAdapter { id: Int, notification: GetNotificationItem ->
-//            val bundle = Bundle()
-//            bundle.putInt("id", id)
-////            notificationViewModel.patchNotifcationById(id).observe()
-////            findNavController().navigate(R.id.action_notificationFragment_to_bidderInfoFragment, bundle)
-//
-////            val fragment: Fragment = BidderInfoFragment()
-////            val transaction = childFragmentManager.beginTransaction()
-////            fragment.arguments = bundle
-////            transaction.replace(R.id.fragmentContainerView, fragment)
-////            transaction.commit()
-//        }
-//        binding.rvData.apply {
-//            adapter = notificationAdapter
-//            layoutManager = LinearLayoutManager(requireContext())
-//        }
-//    }
 
     private fun observeNotification() {
         notificationAdapter = NotificationAdapter { id: Int, notification: Notification ->
@@ -111,30 +90,15 @@ class NotificationFragment : Fragment() {
 
             notificationViewModel.notification.observe(viewLifecycleOwner) { result ->
                 pbNotification.isVisible = result is Resource.Loading && result.data.isNullOrEmpty()
-//                textViewError.isVisible = result is Resource.Error && result.data.isNullOrEmpty()
-//                textViewError.text = result.error?.localizedMessage
+                if (result is Resource.Error && result.data.isNullOrEmpty()) {
+                    Toast.makeText(
+                        requireContext(),
+                        result.error?.localizedMessage,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }
-
-//    private fun observeNotification() {
-//        notificationViewModel.getNotification("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAbWFpbC5jb20iLCJpYXQiOjE2NTQ5MjcxODZ9.fghFryd8OPEHztZlrN50PtZj0EC7NWFVj2iPPN9xi1M")
-//            .observe(viewLifecycleOwner) {
-//                when (it.status) {
-//                    Status.SUCCESS -> {
-//                        notificationAdapter.updateData(it.data)
-//                        binding.pbMovie.isVisible = false
-//                        if (it.data!!.isEmpty()) {
-//                            binding.nothing.isVisible = true
-//                        }
-//                    }
-//                    Status.ERROR -> {
-//                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-//                }
-//                else -> {}
-//            }
-//        }
-//
-//    }
 
 }
