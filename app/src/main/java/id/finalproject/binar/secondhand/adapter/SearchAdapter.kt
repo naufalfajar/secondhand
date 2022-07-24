@@ -56,7 +56,7 @@ class SearchAdapter(private val onClickListener: (id: Int, product: Product) -> 
 
                 var category = ""
 
-                for (i in product.Categories) {
+                for (i in product.Categories!!) {
                     category = category + ", " + i.name
                 }
 

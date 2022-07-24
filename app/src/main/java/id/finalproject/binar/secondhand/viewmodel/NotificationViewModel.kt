@@ -19,5 +19,4 @@ class NotificationViewModel @Inject constructor(
     val notification = repository.getNotification(accessToken)
         .asLiveData()
 
-
 }

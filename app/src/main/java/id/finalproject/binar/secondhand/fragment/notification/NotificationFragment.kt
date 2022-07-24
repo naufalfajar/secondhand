@@ -111,8 +111,8 @@ class NotificationFragment : Fragment() {
 
             notificationViewModel.notification.observe(viewLifecycleOwner) { result ->
                 pbNotification.isVisible = result is Resource.Loading && result.data.isNullOrEmpty()
-//                textViewError.isVisible = result is Resource.Error && result.data.isNullOrEmpty()
-//                textViewError.text = result.error?.localizedMessage
+                nothing.isVisible = result is Resource.Error && result.data.isNullOrEmpty()
+                nothing.text = result.error?.localizedMessage
             }
         }
     }
