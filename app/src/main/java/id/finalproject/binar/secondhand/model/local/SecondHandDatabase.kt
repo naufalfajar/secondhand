@@ -4,6 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import id.finalproject.binar.secondhand.model.local.converters.CategoryConverters
+import id.finalproject.binar.secondhand.model.local.converters.ProductConverter
 import id.finalproject.binar.secondhand.model.local.dao.*
 import id.finalproject.binar.secondhand.model.local.entity.*
 
@@ -12,7 +13,7 @@ import id.finalproject.binar.secondhand.model.local.entity.*
     version = 1,
     exportSchema = false
 )
-@TypeConverters(CategoryConverters::class)
+@TypeConverters(CategoryConverters::class, ProductConverter::class)
 abstract class SecondHandDatabase : RoomDatabase() {
     abstract fun productDao(): ProductDao
     abstract fun categoryDao(): CategoryDao

@@ -6,7 +6,6 @@ import android.app.AlertDialog
 import android.content.ContentUris
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.graphics.Bitmap
@@ -23,9 +22,12 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import dagger.hilt.android.AndroidEntryPoint
 import id.finalproject.binar.secondhand.databinding.FragmentUpdateprofilBinding
+import id.finalproject.binar.secondhand.helper.SharedPreferences
 import id.finalproject.binar.secondhand.model.network.Status
 import id.finalproject.binar.secondhand.repository.UserRepository
 import id.finalproject.binar.secondhand.repository.viewModelsFactory
@@ -40,17 +42,15 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.ByteArrayOutputStream
 import java.io.File
 
+@AndroidEntryPoint
 class UpdateProfilFragment : Fragment() {
 
     private var _binding: FragmentUpdateprofilBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var sharedPref: SharedPreferences
     private var path: String = ""
 
-    private val apiService: ApiService by lazy { ApiClient.instance }
-    private val userRepo: UserRepository by lazy { UserRepository(apiService) }
-    private val updateViewModel: UpdateViewModel by viewModelsFactory { UpdateViewModel(userRepo) }
+    private val updateViewModel: UpdateViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,13 +67,10 @@ class UpdateProfilFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        sharedPref = requireContext().getSharedPreferences("ini_token", Context.MODE_PRIVATE)
-        val token = sharedPref.getString("token", "null")
+        val token = updateViewModel.token.toString()
+        observeData(token)
         binding.apply {
             textUbahAkun.setOnClickListener { back() }
-        }
-        if (token != null) {
-            observeData(token)
         }
         ivProfile()
         btnUpdate()
@@ -82,9 +79,8 @@ class UpdateProfilFragment : Fragment() {
     private fun btnUpdate() {
         binding.apply {
             btnEdit.setOnClickListener {
-                val token = sharedPref.getString("token", "null")
-                val email = sharedPref.getString("email", "null")
-//                val pass = sharedPref.getString("pass", "null")
+                val token = updateViewModel.token
+                val email = updateViewModel.email
                 val imageFile1 = File(path)
                 val nama = etNama.text.toString()
                 val kota = etKota.text.toString()
@@ -110,7 +106,6 @@ class UpdateProfilFragment : Fragment() {
                                 token = token,
                                 nama = nama,
                                 email = email!!,
-//                                pass = pass!!,
                                 phoneNumber = phone,
                                 address = alamat,
                                 imageFile = imageFile1,
@@ -128,7 +123,6 @@ class UpdateProfilFragment : Fragment() {
         token: String,
         nama: String,
         email: String,
-//        pass: String,
         phoneNumber: String,
         address: String,
         imageFile: File,
@@ -137,7 +131,6 @@ class UpdateProfilFragment : Fragment() {
         val reqFile = imageFile.asRequestBody("image/jpg".toMediaTypeOrNull())
         val nama1 = nama.toRequestBody("text/plain".toMediaType())
         val email1 = email.toRequestBody("text/plain".toMediaType())
-//        val pass1 = pass.toRequestBody("text/plain".toMediaType())
         val phoneNumber1 = phoneNumber.toRequestBody("text/plain".toMediaType())
         val address1 = address.toRequestBody("text/plain".toMediaType())
         val image1 = MultipartBody.Part.createFormData("image", imageFile.name, reqFile)
@@ -147,7 +140,6 @@ class UpdateProfilFragment : Fragment() {
             token,
             nama1,
             email1,
-//            pass1,
             phoneNumber1,
             address1,
             image1,
@@ -179,14 +171,6 @@ class UpdateProfilFragment : Fragment() {
                         etKota.setText(it.data.city)
                         etAlamat.setText(it.data.address)
                         etPhone.setText(it.data.phoneNumber)
-
-//                        email = it.data.email
-//                        pass = it.data.password
-
-                        val editor = sharedPref.edit()
-                        editor.putString("email", it.data.email)
-//                        editor.putString("pass", it.data.password)
-                        editor.apply()
                     }
                 }
                 Status.ERROR -> {
@@ -200,7 +184,7 @@ class UpdateProfilFragment : Fragment() {
     }
 
     private fun back() {
-        findNavController().popBackStack()
+        activity?.onBackPressed()
     }
 
     private fun ivProfile() {
@@ -285,7 +269,7 @@ class UpdateProfilFragment : Fragment() {
 
 //            binding.imageView2.setImageURI(result)
             path = getRealPathFromURI(requireContext(), result!!)!!
-            binding.imageView2.background = null
+//            binding.imageView2.background = null
         }
 
     private fun openCamera() {

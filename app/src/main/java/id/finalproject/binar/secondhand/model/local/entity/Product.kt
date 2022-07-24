@@ -12,7 +12,7 @@ data class Product(
     val base_price: Int,
 
     @TypeConverters(CategoryConverters::class)
-    val Categories: List<Category>,
+    val Categories: List<Category>? = null,
 
     val createdAt: String? = null,
     val description: String? = null,

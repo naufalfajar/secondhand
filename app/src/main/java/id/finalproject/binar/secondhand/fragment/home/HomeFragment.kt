@@ -91,7 +91,7 @@ class HomeFragment : Fragment() {
                     homeProductAdapter.updateData(result.data!!)
                 } else {
                     homeProductAdapter.updateData(result.data!!.filter {
-                        it.Categories.contains(category)
+                        it.Categories!!.contains(category)
                     })
                 }
 

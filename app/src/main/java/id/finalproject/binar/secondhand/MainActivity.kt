@@ -62,9 +62,12 @@ class MainActivity : AppCompatActivity() {
                         return@OnNavigationItemSelectedListener true
                     }
                     R.id.profilFragment -> {
+//                        val intent = Intent(this, ProfileActivity::class.java)
+//                        startActivity(intent)
+//                        return@OnNavigationItemSelectedListener false
+
                         replaceFragment(ProfilFragment())
                         return@OnNavigationItemSelectedListener true
-
                     }
                 }
                 false

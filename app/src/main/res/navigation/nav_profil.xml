@@ -9,5 +9,6 @@
         android:id="@+id/updateProfilFragment2"
         android:name="id.finalproject.binar.secondhand.fragment.account.UpdateProfilFragment"
         android:label="fragment_updateprofil"
-        tools:layout="@layout/fragment_updateprofil" />
+        tools:layout="@layout/fragment_updateprofil" >
+    </fragment>
 </navigation>

@@ -2,14 +2,23 @@ package id.finalproject.binar.secondhand.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import id.finalproject.binar.secondhand.helper.SharedPreferences
 import id.finalproject.binar.secondhand.model.network.Resource
 import id.finalproject.binar.secondhand.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.HttpException
+import javax.inject.Inject
 
-class UpdateViewModel(private val userRepo: UserRepository) : ViewModel() {
+@HiltViewModel
+class UpdateViewModel @Inject constructor(
+    private val userRepository: UserRepository,
+    private val sharedPref: SharedPreferences
+) : ViewModel() {
 
     fun putUpdateUser(
         access_token: String,
@@ -22,7 +31,7 @@ class UpdateViewModel(private val userRepo: UserRepository) : ViewModel() {
     ) = liveData(Dispatchers.IO) {
         emit(Resource.loading(null))
         try {
-            emit(Resource.success(userRepo.putUser(
+            emit(Resource.success(userRepository.putUser(
                 access_token, full_name, email,
                 phone_number, address, image, city)))
         } catch (e: Exception) {
@@ -36,7 +45,7 @@ class UpdateViewModel(private val userRepo: UserRepository) : ViewModel() {
         emit(Resource.loading(null))
         try {
             emit(
-                Resource.success(userRepo.getUser(access_token)))
+                Resource.success(userRepository.getUser(access_token)))
         } catch (e: Exception) {
             emit(
                 (e as? HttpException)!!.response()?.errorBody()?.string()?.let {
@@ -48,4 +57,8 @@ class UpdateViewModel(private val userRepo: UserRepository) : ViewModel() {
             )
         }
     }
+
+    val login = sharedPref.getLogin()
+    val token = sharedPref.getToken()
+    val email = sharedPref.getEmail()
 }
