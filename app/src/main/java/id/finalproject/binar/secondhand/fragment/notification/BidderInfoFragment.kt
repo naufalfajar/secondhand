@@ -70,7 +70,10 @@ class BidderInfoFragment : Fragment() {
 
         sharedPref = SharedPreferences(requireContext())
 
-        val notificationId = arguments?.getInt("id")
+        if (arguments != null) {
+            val orderId = arguments!!.getInt("id")
+            observeContact(orderId, view)
+        }
 
         initRecyclerView()
         observeOrder()

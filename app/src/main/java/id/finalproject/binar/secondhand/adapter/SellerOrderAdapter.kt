@@ -7,12 +7,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import id.finalproject.binar.secondhand.databinding.ItemDiminatiBinding
+import id.finalproject.binar.secondhand.model.local.entity.Product
 import id.finalproject.binar.secondhand.model.network.response.seller.GetSellerOrderItem
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class SellerOrderAdapter(val onItemClick: (GetSellerOrderItem) -> Unit) :
+class SellerOrderAdapter(val onItemClick: (id: Int, order: GetSellerOrderItem) -> Unit) :
     RecyclerView.Adapter<SellerOrderAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: ItemDiminatiBinding) :
@@ -20,7 +21,7 @@ class SellerOrderAdapter(val onItemClick: (GetSellerOrderItem) -> Unit) :
         fun bind(data: GetSellerOrderItem, position: Int) {
             binding.apply {
                 root.setOnClickListener {
-                    onItemClick(data)
+                    onItemClick(position,data)
                 }
                 val txtNote = "Ditawar Rp ${data.price}"
                 val txtPrice = "Rp ${data.product.basePrice}"

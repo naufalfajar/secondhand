@@ -4,28 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import dagger.hilt.android.AndroidEntryPoint
-import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.adapter.SellListHistoryAdapter
-import id.finalproject.binar.secondhand.adapter.SellerOrderAdapter
 import id.finalproject.binar.secondhand.databinding.FragmentTabHistoryBinding
-import id.finalproject.binar.secondhand.fragment.notification.BidderInfoFragment
 import id.finalproject.binar.secondhand.helper.SharedPreferences
 import id.finalproject.binar.secondhand.model.network.Status
 import id.finalproject.binar.secondhand.model.network.response.GetHistoryItem
-import id.finalproject.binar.secondhand.model.network.response.seller.GetSellerOrderItem
 import id.finalproject.binar.secondhand.repository.HistoryRepository
-import id.finalproject.binar.secondhand.repository.network.SellerOrderRepository
 import id.finalproject.binar.secondhand.repository.viewModelsFactory
 import id.finalproject.binar.secondhand.service.ApiClient
 import id.finalproject.binar.secondhand.service.ApiService
 import id.finalproject.binar.secondhand.viewmodel.HistoryViewModel
-import id.finalproject.binar.secondhand.viewmodel.SellerOrderViewModel
 
 
 class TabHistoryFragment : Fragment() {

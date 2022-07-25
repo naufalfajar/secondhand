@@ -1,5 +1,6 @@
 package id.finalproject.binar.secondhand.fragment.sell
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,11 +10,14 @@ import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import id.finalproject.binar.secondhand.BidderActivity
+import id.finalproject.binar.secondhand.BuyerActivity
 import id.finalproject.binar.secondhand.fragment.notification.BidderInfoFragment
 import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.adapter.SellerOrderAdapter
 import id.finalproject.binar.secondhand.databinding.FragmentTabDiminatiBinding
 import id.finalproject.binar.secondhand.helper.SharedPreferences
+import id.finalproject.binar.secondhand.model.local.entity.Product
 import id.finalproject.binar.secondhand.model.network.response.seller.GetSellerOrderItem
 import id.finalproject.binar.secondhand.repository.network.SellerOrderRepository
 import id.finalproject.binar.secondhand.repository.viewModelsFactory
@@ -70,12 +74,13 @@ class TabDiminatiFragment : Fragment() {
                 Status.SUCCESS -> {
                     val data = it.data
 
-                    val adapter = SellerOrderAdapter { order ->
-                        val mBundle = bundleOf(BidderInfoFragment.EXTRA_ORDER_ID to order.id)
-                        Navigation.findNavController(requireView()).navigate(
-                            R.id.action_daftarJualFragment2_to_bidderInfoFragment,
-                            mBundle
-                        )
+                    val adapter = SellerOrderAdapter { id: Int, order: GetSellerOrderItem ->
+                        val bundle = Bundle()
+                        bundle.putInt("id", id)
+
+                        val intent = Intent(this@TabDiminatiFragment.requireContext(), BidderActivity::class.java)
+                        intent.putExtras(bundle)
+                        startActivity(intent, bundle)
                     }
                     val list = mutableListOf<GetSellerOrderItem>()
 
