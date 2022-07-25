@@ -1,6 +1,7 @@
 package id.finalproject.binar.secondhand.model.network.response
 
 
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 data class GetUserItem(
@@ -15,7 +16,7 @@ data class GetUserItem(
     @SerializedName("full_name")
     val fullName: String,
     @SerializedName("id")
-    val id: Int,
+    @PrimaryKey val id: Int,
     @SerializedName("image_url")
     val imageUrl: String,
     @SerializedName("password")

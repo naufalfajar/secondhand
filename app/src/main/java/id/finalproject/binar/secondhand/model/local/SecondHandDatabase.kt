@@ -7,6 +7,7 @@ import id.finalproject.binar.secondhand.model.local.converters.CategoryConverter
 import id.finalproject.binar.secondhand.model.local.converters.ProductConverter
 import id.finalproject.binar.secondhand.model.local.dao.*
 import id.finalproject.binar.secondhand.model.local.entity.*
+import id.finalproject.binar.secondhand.model.network.response.GetUserItem
 
 @Database(
     entities = [Product::class, Category::class, Banner::class, Notification::class, ProductSeller::class, History::class, User::class],
@@ -22,5 +23,4 @@ abstract class SecondHandDatabase : RoomDatabase() {
     abstract fun productSellerDao(): ProductSellerDao
     abstract fun historyDao(): HistoryDao
     abstract fun userDao(): UserDao
-
 }
