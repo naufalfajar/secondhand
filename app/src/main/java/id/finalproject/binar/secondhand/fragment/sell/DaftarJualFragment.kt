@@ -96,13 +96,16 @@ class DaftarJualFragment : Fragment() {
         private val TAB_TITLES = mutableListOf<String>(
             "Produk",
             "Diminati",
-            "Terjual"
+            "Terjual",
+            "History"
         )
 
         private val IMAGE_LIST = mutableListOf<Int>(
             R.drawable.ic_box_grey,
             R.drawable.ic_fav_grey,
-            R.drawable.ic_dollar_grey
+            R.drawable.ic_dollar_grey,
+            R.drawable.ic_history
+
         )
     }
 
