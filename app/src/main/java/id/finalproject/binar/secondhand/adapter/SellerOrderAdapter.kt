@@ -18,10 +18,10 @@ class SellerOrderAdapter(val onItemClick: (id: Int, order: GetSellerOrderItem) -
 
     inner class ViewHolder(private val binding: ItemDiminatiBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: GetSellerOrderItem, position: Int) {
+        fun bind(data: GetSellerOrderItem) {
             binding.apply {
                 root.setOnClickListener {
-                    onItemClick(position,data)
+                    onItemClick(data.id,data)
                 }
                 val txtNote = "Ditawar Rp ${data.price}"
                 val txtPrice = "Rp ${data.product.basePrice}"
@@ -67,7 +67,7 @@ class SellerOrderAdapter(val onItemClick: (id: Int, order: GetSellerOrderItem) -
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = differ.currentList[position]
         data.let {
-            holder.bind(data, position)
+            holder.bind(data)
         }
     }
 

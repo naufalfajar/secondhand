@@ -13,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SellListViewModel2 @Inject constructor(
     private val userRepository: UserRepository,
-    private val sharedPref: SharedPreferences
+    val sharedPref: SharedPreferences
 ) : ViewModel() {
 
     fun getUser(access_token: String) = liveData(Dispatchers.IO) {

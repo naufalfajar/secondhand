@@ -11,7 +11,6 @@ import kotlinx.coroutines.Dispatchers
 
 class SellerOrderViewModel(private val repository: SellerOrderRepository) : ViewModel() {
 
-
     fun getOrderSeller(accessToken: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(null))
         try {

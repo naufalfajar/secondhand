@@ -19,6 +19,7 @@ import id.finalproject.binar.secondhand.R
 import id.finalproject.binar.secondhand.adapter.BidderInfoAdapter
 import id.finalproject.binar.secondhand.databinding.FragmentBidderInfoBinding
 import id.finalproject.binar.secondhand.helper.SharedPreferences
+import id.finalproject.binar.secondhand.model.local.entity.User
 import id.finalproject.binar.secondhand.model.network.Status
 import id.finalproject.binar.secondhand.model.network.response.seller.GetSellerOrderItem
 import id.finalproject.binar.secondhand.repository.network.SellerOrderRepository
@@ -65,14 +66,15 @@ class BidderInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.ivBack.setOnClickListener {
-            findNavController().popBackStack()
+            activity?.onBackPressed()
         }
 
         sharedPref = SharedPreferences(requireContext())
+//        val token = sharedPref.getToken().toString()
 
         if (arguments != null) {
             val orderId = arguments!!.getInt("id")
-            observeContact(orderId, view)
+            observeContact(orderId)
         }
 
         initRecyclerView()
@@ -86,7 +88,7 @@ class BidderInfoFragment : Fragment() {
                 LayoutInflater.from(requireContext()).inflate(R.layout.dialog_contact, null)
             val btnContact = viewContact.findViewById<Button>(R.id.bt_contact)
 
-            observeContact(id, viewContact)
+//            observeContact(id)
 
             //contact
             val dialog = BottomSheetDialog(requireContext())
@@ -139,8 +141,11 @@ class BidderInfoFragment : Fragment() {
         sellerOrderViewModel.getOrderSeller(token!!).observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
-                    bidderInfoAdapter.updateData(it.data)
-                    binding.pbMovie.isVisible = false
+                    binding.apply {
+                        bidderInfoAdapter.updateData(it.data)
+                        pbMovie.isVisible = false
+                    }
+//                    binding.tvBuyerName.text = it.data.
                 }
                 Status.ERROR -> {
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
@@ -151,21 +156,25 @@ class BidderInfoFragment : Fragment() {
 
     }
 
-    private fun observeContact(orderId: Int, view: View) {
-        val token = sharedPref.getToken()
-        sellerOrderViewModel.getOrderByIdSeller(orderId, token!!).observe(viewLifecycleOwner) {
+    private fun observeContact(orderId: Int) {
+        val token = sharedPref.getToken().toString()
+        sellerOrderViewModel.getOrderByIdSeller(orderId, token).observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
-                    val tvBuyerName = view.findViewById<Button>(R.id.tv_BuyerName)
-                    val tvBuyerCity = view.findViewById<Button>(R.id.tv_BuyerCity)
-
-                    val tvProductName = view.findViewById<Button>(R.id.tv_ProductName)
-                    val tvProductPrice = view.findViewById<Button>(R.id.tv_ProductPrice)
-
-                    tvBuyerName.text = it.data!!.user.fullName
-                    tvBuyerCity.text = it.data.user.city
-                    tvProductName.text = it.data.product.name
-                    tvProductPrice.text = it.data.product.basePrice.toString()
+                    binding.apply {
+                        tvBuyerName.text = it.data!!.user.fullName
+                        tvBuyerCity.text = it.data.user.city
+                    }
+//                    val tvBuyerName = view.findViewById<Button>(R.id.tv_BuyerName)
+//                    val tvBuyerCity = view.findViewById<Button>(R.id.tv_BuyerCity)
+//
+//                    val tvProductName = view.findViewById<Button>(R.id.tv_ProductName)
+//                    val tvProductPrice = view.findViewById<Button>(R.id.tv_ProductPrice)
+//
+//                    tvBuyerName.text = it.data!!.user.fullName
+//                    tvBuyerCity.text = it.data.user.city
+//                    tvProductName.text = it.data.product.name
+//                    tvProductPrice.text = it.data.product.basePrice.toString()
                 }
                 Status.ERROR -> {
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
