@@ -19,7 +19,7 @@ class UserRepo @Inject constructor(
         },
         fetch = {
             delay(2000)
-            api.getUser(access_token)
+            api.getUserData(access_token)
         },
         saveFetchResult = { user ->
             db.withTransaction {
