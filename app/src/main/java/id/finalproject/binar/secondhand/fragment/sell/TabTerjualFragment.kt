@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import id.finalproject.binar.secondhand.model.network.Status
@@ -79,6 +80,7 @@ class TabTerjualFragment : Fragment() {
                     binding.apply {
                         rvTerjual.adapter = adapter
                         rvTerjual.layoutManager = LinearLayoutManager(requireContext())
+                        progressBar.isVisible = false
                     }
                 }
                 else -> {}

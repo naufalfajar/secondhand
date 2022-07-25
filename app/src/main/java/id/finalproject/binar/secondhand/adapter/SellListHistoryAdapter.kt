@@ -8,25 +8,28 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import id.finalproject.binar.secondhand.databinding.ItemHistoryBinding
 import id.finalproject.binar.secondhand.model.local.entity.History
+import id.finalproject.binar.secondhand.model.network.response.GetHistory
+import id.finalproject.binar.secondhand.model.network.response.GetHistoryItem
+import id.finalproject.binar.secondhand.model.network.response.seller.GetSellerOrderItem
 import java.text.NumberFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class SellListHistoryAdapter(private val onClickListener: (id: Int, history: History) -> Unit) :
+class SellListHistoryAdapter() :
     RecyclerView.Adapter<SellListHistoryAdapter.HistoryViewHolder>() {
 
-    private val diffCallback = object : DiffUtil.ItemCallback<History>() {
-        override fun areItemsTheSame(oldItem: History, newItem: History) =
+    private val diffCallback = object : DiffUtil.ItemCallback<GetHistoryItem>() {
+        override fun areItemsTheSame(oldItem: GetHistoryItem, newItem: GetHistoryItem) =
             oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: History, newItem: History) =
+        override fun areContentsTheSame(oldItem: GetHistoryItem, newItem: GetHistoryItem) =
             oldItem == newItem
     }
 
     private val listDiffer = AsyncListDiffer(this, diffCallback)
 
-    fun updateData(history: List<History>) = listDiffer.submitList(history)
+    fun updateData(history: List<GetHistoryItem>?) = listDiffer.submitList(history)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
         val binding =
@@ -43,24 +46,24 @@ class SellListHistoryAdapter(private val onClickListener: (id: Int, history: His
     inner class HistoryViewHolder(private val binding: ItemHistoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(history: History) {
+        fun bind(history: GetHistoryItem) {
             binding.apply {
                 Glide.with(itemView.context)
-                    .load(history.image_url)
+                    .load(history.imageUrl)
                     .into(ivPicture)
                 tvStatus.text = history.status
-                tvProductName.text = history.product_name
+                tvProductName.text = history.productName
                 tvProductPrice.text = rupiah(history.price)
 
-                val dateTime = history.transaction_date!!
+                val dateTime = history.transactionDate!!
                 tvDate.text = formatDate(
                     dateTime.slice(0..9),
                     "dd MMM yyyy"
                 )
 
-                itemHistory.setOnClickListener {
-                    onClickListener.invoke(history.id!!, history)
-                }
+//                itemHistory.setOnClickListener {
+//                    onClickListener.invoke(history.id!!, history)
+//                }
             }
         }
     }

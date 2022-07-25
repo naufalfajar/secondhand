@@ -11,7 +11,6 @@ import javax.inject.Inject
 @HiltViewModel
 class SellListViewModel @Inject constructor(
     productSellerRepository: ProductSellerRepository,
-    historyRepository: HistoryRepository,
     sharedPref: SharedPreferences,
 ) : ViewModel() {
 
@@ -19,5 +18,4 @@ class SellListViewModel @Inject constructor(
     val isLogin = sharedPref.getLogin()
 
     val getProduct = productSellerRepository.getProduct(accessToken).asLiveData()
-    val getHistory = historyRepository.getHistory(accessToken).asLiveData()
 }

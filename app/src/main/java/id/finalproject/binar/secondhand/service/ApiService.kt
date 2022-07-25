@@ -180,13 +180,13 @@ interface ApiService {
     //HISTORY
 
     @GET("history")
-    suspend fun getHistory(@Header("access_token") access_token: String)
+    suspend fun getHistory(@Header("access_token") access_token: String):GetHistory
 
     @GET("history/{id}")
     suspend fun getHistoryById(
         @Path("id") historyId: Int,
         @Header("access_token") access_token: String
-    )
+    ): GetHistoryItem
 
     //NOTIFICATION
 
